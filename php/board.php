@@ -1,38 +1,21 @@
-<div class="board black-view">
+<div class="board white-view">
     <?php    
     $piece_order = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'];
     $alphabet = range('a', 'z');
     
-    for ($i = 0; $i < 8; $i++) {
-        ?>
-        <div class="rank rank-<?php echo 8 - $i; ?>">
-        <?php
-
+    for ($i = 8; $i > 0; $i--) {
+        echo "<div class=\"rank rank-$i\">";
         for ($j = 0; $j < 8; $j++) {
-            ?>
-            <div class="square <?php echo $alphabet[$j].(8 - $i); ?>"> 
-            <?php
+            echo "<div class=\"square $alphabet[$j]$i\">";
             
-            $piece = "";
-            if ($i == 0 || $i == 7) $piece = $piece_order[$j];
-            if ($i == 1 || $i == 6) $piece = "P";
+                if ($i == 1 || $i == 8) $piece = $piece_order[$j];
+            elseif ($i == 2 || $i == 7) $piece = "P";
             
-            if ($piece != "") {
-                $color = $i < 4 ? "black" : "white";
+            if ($piece) echo "<div class=\"piece ".( $i > 4 ? "black" : "white" )." $piece\"></div>";
 
-                ?>
-                <div class="piece <?php echo $color." ".$piece; ?>"></div>
-                <?php
-            }
-            
-            ?>
-            </div>
-            <?php
+            echo "</div>";
         }
-
-        ?>
-        </div>
-        <?php
+        echo "</div>";
     }
     ?>
 </div>
