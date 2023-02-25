@@ -8,6 +8,7 @@
         for ($j = 0; $j < 8; $j++) {
             echo "<div class=\"square $alphabet[$j]$i\">";
             
+            $piece = null;
                 if ($i == 1 || $i == 8) $piece = $piece_order[$j];
             elseif ($i == 2 || $i == 7) $piece = "P";
             
