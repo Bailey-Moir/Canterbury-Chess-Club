@@ -1,0 +1,41 @@
+.board {
+    width: 800px;
+    height: 800px;
+}
+
+.rank {
+    display: flex;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.square.white {
+    background-color: rgb(225, 225, 225);
+}
+.square.black {
+    background-color: rgb(30, 30, 30);
+}
+
+
+/* Piece definitions */
+.square > .piece {
+    width: 50px;
+    height: 50px;
+}
+
+/* Placeholer colours and borders for identification */
+.piece.R { background-color: red; }
+.piece.N { background-color: orange; }
+.piece.B { background-color: yellow; }
+.piece.Q { background-color: green; }
+.piece.K { background-color: blue; }
+.piece.P { background-color: indigo; }
+
+.piece.black { border: 5px solid black; }
+.piece.white { border: 5px solid white; }
