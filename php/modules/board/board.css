@@ -16,26 +16,33 @@
 }
 
 .square.white {
-    background-color: rgb(225, 225, 225);
+    background-color: #d5e1e5;
 }
 .square.black {
-    background-color: rgb(30, 30, 30);
+    background-color: #779bb1;
 }
 
 
 /* Piece definitions */
 .square > .piece {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 /* Placeholer colours and borders for identification */
-.piece.R { background-color: red; }
-.piece.N { background-color: orange; }
-.piece.B { background-color: yellow; }
-.piece.Q { background-color: green; }
-.piece.K { background-color: blue; }
-.piece.P { background-color: indigo; }
+.piece.black.R { background-image: url("../../../res/pieces/blackR.svg"); }
+.piece.black.N { background-image: url("../../../res/pieces/blackN.svg"); }
+.piece.black.B { background-image: url("../../../res/pieces/blackB.svg"); }
+.piece.black.Q { background-image: url("../../../res/pieces/blackQ.svg"); }
+.piece.black.K { background-image: url("../../../res/pieces/blackK.svg"); }
+.piece.black.P { background-image: url("../../../res/pieces/blackP.svg"); }
 
-.piece.black { border: 5px solid black; }
-.piece.white { border: 5px solid white; }
+.piece.white.R { background-image: url("../../../res/pieces/whiteR.svg"); }
+.piece.white.N { background-image: url("../../../res/pieces/whiteN.svg"); }
+.piece.white.B { background-image: url("../../../res/pieces/whiteB.svg"); }
+.piece.white.Q { background-image: url("../../../res/pieces/whiteQ.svg"); }
+.piece.white.K { background-image: url("../../../res/pieces/whiteK.svg"); }
+.piece.white.P { background-image: url("../../../res/pieces/whiteP.svg"); }
