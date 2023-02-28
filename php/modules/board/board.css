@@ -46,3 +46,7 @@
 .piece.white.Q { background-image: url("../../../res/pieces/whiteQ.svg"); }
 .piece.white.K { background-image: url("../../../res/pieces/whiteK.svg"); }
 .piece.white.P { background-image: url("../../../res/pieces/whiteP.svg"); }
+
+/* JS classes */
+.square.white.selected { background-color: #E9797C; }
+.square.black.selected { background-color: #D56A71; }
