@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./board.css">
+<link rel="stylesheet" href="/php/modules/board/board.css">
 <div class="board white-view">
     <?php    
     $piece_order = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'];
