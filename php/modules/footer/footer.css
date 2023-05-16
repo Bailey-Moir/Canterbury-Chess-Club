@@ -1,0 +1,17 @@
+#foot {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgb(1, 22, 30);
+    position: absolute;
+    bottom: 0px;
+   
+}
+ 
+#foot > #buttons > a {
+    color: white;
+    align-self: center;
+}

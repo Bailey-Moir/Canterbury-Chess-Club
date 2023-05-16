@@ -1,0 +1,41 @@
+#nav {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration-color: rgb(255, 255, 255);
+    background-color: rgb(1, 22, 30);
+}
+
+#nav > h1 {
+    margin-right: 15px;
+}
+
+#nav>a>img {
+    height: 100%
+}
+
+#nav > #buttons_left {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+
+#nav > #buttons_left > a {
+    color: white; 
+    align-self: left;
+}
+
+#nav > #buttons_right {
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+#nav > #buttons_right > a {
+    color: white; 
+    align-self: right;
+}
