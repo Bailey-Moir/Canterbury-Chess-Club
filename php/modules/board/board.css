@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
 }
-
+ 
 .square.white {
     background-color: #d5e1e5;
 }
@@ -22,7 +22,7 @@
     background-color: #779bb1;
 }
 
-
+ 
 /* Piece definitions */
 .square > .piece {
     width: 100%;
@@ -48,5 +48,5 @@
 .piece.white.P { background-image: url("../../../res/pieces/whiteP.svg"); }
 
 /* JS classes */
-.square.white.selected { background-color: #E9797C; }
-.square.black.selected { background-color: #D56A71; }
+.piece.black { border: 5px solid black; }
+.piece.white { border: 5px solid white; }

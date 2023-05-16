@@ -1,41 +1,41 @@
 #nav {
-    height: 15vh;
+    height: 10vh;
     width: 100%;
-    position: static;
     display: flex;
     align-items: center;
-    padding: 0 0 8px 30px;
-    background-color: #01161e
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration-color: rgb(255, 255, 255);
+    background-color: rgb(1, 22, 30);
 }
 
-#nav>a {
-    height: 50%;
-    margin-right: 20px
+#nav > h1 {
+    margin-right: 15px;
 }
 
 #nav>a>img {
     height: 100%
 }
 
-#nav #btns_left, #nav #btns_right {
-    margin-right: 90px;
+#nav > #buttons_left {
     display: flex;
-    align-items: center
+    align-items: center;
+    text-align: left;
 }
 
-#nav #btns_left>a, #nav #btns_right>a {
-    margin: 0 50px 0 50px;
-    color: #f5f5f5;
-    font-weight: bold;
-    font-size: larger;
+
+#nav > #buttons_left > a {
+    color: white; 
+    align-self: left;
+}
+
+#nav > #buttons_right {
     display: flex;
-    align-items: center
+    align-items: center;
+    text-align: right;
 }
 
-#nav #btns_left>a>span, #nav #btns_right>a>span {
-    margin-right: 5px
-}
-
-#nav #btns_right {
-    margin-left: auto
+#nav > #buttons_right > a {
+    color: white; 
+    align-self: right;
 }

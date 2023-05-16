@@ -6,12 +6,32 @@
 </head>
 <body>
 	<?php include "php/modules/navbar/navbar.php"; ?>
+	<div id="main">
+		
+		<h2>Canterbury Chess Club</h2>
 
-	<p class="h1 row justify-content-center m-5 bold">Canterbury Chess Club</p>
+		<div class="columns">
+			<p><h3>Recent Games</h3></p>
 
-	<p class="h3 row justify-content-center m-2 bold">Recent Games</p>
+			<div id="board">
+				<p>Game Title</p>
+				<img src="" alt="">
+			</div>
 
+			<div id="board">
+				<p>Game Title</p>
+				<img src="" alt="">
+			</div>
+
+			<div id="board">
+				<p>Game Title</p>
+				<img src="" alt="">
+			</div>
+		</div>
+		
+
+		
+	</div>
 	<?php include "php/modules/footer/footer.php"; ?>
-</body>
 </body>
 </html>

@@ -1,11 +1,88 @@
 * {
     margin: 0px;
     padding: 0px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI';
     text-decoration: none;
     resize: none;
 }
 
-body {
-    background-color: #f5f5f5;
+#main {
+    background-color: rgb(245, 245, 245);
+    text-align: center;
+}
+
+#columuns {
+    
+}
+
+#card {
+
+}
+
+#login_box {
+    background-color: rgb(245, 245, 245);
+    text-decoration-color: rgb(1, 22, 30);
+}
+
+#login_header {
+    background-color: rgb(1, 22, 30);
+    text-decoration-color: rgb(255, 255, 255);
+}
+
+#login_enter_box {
+    
+}
+
+#remember {
+
+}
+
+
+#login {
+
+}
+
+#profile_name {
+    background-color: rgb(245, 245, 245);
+    text-decoration-color: rgb(1, 22, 30);
+}   
+
+#forum {
+    background-color: rgb(245, 245, 245);
+    text-decoration-color: rgb(1, 22, 30);
+}
+
+#studies {
+    background-color: rgb(245, 245, 245);
+    text-decoration-color: rgb(1, 22, 30);
+}
+
+#forums {
+    background-color: rgb(1, 22, 30);
+    text-decoration-color: rgb(255, 255, 255);
+}
+
+#message {
+
+}
+
+#send_message {
+
+}
+
+#players {
+    
+}
+
+#rating_type {
+
+}
+
+#player {
+    background-color: rgb(1, 22, 30);
+    text-decoration-color: rgb(255, 255, 255);
+}
+
+#table {
+
 }
