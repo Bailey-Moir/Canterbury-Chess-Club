@@ -10,7 +10,7 @@
 		
 		<h2>Canterbury Chess Club</h2>
 
-		<div class="columns">
+		<div class="container-fluid">
 			<p><h3>Recent Games</h3></p>
 
 			<div id="board">

@@ -4,14 +4,16 @@
     font-family: 'Segoe UI';
     text-decoration: none;
     resize: none;
+    
 }
 
 #main {
-    background-color: rgb(245, 245, 245);
+    padding-top: 20px;
+    background-color: rgb(255, 255, 255);
     text-align: center;
 }
 
-#columuns {
+#container-fluid {
     
 }
 
@@ -20,7 +22,7 @@
 }
 
 #login_box {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     text-decoration-color: rgb(1, 22, 30);
 }
 
@@ -43,17 +45,17 @@
 }
 
 #profile_name {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     text-decoration-color: rgb(1, 22, 30);
 }   
 
 #forum {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     text-decoration-color: rgb(1, 22, 30);
 }
 
 #studies {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     text-decoration-color: rgb(1, 22, 30);
 }
 

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/php/modules/navbar/navbar.css">
 <div id="nav">
-    <a href="#"><img src="/res/white_icon.svg" alt="Icon"></a>
+    <a href="index.php"><img src="/res/white_icon.svg" alt="Icon"></a>
     <div id="buttons_left">   
         <a href="/php/tournaments.php" class="btn"><i></i>Tournaments</a>
     </div>
