@@ -10,7 +10,7 @@
 		
 		<h2>Location</h2>
         <p>Our address is unit 9, 27 Tyne Street, Addington, Christchurch. Off street parking available from 6pm and on weekends.</p>
-        <img src="" alt="">
+        <img width="500px" src="/res/location.JPG" alt="Googlemaps snip of the Canterbury Chess Club">
 
 	</div>
 	<?php include "modules/footer/footer.php"; ?>
