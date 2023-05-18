@@ -13,12 +13,17 @@
     text-align: center;
 }
 
-#container-fluid {
-    
+.container-fluid:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-#column {
-    
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px;
 }
 
 
