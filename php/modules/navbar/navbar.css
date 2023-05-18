@@ -26,16 +26,17 @@
 
 #nav > #buttons_left > a {
     color: white; 
-    align-self: left;
+    float: left;
 }
 
 #nav > #buttons_right {
     display: flex;
     align-items: center;
-    float: right;
+   
 }
 
 #nav > #buttons_right > a {
     color: white; 
-   
+    float: right;
+
 }

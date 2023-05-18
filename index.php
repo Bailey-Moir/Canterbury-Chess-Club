@@ -13,17 +13,17 @@
 		<div class="container-fluid">
 			<p><h3>Recent Games</h3></p>
 
-			<div id="board">
+			<div id="column">
 				<p>Game Title</p>
 				<img src="" alt="">
 			</div>
 
-			<div id="board">
+			<div id="columm">
 				<p>Game Title</p>
 				<img src="" alt="">
 			</div>
 
-			<div id="board">
+			<div id="column">
 				<p>Game Title</p>
 				<img src="" alt="">
 			</div>
