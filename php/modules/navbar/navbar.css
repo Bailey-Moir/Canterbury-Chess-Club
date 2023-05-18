@@ -13,7 +13,7 @@
     margin-right: 15px;
 }
 
-#nav>a>img {
+#nav > a > img {
     height: 100%
 }
 
@@ -32,7 +32,7 @@
 #nav > #buttons_right {
     display: flex;
     align-items: center;
-    text-align: right;
+    float: right;
 }
 
 #nav > #buttons_right > a {
