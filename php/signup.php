@@ -10,7 +10,7 @@
 		
 		<div id="login_box">
 			<div id="login_header">
-                <h2>Login</h2>
+                <h2>Sign up</h2>
             </div>
 
             <div id="login_enter_box">

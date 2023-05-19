@@ -8,10 +8,14 @@
     background-color: rgb(1, 22, 30);
     position: absolute;
     bottom: 0px;
-   
+    
 }
  
 #foot > #buttons > a {
     color: white;
     align-self: center;
+    display: block;
+    font-size: 10px;
+    padding: 2px;
+    padding-left: 75%;
 }

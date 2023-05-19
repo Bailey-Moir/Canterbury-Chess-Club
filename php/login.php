@@ -30,8 +30,8 @@
             
             <a href="">Forgot password?</a>
 
-            <div id="login">
-                <h4><a href="">Login</a></h2>
+            <div id="button" class="btn">
+                <h4><a href="/php/profile.php">Login</a></h2>
             </div>
 
             <p>Don't have an account? <a href="signup.php">Sign in</a> instead.</p>

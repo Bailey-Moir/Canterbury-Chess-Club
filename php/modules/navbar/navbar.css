@@ -7,6 +7,8 @@
     padding-right: 15px;
     text-decoration-color: rgb(255, 255, 255);
     background-color: rgb(1, 22, 30);
+    justify-content: space-between;
+   
 }
 
 #nav > h1 {
@@ -21,12 +23,12 @@
     display: flex;
     align-items: center;
     text-align: left;
+   
 }
 
 
 #nav > #buttons_left > a {
     color: white; 
-    float: left;
 }
 
 #nav > #buttons_right {
@@ -37,6 +39,5 @@
 
 #nav > #buttons_right > a {
     color: white; 
-    float: right;
-
+   
 }

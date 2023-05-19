@@ -4,7 +4,8 @@
     font-family: 'Segoe UI';
     text-decoration: none;
     resize: none;
-    
+    align-self: center;
+
 }
 
 #main {
@@ -13,19 +14,13 @@
     text-align: center;
 }
 
-.container-fluid:after {
-    content: "";
-    display: table;
-    clear: both;
+.container-fluid {
+  
 }
 
 .column {
-    float: left;
-    width: 33.33%;
-    padding: 10px;
-    height: 300px;
-}
 
+}
 
 #card {
 
@@ -34,6 +29,11 @@
 #login_box {
     background-color: rgb(255, 255, 255);
     text-decoration-color: rgb(1, 22, 30);
+    width: 40%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(1, 22, 30);
+    
 }
 
 #login_header {
@@ -92,10 +92,17 @@
 
 #player {
     background-color: rgb(1, 22, 30);
-    text-decoration-color: rgb(255, 255, 255);
+    text-decoration-color: rgb(245,245,245);
 }
 
 #table {
 
 }
 
+.h2 {
+    font: bold;
+}
+
+#button {
+    color: rgb(255,255,255);
+}
