@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include "header.php"; ?>
+	<?php include "../header.php"; ?>
 	<title>Canterbury Chess Club</title>
 </head>
 <body>
-	<?php include "modules/navbar/navbar.php"; ?>
+	<?php include "../modules/navbar/navbar.php"; ?>
 	<div id="main">
 		
 		<div id="login_box">
@@ -34,12 +34,12 @@
                 <h4><a href="">Login</a></h2>
             </div>
 
-            <p>Don't have an account? <a href="signup.php">Sign in</a> instead.</p>
+            <p>Don't have an account? <a href="/pages/signup.php">Sign in</a> instead.</p>
 
 		</div>
 		
 
 	</div>
-	<?php include "modules/footer/footer.php"; ?>
+	<?php include "../modules/footer/footer.php"; ?>
 </body>
 </html>

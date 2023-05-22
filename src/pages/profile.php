@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include "header.php"; ?>
+	<?php include "../header.php"; ?>
 	<title>Canterbury Chess Club</title>
 </head>
 <body>
-	<?php include "modules/navbar/navbar.php"; ?>
+	<?php include "../modules/navbar/navbar.php"; ?>
 	<div id="main">
 		
 		<h2>Canterbury Chess Club</h2>
@@ -46,6 +46,6 @@
 
 		
 	</div>
-	<?php include "modules/footer/footer.php"; ?>
+	<?php include "../modules/footer/footer.php"; ?>
 </body>
 </html>
