@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include "header.php"; ?>
+	<?php include "../header.php"; ?>
 	<title>Canterbury Chess Club</title>
 </head>
 <body>
-	<?php include "modules/navbar/navbar.php"; ?>
+	<?php include "../modules/navbar/navbar.php"; ?>
 	<div id="main">
 		
 		<h2>History</h2>
@@ -13,6 +13,6 @@
         <p>Although there is a date for the formation of the Canterybury Chess Club as a theoretically seperate entity, the club centerary and sesquicentenary were celebrated in 1966 and 2016 respectively as the history is closer to a name change than two rival clubs.</p>
 
 	</div>
-	<?php include "modules/footer/footer.php"; ?>
+	<?php include "../modules/footer/footer.php"; ?>
 </body>
 </html> 
