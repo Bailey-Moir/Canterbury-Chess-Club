@@ -6,7 +6,7 @@
     </div>
 
     <div id="buttons_right">   
-        <a href="#" class="btn"><img src="/res/search.svg" alt="Icon"><b>Search</b></a>
+        <a href="#" class="btn"><span class="material-symbols-outlined"></span><b>Search</b></a>
         <a href="https://www.facebook.com/CanterburyChessClub/" class="btn"><img src="/res/person_square.svg" alt="Icon"><b>Facebook</b></a>
         <a href="/php/login.php" class="btn"><img src="/res/person_circle.svg" alt="Icon"><b>Profile</b></a>
     </div>

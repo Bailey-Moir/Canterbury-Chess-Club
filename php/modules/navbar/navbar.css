@@ -38,8 +38,12 @@
 }
 
 #nav > #buttons_right > a {
-    color: white; 
-   
+    color: white;   
 }
+
+.img {
+    padding-right: 100px;
+}
+
 
 
