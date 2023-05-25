@@ -1,13 +1,41 @@
 <link rel="stylesheet" href="/php/modules/navbar/navbar.css">
-<div id="nav">
-    <div id="buttons_left">   
-        <a href="index.php"><img src="/res/white_logo.svg" alt="Icon"></a>
-        <a href="/php/tournaments.php" class="btn"><i></i><b>Tournaments</b></a>
-    </div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <div id="buttons_right">   
-        <a href="#" class="btn"><span class="material-symbols-outlined"></span><b>Search</b></a>
-        <a href="https://www.facebook.com/CanterburyChessClub/" class="btn"><img src="/res/person_square.svg" alt="Icon"><b>Facebook</b></a>
-        <a href="/php/login.php" class="btn"><img src="/res/person_circle.svg" alt="Icon"><b>Profile</b></a>
+<nav class="navbar navbar-expand-lg bg-body-nav">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#"><img src="/res/white_logo.svg" alt="Icon"></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/php/tournaments.php">Tournaments</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+            </li>
+            
+        </ul>
+
+        <form class="d-flex" role="search">
+            <button class="btn " type="submit"><span class="material-symbols-outlined">search</span><b>Search</b></button>  
+        </form>
+
+        <button class="btn " type="submit"><span class="material-symbols-outlined">account_circle</span><b>Profile </b></button>
+
+        </div>
     </div>
-</div>
+</nav>

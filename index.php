@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		
-
+		<span class="material-symbols-outlined"></span>
 		
 	</div>
 	<?php include "php/modules/footer/footer.php"; ?>

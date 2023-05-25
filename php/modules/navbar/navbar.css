@@ -1,4 +1,4 @@
-#nav {
+.bg-body-nav {
     height: 10vh;
     width: 100%;
     display: flex;
@@ -29,6 +29,7 @@
 
 #nav > #buttons_left > a {
     color: white; 
+    
 }
 
 #nav > #buttons_right {
@@ -39,10 +40,6 @@
 
 #nav > #buttons_right > a {
     color: white;   
-}
-
-.img {
-    padding-right: 100px;
 }
 
 
