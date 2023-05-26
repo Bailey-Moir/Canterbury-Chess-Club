@@ -5,7 +5,7 @@
 
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="#"><img src="/res/white_logo.svg" alt="Icon"></a>
+        <a class="navbar-brand" href="index.php"><img src="/res/white_logo.svg" alt="Icon"></a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/php/tournaments.php">Tournaments</a>
+            <a class="nav-link active text-white" aria-current="page" href="/php/tournaments.php">Tournaments</a>
             </li>
             
             <li class="nav-item dropdown">
@@ -31,10 +31,12 @@
         </ul>
 
         <form class="d-flex" role="search">
-            <button class="btn " type="submit"><span class="material-symbols-outlined">search</span><b>Search</b></button>  
+            <button class="btn text-white" type="submit"><b>Search</b></button>  
         </form>
 
-        <button class="btn " type="submit"><span class="material-symbols-outlined">account_circle</span><b>Profile </b></button>
+        <a href="https://www.facebook.com/CanterburyChessClub/"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>facebook</b></button></a>
+
+        <a href="profile.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>Profile </b></button></a>
 
         </div>
     </div>
