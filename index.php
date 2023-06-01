@@ -10,26 +10,46 @@
 		
 		<h2>Canterbury Chess Club</h2>
 
-		<div class="container-fluid">
-			<p><h3>Recent Games</h3></p>
 
-			<div class="column">
-				<p>Game Title</p>
-				<img src="" alt="">
-			</div>
+			<div class="container-fluid content">
+				<h3>Recent Games</h3>
+				<div class="row justify-content-around">
+					
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
 
-			<div class="columm">
-				<p>Game Title</p>
-				<img src="" alt="">
-			</div>
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
 
-			<div class="column">
-				<p>Game Title</p>
-				<img src="" alt="">
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
+
+				</div>
 			</div>
-		</div>
-		
-		<span class="material-symbols-outlined"></span>
 		
 	</div>
 	<?php include "php/modules/footer/footer.php"; ?>

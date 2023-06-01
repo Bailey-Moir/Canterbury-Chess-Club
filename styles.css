@@ -2,7 +2,7 @@
     margin: 0px;
     padding: 0px;
     font-family: 'Segoe UI';
-    text-decoration: none;
+    text-decoration: bold;
     resize: none;
     align-self: center;
 
@@ -12,14 +12,6 @@
     padding-top: 20px;
     background-color: rgb(255, 255, 255);
     text-align: center;
-}
-
-.container-fluid {
-  
-}
-
-.column {
-
 }
 
 #card {
@@ -110,4 +102,30 @@
 .material-symbols-outlined {
     color: white;
 }
+
+.bg-body-title {
+    text-decoration-color: rgb(255, 255, 255);
+    background-color: rgb(1, 22, 30);
+}
+
+.card > a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.card1 > a {
+    text-decoration: none;
+    color:rgb(1, 22, 30);
+    width: 50%;
+}
+
+.col-1 > a {
+    text-decoration: none;
+    color: rgb(1, 22, 30);
+}
+
+.form-floating {
+   padding-bottom: 5px;
+}
+
 

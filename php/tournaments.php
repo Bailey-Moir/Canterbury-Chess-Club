@@ -8,48 +8,48 @@
 	<?php include "modules/navbar/navbar.php"; ?>
 	<div id="main">
 		
-		<h2>Tournaments</h2>
+		<h2>Canterbury Chess Club</h2>
 
-		<div>
-			<p><h4>Upcoming</h4></p>
 
-			<div>
-				<div id="card">
-					<p>Tourney 1</p>
-					<a href=""></a>
-				</div>
+			<div class="container-fluid content">
+				<h3>Recent Games</h3>
+				<div class="row justify-content-around">
+					
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
 
-				<div id="card">
-					<p>Tourney 2</p>
-				</div>
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
 
-				<div id="card">
-					<p>Tourney 3</p>
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
+
 				</div>
 			</div>
-
-
-
-			<div>
-
-				<p><h4>Recent</h4></p>
-
-				<div id="card">
-					<p>Tourney 1</p>
-				</div>
-
-				<div id="card">
-					<p>Tourney 2</p>
-				</div>
-
-				<div id="card">
-					<p>Tourney 3</p>
-				</div>
-			</div>
-			
-		</div>
-		
-
 		
 	</div>
 	<?php include "modules/footer/footer.php"; ?>

@@ -7,36 +7,38 @@
 <body>
 	<?php include "modules/navbar/navbar.php"; ?>
 	<div id="main">
-		
-		<div id="login_box">
-			<div id="login_header">
-                <h2>Sign up</h2>
+
+        <div class="card">
+            <div class="card-title ">
+                <p class="card-text"> <h2>Please sign up</h2> </p>
             </div>
 
-            <div id="login_enter_box">
-                <div><i></i></div>
-                <h4>Username or Email to login</h4>
-                <p>This username is already taken <a href="login.php">Log in</a> instead.</p> 
-            </div>
+            <form-signup>
 
-            <div id="login_enter_box">
-                <div><i></i></div>
-                <h4>Email</h4>
-                <p>This is not a valid email format, it should look like this: "username@email.com".</p> 
-            </div>
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
 
-            <div id="login_enter_box">
-                <div><i></i></div>
-                <h4>Password</h4>
-                <i></i>
-                <p>Password should contain at least one capital letter, number and be 8 characters long.</p> 
-            </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
 
-            <div id="login">
-                <h4><a href="">Create Account</a></h2>
-            </div>
+                <div class="form-check text-start my-3">
+                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Remember me
+                    </label>
+                </div>
 
-		</div>
+                <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+            </form>
+
+        </div>
+
+        
+
 		
 
 	</div>
