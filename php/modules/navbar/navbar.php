@@ -36,7 +36,7 @@
 
         <a href="https://www.facebook.com/CanterburyChessClub/"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>facebook</b></button></a>
 
-        <a href="signup.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>Profile </b></button></a>
+        <a href="signin.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>Profile </b></button></a>
 
         </div>
     </div>

@@ -6,20 +6,20 @@
 </head>
 <body>
 	<?php include "modules/navbar/navbar.php"; ?>
-	<div id="main">
+    <div id="main">
         
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="width: 100%;">
             <div class="col-6">
 
-                <div class="card" style="padding-bottom: 10px;"> 
+                <div class="card"> 
                     <h3 class="card-header">
                         Sign in
                     </h3>
 
                     <form-signup style="padding-top: 15px; width: 80%;">
 
-                        <div class="form-floating border-secondary">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <div class="form-floating border-secondary" >
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" >
                             <label for="floatingInput">Email address</label>
                         </div>
 
@@ -33,11 +33,18 @@
                             <label class="form-check-label" for="flexCheckDefault">
                                 Remember me
                             </label>
+
+                            <a href="#" style="float: right;">
+                                Forgot password?
+                            </a>
                         </div>
 
-                        <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
+                        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
                     </form>
 
+                    <p style="padding-top: 10px;">
+                        Don't have an account? <a href="signup.php">Sign up</a> instead.
+                    </p>
                 </div>
 
             </div>
