@@ -4,39 +4,37 @@
 <nav class="navbar navbar-expand-lg bg-body-nav">
 
     <div class="container-fluid">
-
-        <a class="navbar-brand" href="index.php"><img src="/res/white_logo.svg" alt="Icon"></a>
+        <a class="navbar-brand" href="/index.php"><img src="/res/white_logo.svg" alt="Icon"></a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="/php/tournaments.php">Tournaments</a>
-            </li>
-            
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="/php/tournaments.php">Tournaments</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                   
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>     
             </ul>
-            </li>
-            
-        </ul>
 
-        <form class="d-flex" role="search">
-            <button class="btn text-white" type="submit"><b>Search</b></button>  
-        </form>
+            <form class="d-flex" role="search">
+                <button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">search</span><b>Search</b></button>  
+            </form>
 
-        <a href="https://www.facebook.com/CanterburyChessClub/"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>facebook</b></button></a>
+            <a href="https://www.facebook.com/CanterburyChessClub/"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">account_circle</span><b>facebook</b></button></a>
 
-        <a href="signin.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">account_circle</span><b>Profile </b></button></a>
+            <a href="/php/signin.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">account_circle</span><b>Profile</b></button></a>
 
         </div>
     </div>

@@ -8,16 +8,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="/php/location.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">location_on</span><b>Location</b></button></a>
+                        <a href="/php/location.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">location_on</span><b>Location</b></button></a>
                     </li>
                     <li class="nav-item">
-                        <a href="/php/contact.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">mail</span><b>Contact</b></button></a>
+                        <a href="/php/contact.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">mail</span><b>Contact</b></button></a>
                     </li>
                     <li class="nav-item">
-                        <a href="/php/history.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined">history</span><b>History</b></button></a>
+                        <a href="/php/history.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">history</span><b>History</b></button></a>
                     </li>               
                 </ul>
             </div>
         </div>
     </nav>  
+    
 </div>

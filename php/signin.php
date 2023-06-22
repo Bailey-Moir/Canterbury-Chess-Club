@@ -1,3 +1,11 @@
+<?php
+
+if(isset($_SESSION['admin'])) {
+    header("Location: index.php?page=adminpanel");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,24 +19,24 @@
         <div class="row justify-content-center" style="width: 100%;">
             <div class="col-6">
 
-                <div class="card"> 
+                <div class="card" style="border-radius: 0px;"> 
                     <h3 class="card-header">
                         Sign in
                     </h3>
 
-                    <form-signup style="padding-top: 15px; width: 80%;">
+                    <form-signup style="border-radius: 0px; padding-top: 15px; width: 80%;" action="verify.php" method="post">
 
-                        <div class="form-floating border-secondary" >
+                        <div class="form-floating border-secondary" style="border-radius: 0px;">
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" >
                             <label for="floatingInput">Email address</label>
                         </div>
 
-                        <div class="form-floating border-secondary">
+                        <div class="form-floating border-secondary" style="border-radius: 0px;">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
-                        <div class="form-check text-start my-3">
+                        <div class="form-check text-start my-3" style="border-radius: 0px;">
                             <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Remember me
@@ -39,7 +47,18 @@
                             </a>
                         </div>
 
-                        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                        <?php
+
+                            if(isset($_GET['error'])) {
+                            ?>
+                            <div class="alter alert-danger" role="alert">
+                                Username or password is incorrect
+                            </div>
+                            <?php 
+                         } 
+                        ?>
+
+                        <a href="/php/profile.php"><button class="btn btn-primary w-100 py-2" type="submit">Sign in</button></a>
                     </form>
 
                     <p style="padding-top: 10px;">
