@@ -17,7 +17,7 @@
                        <p>By making an account with us you equip yourself with access to club forums, games studies and more.</p>
                     </h3>
 
-                    <form-signup style="border-radius: 0px; padding-top: 15px; width: 80%;">
+                    <form-signup style="border-radius: 0px; padding-top: 15px; width: 80%;" action="signin.php" method="post">
                         
                         <div class="form-floating border-secondary" style="border-radius: 0px;">
                             <input type="email" class="form-control" id="floatingInput" placeholder="Examplename123">
@@ -36,7 +36,9 @@
                             <span class="material-symbols-outlined">eye-open</span>
                         </div>
 
-                        <a href="/php/account.php" style="text-decoration: none; color: white; "><button class="btn btn-primary w-100 py-2" type="submit">Sign up</button></a>
+                        
+                        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                        </form>
                         
                     </form>
 

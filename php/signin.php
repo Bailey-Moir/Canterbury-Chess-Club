@@ -27,7 +27,7 @@ if(isset($_SESSION['admin'])) {
                     <form style="border-radius: 0px; padding-top: 15px; width: 80%;" action="verify.php" method="post">
 
                         <div class="form-floating border-secondary" style="border-radius: 0px;">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username" >
+                            <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username" >
                             <label for="floatingInput">Username</label>
                         </div>
 
@@ -51,7 +51,7 @@ if(isset($_SESSION['admin'])) {
 
                             if(isset($_GET['error'])) {
                             ?>
-                            <div class="alter alert-danger" role="alert">
+                            <div class="alter alert-danger" role="alert" style="color: rgb(255, 0, 0); padding-bottom: 10px;    ">
                                 Username or password is incorrect
                             </div>
                             <?php 
