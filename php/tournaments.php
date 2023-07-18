@@ -12,16 +12,16 @@
 
 
 			<div class="container-fluid content">
-				<h3>Recent Games</h3>
+				<h3>Upcoming</h3>
 				<div class="row justify-content-around">
 					
 					<div class="col-1 ">
 						<div class="card" >
 							<a href="#">
 								<div class="card-body bg-body-title">
-								<p class="card-text">Game Title</p>
+								<p class="card-text">Tourney 1</p>
 								</div>
-								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
 							</a>
 						</div>
 					</div>
@@ -30,9 +30,9 @@
 						<div class="card" >
 							<a href="#">
 								<div class="card-body bg-body-title">
-								<p class="card-text">Game Title</p>
+								<p class="card-text">Tourney 2</p>
 								</div>
-								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
 							</a>
 						</div>
 					</div>
@@ -41,14 +41,52 @@
 						<div class="card" >
 							<a href="#">
 								<div class="card-body bg-body-title">
-								<p class="card-text">Game Title</p>
+								<p class="card-text">Tourney 3</p>
 								</div>
-								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
 							</a>
 						</div>
 					</div>
-
 				</div>
+
+				<h3 style="margin-top: 10px;">Recent</h3>
+				<div class="row justify-content-around">
+					
+					<div class="col-2 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Tourney 4</p>
+								</div>
+								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
+							</a>
+						</div>
+					</div>
+
+					<div class="col-2 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Tourney 5</p>
+								</div>
+								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
+							</a>
+						</div>
+					</div>
+
+					<div class="col-2 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Tourney 6</p>
+								</div>
+								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
+							</a>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 		
 	</div>

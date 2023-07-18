@@ -28,6 +28,7 @@
                             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
                         </div>
+                        
 
                         <div class="form-floating border-secondary" style="border-radius: 0px;">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -35,7 +36,7 @@
                             <span class="material-symbols-outlined">eye-open</span>
                         </div>
 
-                        <a href="/php/profile.php" style="text-decoration: none; color: white; "><button class="btn btn-primary w-100 py-2" type="submit">Sign up</button></a>
+                        <a href="/php/account.php" style="text-decoration: none; color: white; "><button class="btn btn-primary w-100 py-2" type="submit">Sign up</button></a>
                         
                     </form>
 

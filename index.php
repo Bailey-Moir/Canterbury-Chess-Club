@@ -16,7 +16,6 @@ session_start();
 		
 		<h2>Canterbury Chess Club</h2>
 
-
 			<div class="container-fluid content">
 				<h3>Recent Games</h3>
 				<div class="row justify-content-around">
@@ -31,7 +30,6 @@ session_start();
 							</a>
 						</div>
 					</div>
-
 					<div class="col-1 ">
 						<div class="card" >
 							<a href="#">
