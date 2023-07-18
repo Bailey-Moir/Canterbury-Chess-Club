@@ -32,7 +32,7 @@ if(isset($_SESSION['admin'])) {
                         </div>
 
                         <div class="form-floating border-secondary" style="border-radius: 0px;">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
                             <label for="floatingPassword">Password</label>
                         </div>
 
