@@ -34,7 +34,7 @@
 
 /* Placeholer colours and borders for identification */
 .piece.black.R { background-image: url("../../../res/pieces/blackR.svg"); }
-.piece.black.N { background-image: url("../../../res/pieces/blackN.svg"); }
+.piece.black.N { background-image: url("../../../res/pieces//blackN.svg"); }
 .piece.black.B { background-image: url("../../../res/pieces/blackB.svg"); }
 .piece.black.Q { background-image: url("../../../res/pieces/blackQ.svg"); }
 .piece.black.K { background-image: url("../../../res/pieces/blackK.svg"); }
@@ -47,6 +47,25 @@
 .piece.white.K { background-image: url("../../../res/pieces/whiteK.svg"); }
 .piece.white.P { background-image: url("../../../res/pieces/whiteP.svg"); }
 
-/* JS classes */
-.piece.black { border: 5px solid black; }
-.piece.white { border: 5px solid white; }
+.arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.arrow>div {
+    background-color:rgba(227, 121, 27, 0.75);
+    position: relative;
+}
+
+.arrow>img {
+    position: relative;
+}
+
+.arrow>.arrowHead {
+    -webkit-transform: rotate(90deg);
+}
+
+.selected {
+    background-color: rgb(158, 84, 19) !important;
+}
