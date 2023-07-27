@@ -34,7 +34,7 @@
 
 /* Placeholer colours and borders for identification */
 .piece.black.R { background-image: url("../../../res/pieces/blackR.svg"); }
-.piece.black.N { background-image: url("../../../res/pieces//blackN.svg"); }
+.piece.black.N { background-image: url("../../../res/pieces/blackN.svg"); }
 .piece.black.B { background-image: url("../../../res/pieces/blackB.svg"); }
 .piece.black.Q { background-image: url("../../../res/pieces/blackQ.svg"); }
 .piece.black.K { background-image: url("../../../res/pieces/blackK.svg"); }
