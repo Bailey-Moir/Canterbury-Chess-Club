@@ -13,10 +13,10 @@ if(isset($_SESSION['admin'])) {
 	<title>Canterbury Chess Club</title>
 </head>
 <body>
-	<?php include "modules/navbar/navbar.php"; ?>
     <div id="main">
         
-        <div class="row justify-content-center" style="width: 100%;">
+        <div class="row justify-content-center" style="width: 100%; margin-top: 15%;">
+            <p><a class="navbar-brand" href="/index.php"><img src="/res/black_logo.svg" alt="Icon"></a></p>
             <div class="col-6">
 
                 <div class="card" style="border-radius: 0px;"> 
@@ -42,7 +42,7 @@ if(isset($_SESSION['admin'])) {
                                 Remember me
                             </label>
 
-                            <a href="#" style="float: right;">
+                            <a href="forgotpassword.php" style="float: right;">
                                 Forgot password?
                             </a>
                         </div>
@@ -70,6 +70,5 @@ if(isset($_SESSION['admin'])) {
         </div>
         
 	</div>
-	<?php include "modules/footer/footer.php"; ?>
 </body>
 </html>

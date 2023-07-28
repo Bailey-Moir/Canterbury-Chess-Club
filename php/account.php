@@ -34,15 +34,15 @@
                             
                             <div class="row">
                                 <div class="col-sm">
-                                    Forum 1
+                                    <a href="forums.php">Forum 1</a>
                                 </div>
 
                                 <div class="col-sm">
-                                    Forum 2   
+                                    <a href="forums.php">Forum 2</a>   
                                 </div>
 
                                 <div class="col-sm">
-                                    Forum 3
+                                    <a href="forums.php">Forum 3</a>
                                 </div>
                             </div>
                             <hr>
@@ -56,15 +56,15 @@
                             
                             <div class="row">
                                 <div class="col-sm">
-                                    Study 1
+                                    <a href="study.php">Study 1</a>
                                 </div>
 
                                 <div class="col-sm">
-                                    Study 2   
+                                    <a href="study.php">Study 2</a>  
                                 </div>
 
                                 <div class="col-sm">
-                                    Study 3
+                                    <a href="study.php">Study 3</a>
                                 </div>
                             </div>
                             <hr>
