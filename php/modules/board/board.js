@@ -80,14 +80,14 @@ $(document).ready(function() {
     });
 
     // Keeping Mouse Position
-    let mousePosition = new Point(0,0)
+    let mousePosition = new Point(0,0);
     $(document).mousemove(e => {
         mousePosition.x = e.pageX;
         mousePosition.y = e.pageY;
     });
 
     // Arrows    
-    let hoveringCellPosition;    
+    let hoveringCellPosition = new Point(0,0);    
     $(".square").mouseover(e => hoveringCellPosition = getCentre(e.currentTarget));
 
     let rightMouseDown = false,
@@ -179,7 +179,7 @@ class Move {
     origin = null
 }
 
-const pieceType = {
+const PieceType = {
     pawn: "P",
     rook: "R",
     knight: "N",
@@ -195,10 +195,9 @@ const pieceType = {
  */
 function compile_string(str, white) {
     /** @type {Move} */
-    let move = Move.new();
+    let move = new Move();
 
-    str = str.replace(/!|(\(=\))|\?|\+|#/gmi,"") // Remove computationally meaningless characters
-        .toUpperCase();
+    str = str.replace(/!|(\(=\))|\?|\+|#/gmi,""); // Remove computationally meaningless characters
     
     // O-O <- kingside
     // O-O-O <- queenside
@@ -206,19 +205,18 @@ function compile_string(str, white) {
     // = <- upgrade
     
     let pieceType = null;
-    for (const type in pieceType) { // note that "type" is the key
-        if (pieceType[type] == str[0]) {
+    for (const type in PieceType) { // note that "type" is the key
+        if (PieceType[type] == str[0]) {
             pieceType = type;
             break;
         }
     }
     if (pieceType == null) {
-        pieceType = pieceType.pawn;
-        str = str.padStart(str.length + 1, "P");
+        pieceType = PieceType.pawn;
+        str = str.padStart(str.length + 1, PieceType.pawn);
     }
-    
-    move.pieceType = pieceType.keys().find(type => pieceType[type] === str[0])
-    move.dest = $(`.${str.substring(str.length - 2,str.length)}`);
+    move.pieceType = PieceType[Object.keys(PieceType).find(type => PieceType[type] === str[0])];
+    move.dest = $(`.S${str.substring(str.length - 2,str.length)}`);
 
     // DISAMBIGATION
 
@@ -228,17 +226,42 @@ function compile_string(str, white) {
     // Make sure that all possibilites meet origin requirements.
     if (str.length > 3) {
         let origin_str = str.substring(1,str.length-2);
-        let rank = origin_str.find(/\d/gmi);
-        let file = origin_str.find(/[A-Z]/gmi);
+        let file = origin_str.search(/[a-z]/);
+        let rank = origin_str.search(/\d/);
 
-        possibilities = possibilities.filter(obj => { return (file == null || obj.parent().hasClass(`file-${file}`)) && (rank == null || obj.parent().hasClass(`rank-${rank}`)); });
+        possibilities = possibilities.filter(i => { 
+            return  (file == -1 || $(possibilities[i]).parent().hasClass(`file-${origin_str.charAt(file)}`)) 
+                    && 
+                    (rank == -1 || $(possibilities[i]).parent().hasClass(`rank-${origin_str.charAt(rank)}`)); 
+        });
     }
     
     // If there's only one of the pieces, simply select that one.
     if (possibilities.length == 1) {
         move.piece = possibilities[0];
-        move.origin = possibilities[0].parent();
+        move.origin = $(possibilities[0]).parent();
         return move;
+    }
+
+    if (move.pieceType == PieceType.rook) {
+        let destinationClasses = move.dest.attr('class');
+        possibilities.filter(i => {
+            let originClasses = $(possibilities[i]).parent().attr('class');
+
+            //return o_file == d_file || o_rank == d_rank;
+            return  originClasses[originClasses.search(/file-[a-z]/) + 5] == destinationClasses[destinationClasses.search(/file-[a-z]/) + 5] 
+                    || 
+                    originClasses[originClasses.search(/rank-\d/) + 5] == destinationClasses[destinationClasses.search(/rank-\d/) + 5];
+
+        });
+
+        console.log(possibilities.length)
+        // If there's only one of the pieces, simply select that one again.
+        if (possibilities.length == 1) {
+            move.piece = possibilities[0];
+            move.origin = $(possibilities[0]).parent();
+            return move;
+        }
     }
 
     // Disambiguate using movement rules.    
