@@ -67,6 +67,8 @@ class Point {
     toString() { return `${this.x}, ${this.y}` }
 };
 
+const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+
 //TODO: add capability to have multiple boards without interfering.
 $(document).ready(function() {
     // Toggling square selection for note taking
@@ -189,11 +191,11 @@ const PieceType = {
 }
 
 /**
- * 
- * @param {String} str 
+ * Returns data about a move on the given board given a chess noation move string.
+ * @param {String} str The chess notation move
  * @returns {Move}
  */
-function compile_string(str, white) {
+function compile_move(str, white) {
     /** @type {Move} */
     let move = new Move();
 
@@ -235,8 +237,10 @@ function compile_string(str, white) {
                     (rank == -1 || $(possibilities[i]).parent().hasClass(`rank-${origin_str.charAt(rank)}`)); 
         });
     }
-    
+
     // If there's only one of the pieces, simply select that one.
+    // CHECKPOINT 1 (Piece type and color)
+    // console.log(`Checkpoint 1 (Piece type and color) : ${possibilities.length}`);
     if (possibilities.length == 1) {
         move.piece = possibilities[0];
         move.origin = $(possibilities[0]).parent();
@@ -244,25 +248,65 @@ function compile_string(str, white) {
     }
 
     if (move.pieceType == PieceType.rook) {
+        // Check if they are on the same row and or same rank.
         let destinationClasses = move.dest.attr('class');
-        possibilities.filter(i => {
+        possibilities = possibilities.filter(i => {
             let originClasses = $(possibilities[i]).parent().attr('class');
 
             //return o_file == d_file || o_rank == d_rank;
             return  originClasses[originClasses.search(/file-[a-z]/) + 5] == destinationClasses[destinationClasses.search(/file-[a-z]/) + 5] 
-                    || 
+                    ||
                     originClasses[originClasses.search(/rank-\d/) + 5] == destinationClasses[destinationClasses.search(/rank-\d/) + 5];
 
         });
+    }
+    
+    // If there's only one of the pieces, simply select that one again.
+    // CHECKPOINT 2 (Specific movement types)
+    // console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
+    if (possibilities.length == 1) {
+        move.piece = possibilities[0];
+        move.origin = $(possibilities[0]).parent();
+        return move;
+    }
+    
+    if (move.pieceType == PieceType.rook) {
+        // Check if they are on the same row and or same rank.
+        let destinationClasses = move.dest.attr('class');
+        possibilities = possibilities.filter(i => {
+            let originClasses = $(possibilities[i]).parent().attr('class');
+            
+            let rankDest = parseInt(destinationClasses[destinationClasses.search(/rank-\d/) + 5]);
+            let rankOrigin = parseInt(originClasses[originClasses.search(/rank-\d/) + 5]);
+            let fileDest = destinationClasses.charCodeAt(destinationClasses.search(/file-[a-z]/) + 5) - 97;
+            let fileOrigin = originClasses.charCodeAt(originClasses.search(/file-[a-z]/) + 5) - 97;
 
-        console.log(possibilities.length)
-        // If there's only one of the pieces, simply select that one again.
-        if (possibilities.length == 1) {
-            move.piece = possibilities[0];
-            move.origin = $(possibilities[0]).parent();
-            return move;
-        }
+            if (rankDest == rankOrigin) {
+                // go through file
+                if (fileDest > fileOrigin) for (let i = fileOrigin + 1; i < fileDest; i++) {
+                    if ($(`.S${alphabet[i]}${rankDest} > .piece`).length != 0) return false;
+                } else for (let i = fileOrigin - 1; i > fileDest; i--) {
+                    if ($(`.S${alphabet[i]}${rankDest} > .piece`).length != 0) return false;
+                }
+            } else {
+                // go through rank
+                if (rankDest > rankOrigin) for (let i = rankOrigin + 1; i < rankDest; i++) {
+                    if ($(`.S${alphabet[fileDest]}${i} > .piece`).length != 0) return false;
+                } else for (let i = rankOrigin - 1; i > rankDest; i--) {
+                    if ($(`.S${alphabet[fileDest]}${i} > .piece`).length != 0) return false;
+                }
+            }
+            
+            return true;
+        });
     }
 
-    // Disambiguate using movement rules.    
+    // If there's only one of the pieces, simply select that one again.
+    // CHECKPOINT 3 (Walled)
+    // console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
+    if (possibilities.length == 1) {
+        move.piece = possibilities[0];
+        move.origin = $(possibilities[0]).parent();
+        return move;
+    }
 }
