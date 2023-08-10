@@ -176,6 +176,12 @@ $(document).ready(function() {
         
         nextMove($(e.currentTarget).parent().parent().find("> .board"));
     });
+        
+    $(".last-move").mousedown(e => {
+        if (e.which != 1) return;
+        
+        lastMove($(e.currentTarget).parent().parent().find("> .board"));
+    });
 });
 
 // COMPILER
@@ -188,10 +194,16 @@ class Move {
     piece = null;
     dest = null;
     origin = null;
+    taking = null;
+    takingCell = null; 
     /**
      * @type {Array}
      */
     operations = [];
+    /**
+     * @type {Array}
+     */
+    reverse_operations = [];
 }
 
 const PieceType = {
@@ -256,7 +268,10 @@ function compile_move(str, white, board) {
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
         move.origin = board.find(`.Se${white ? 1 : 8}`);
         move.operations.push(() => {
-            board.find(`.Sa${white ? 1 : 8} > .piece`).appendTo(`.Sd${white ? 1 : 8}`);
+            board.find(`.Sa${white ? 1 : 8} > .piece`).appendTo(board.find(`.Sd${white ? 1 : 8}`));
+        });
+        move.reverse_operations.push(() => {
+            board.find(`.Sd${white ? 1 : 8}`).appendTo(board.find(`.Sa${white ? 1 : 8} > .piece`));
         });
         return move;
     }
@@ -266,7 +281,10 @@ function compile_move(str, white, board) {
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
         move.origin = board.find(`.Se${white ? 1 : 8}`);
         move.operations.push(() => {
-            board.find(`.Sh${white ? 1 : 8} > .piece`).appendTo(`.Sf${white ? 1 : 8}`);
+            board.find(`.Sh${white ? 1 : 8} > .piece`).appendTo(board.find(`.Sf${white ? 1 : 8}`));
+        });
+        move.reverse_operations.push(() => {
+            board.find(`.Sf${white ? 1 : 8}`).appendTo(board.find(`.Sh${white ? 1 : 8} > .piece`));
         });
         return move;        
     }
@@ -275,14 +293,18 @@ function compile_move(str, white, board) {
     if (str.includes("=")) {
         promotingPiece = str[str.length - 1];
         str = str.substring(0,str.length-2);
+        move.operations.push(() => {
+            piece = move.dest.find(">:first-child");
+            piece.removeClass("P");
+            piece.addClass(promotingPiece);
+        })
+        move.reverse_operations.push(() => {
+            piece = move.dest.find(">:first-child");
+            piece.removeClass(promotingPiece);
+            piece.addClass("P");
+        });
     }
 
-    let takes = false
-    if (str.includes("x")) {
-        takes = true;
-        str = str.replace("x","");
-    }
-    
     for (const type in PieceType) // note that "type" is the key
         if (PieceType[type] == str[0]) {
             move.pieceType = PieceType[type];
@@ -296,6 +318,11 @@ function compile_move(str, white, board) {
     move.pieceType = PieceType[Object.keys(PieceType).find(type => PieceType[type] == str[0])];
     move.dest = board.find(`.S${str.substring(str.length - 2,str.length)}`);
 
+    if (str.includes("x")) {
+        move.taking = move.dest.find(">:first-child");
+        str = str.replace("x","");
+    }
+
     // DISAMBIGATION
 
     /** @type {Array} */
@@ -308,13 +335,6 @@ function compile_move(str, white, board) {
     const checkpoint = () => {
         move.piece = possibilities[0];
         move.origin = board.find(possibilities[0]).parent();
-        move.operations.push(() => {
-            if (promotingPiece != null) {
-                piece = move.dest.find(">:first-child");
-                piece.removeClass("P");
-                piece.addClass(promotingPiece);
-            }
-        });
         return move;
     };
 
@@ -327,13 +347,21 @@ function compile_move(str, white, board) {
 
         possibilities = possibilities.filter(i => isAt( board.find(possibilities[i]).parent(), fileSearch == -1 ? "-1" : originStr.charAt(fileSearch), rankSearch == -1 ? -1 : parseInt( originStr.charAt(rankSearch) )) );
     }
+    const destinationClasses = move.dest.attr('class');
+    if (move.pieceType == PieceType.pawn && (move.taking != null && !isPieceAt(file(destinationClasses), rank(destinationClasses)))) {
+        move.takingCell = board.find(`.S${file(destinationClasses)}${rank(destinationClasses) + (white ? -1 : 1)}`)
+        move.operations.push(() => {
+            move.takingCell.find("> .piece").remove();
+        });
+    } else {
+        move.takingCell = move.dest;
+    }
 
-    console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
+    // console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
     else if (move.pieceType == PieceType.rook) {
         // Check if they are on the same row and or same rank.
-        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             
@@ -354,7 +382,6 @@ function compile_move(str, white, board) {
     }
     else if (move.pieceType == PieceType.queen) {
         // Check if they are on the same row and or same rank.
-        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
@@ -367,7 +394,6 @@ function compile_move(str, white, board) {
     }
     else if (move.pieceType == PieceType.knight) {
         // Check if they are on the same row and or same rank.
-        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
@@ -381,14 +407,6 @@ function compile_move(str, white, board) {
     }
     else if (move.pieceType == PieceType.pawn) {
         // Check if they are on the same row and or same rank.
-        const destinationClasses = move.dest.attr('class');
-
-        if (takes && !isPieceAt(file(destinationClasses), rank(destinationClasses))) {
-            move.operations.push(() => {
-                board.find(`.S${file(destinationClasses)}${rank(destinationClasses) + (white ? -1 : 1)} > .piece`);
-            });
-        }
-
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
@@ -402,15 +420,14 @@ function compile_move(str, white, board) {
                         (-2 <= signed_rank_distance && signed_rank_distance <= 0)
                     )
                     &&
-                    file_distance == (takes ? 1 : 0);
+                    file_distance == (move.taking != null ? 1 : 0);
         });
     }
     
-    console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
+    // console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
     
     if (move.pieceType == PieceType.rook) {
-        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             
@@ -439,7 +456,6 @@ function compile_move(str, white, board) {
         });
     }
     else if (move.pieceType == PieceType.bishop) {
-        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             
@@ -461,7 +477,6 @@ function compile_move(str, white, board) {
         });
     }  
     else if (move.pieceType == PieceType.queen) {
-        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             
@@ -498,49 +513,87 @@ function compile_move(str, white, board) {
     }
     // Note that knight can jump over things so it doesn't have walling.
     
-    console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
+    // console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 }
 
 // 
 
-let currentMove = 0;
-const moves = [
-    "e4",
-    "e5",
-    "Nf3",
-    "...f6?",
-    "Nxe5",
-    "...fxe5?",
-    "Qh5+",
-    "...Ke7",
-    "Qxe5+",
-    "...Kf7",
-    "Bc4+",
-    ".... d5!",
-    "Bxd5+",
-    "... Kg6",
-    "h4",
-    "... h5",
-    " Bxb7!!",
-    "... Bxb7?",
-    "Qf5+",
-    "... Kh6",
-    "d4+",
-    "... g5",
-    "Qf7!",
-    "... Qe7",
-    "hxg5+",
-    "... Qxg5",
-    "Rxh5#"
-];
+class Board {
+    constructor(boardObject) {
+        this.currentMove = 0;
+        this.moves = [
+            "e4",
+            "e5",
+            "Nf3",
+            "...f6?",
+            "Nxe5",
+            "...fxe5?",
+            "Qh5+",
+            "...Ke7",
+            "Qxe5+",
+            "...Kf7",
+            "Bc4+",
+            ".... d5!",
+            "Bxd5+",
+            "... Kg6",
+            "h4",
+            "... h5",
+            " Bxb7!!",
+            "... Bxb7?",
+            "Qf5+",
+            "... Kh6",
+            "d4+",
+            "... g5",
+            "Qf7!",
+            "... Qe7",
+            "hxg5+",
+            "... Qxg5",
+            "Rxh5#"
+        ];;
+        this.compiledMoves = [];
+        this.boardObject = boardObject;
+    }    
+
+    nextMove() {
+        if (this.currentMove == this.moves.length) return;
+
+        let move;
+        if (this.compiledMoves.length > this.currentMove) {
+            move = this.compiledMoves[this.currentMove++];
+        } else {
+            move = compile_move(this.moves[this.currentMove], this.currentMove++ % 2 == 0, this.boardObject);
+            this.compiledMoves.push(move);
+        }
+    
+        const children = move.dest.find(">:first-child");
+        children.length != 0 && children.remove();
+    
+        $(move.piece).appendTo(move.dest);
+        move.operations.forEach(fn => fn());
+    }
+
+    lastMove() {
+        if (this.currentMove == 0) return;
+        
+        const move = this.compiledMoves[--this.currentMove];
+        
+        $(move.piece).appendTo(move.origin);
+
+        move.taking != null && move.taking.appendTo(move.takingCell);
+
+        move.reverse_operations.forEach(fn => fn());
+    }
+}
+
+let boards = {};
 
 function nextMove(board) {
-    const move = compile_move(moves[currentMove], currentMove++ % 2 == 0, board);
+    if (boards[board] == undefined) boards[board] = new Board(board);
+    boards[board].nextMove();
+}
 
-    const children = move.dest.find(">:first-child");
-    if (children.length != 0) children.remove();
-
-    $(move.piece).appendTo(move.dest);
-    move.operations.forEach(fn => fn());
+function lastMove(board) {
+    if (boards[board] == undefined) boards[board] = new Board(board);
+    boards[board].lastMove();
 }
