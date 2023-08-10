@@ -167,6 +167,15 @@ $(document).ready(function() {
         // Stop the loop that updates an arrow.
         clearInterval(arrowLoopID);
     });
+
+
+
+        
+    $(".next-move").mousedown(e => {
+        if (e.which != 1) return;
+        
+        nextMove($(e.currentTarget).parent().parent().find("> .board"));
+    });
 });
 
 // COMPILER
@@ -178,7 +187,11 @@ class Move {
     pieceType = null;
     piece = null;
     dest = null;
-    origin = null
+    origin = null;
+    /**
+     * @type {Array}
+     */
+    operations = [];
 }
 
 const PieceType = {
@@ -206,7 +219,7 @@ const file = (classes) => classes.charAt(classes.search(/file-[a-z]/) + 5);
  * @param {String} type either "rank" or "file"
  */
 const compareClass = (type,a,b) => {
-    const rexp = new RegExp(`${type}-[a-z]`)
+    const rexp = new RegExp(`${type}-`)
     return a[a.search(rexp) + 5] == b[b.search(rexp) + 5] 
 };
 /**
@@ -231,20 +244,48 @@ const isPieceAt = (file, rank) => $(`.S${file}${rank} > .piece`).length != 0;
  * @param {String} str The chess notation move
  * @returns {Move}
  */
-function compile_move(str, white) {
+function compile_move(str, white, board) {
     /** @type {Move} */
     let move = new Move();
 
-    str = str.replace(/!|(\(=\))|\?|\+|#/gmi,""); // Remove computationally meaningless characters
+    str = str.replace(/\.|!| |(\(=\))|\?|\+|\#/gmi,""); // Remove computationally meaningless characters
     
-    // O-O <- kingside
-    // O-O-O <- queenside
-    // x <- takes
-    // = <- upgrade
+    if (str.includes("O-O-O")) { // queenside castle
+        move.pieceType = PieceType.king;
+        move.dest = board.find(`.Sc${white ? 1 : 8}`);
+        move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
+        move.origin = board.find(`.Se${white ? 1 : 8}`);
+        move.operations.push(() => {
+            board.find(`.Sa${white ? 1 : 8} > .piece`).appendTo(`.Sd${white ? 1 : 8}`);
+        });
+        return move;
+    }
+    if (str.includes("O-O")) { // kingside castle
+        move.pieceType = PieceType.king;
+        move.dest = board.find(`.Sg${white ? 1 : 8}`);
+        move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
+        move.origin = board.find(`.Se${white ? 1 : 8}`);
+        move.operations.push(() => {
+            board.find(`.Sh${white ? 1 : 8} > .piece`).appendTo(`.Sf${white ? 1 : 8}`);
+        });
+        return move;        
+    }
+    
+    let promotingPiece = null;
+    if (str.includes("=")) {
+        promotingPiece = str[str.length - 1];
+        str = str.substring(0,str.length-2);
+    }
+
+    let takes = false
+    if (str.includes("x")) {
+        takes = true;
+        str = str.replace("x","");
+    }
     
     for (const type in PieceType) // note that "type" is the key
         if (PieceType[type] == str[0]) {
-            move.pieceType = type;
+            move.pieceType = PieceType[type];
             break;
         }
     if (move.pieceType == null) {
@@ -253,12 +294,12 @@ function compile_move(str, white) {
     }
 
     move.pieceType = PieceType[Object.keys(PieceType).find(type => PieceType[type] == str[0])];
-    move.dest = $(`.S${str.substring(str.length - 2,str.length)}`);
+    move.dest = board.find(`.S${str.substring(str.length - 2,str.length)}`);
 
     // DISAMBIGATION
 
     /** @type {Array} */
-    let possibilities = $(`.${move.pieceType}.${white ? "white" : "black"}`);
+    let possibilities = board.find(`.${move.pieceType}.${white ? "white" : "black"}`);
     
     /**
      * If there's only one of the pieces, simply select that one.
@@ -266,7 +307,14 @@ function compile_move(str, white) {
      */
     const checkpoint = () => {
         move.piece = possibilities[0];
-        move.origin = $(possibilities[0]).parent();
+        move.origin = board.find(possibilities[0]).parent();
+        move.operations.push(() => {
+            if (promotingPiece != null) {
+                piece = move.dest.find(">:first-child");
+                piece.removeClass("P");
+                piece.addClass(promotingPiece);
+            }
+        });
         return move;
     };
 
@@ -274,38 +322,41 @@ function compile_move(str, white) {
     if (str.length > 3) {
         let originStr = str.substring(1,str.length-2);
 
-        possibilities = possibilities.filter(i => isAt( $(possibilities[i]).parent(), originStr.charAt(originStr.search(/[a-z]/)), parseInt( originStr.charAt(originStr.search(/\d/)) )) );
+        const fileSearch = originStr.search(/[a-z]/),
+              rankSearch = originStr.search(/\d/);
+
+        possibilities = possibilities.filter(i => isAt( board.find(possibilities[i]).parent(), fileSearch == -1 ? "-1" : originStr.charAt(fileSearch), rankSearch == -1 ? -1 : parseInt( originStr.charAt(rankSearch) )) );
     }
 
     console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
-    if (move.pieceType == PieceType.rook) {
+    else if (move.pieceType == PieceType.rook) {
         // Check if they are on the same row and or same rank.
         const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            const originClasses = $(possibilities[i]).parent().attr('class');
-
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
+            
             //return o_file == d_file || o_rank == d_rank;
             return  compareClass("file", originClasses, destinationClasses)
                     ||
                     compareClass("rank", originClasses, destinationClasses);
         });
     }
-    if (move.pieceType == PieceType.bishop) {
+    else if (move.pieceType == PieceType.bishop) {
         // Check if they are on the same row and or same rank.
         let destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            let originClasses = $(possibilities[i]).parent().attr('class');
+            let originClasses = board.find(possibilities[i]).parent().attr('class');
 
             return Math.abs(rank(originClasses) - rank(destinationClasses)) == Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
         });
     }
-    if (move.pieceType == PieceType.queen) {
+    else if (move.pieceType == PieceType.queen) {
         // Check if they are on the same row and or same rank.
         const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            const originClasses = $(possibilities[i]).parent().attr('class');
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
 
             return  compareClass("file", originClasses, destinationClasses)
                     ||
@@ -314,20 +365,44 @@ function compile_move(str, white) {
                     Math.abs(rank(originClasses) - rank(destinationClasses)) == Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
         });
     }
-    if (move.pieceType == PieceType.knight) {
+    else if (move.pieceType == PieceType.knight) {
         // Check if they are on the same row and or same rank.
         const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            const originClasses = $(possibilities[i]).parent().attr('class');
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
 
             const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
-
-            console.log(`delta f : ${file_distance}`);
 
             // delta rank + delta file = 3
             return  Math.abs(rank(originClasses) - rank(destinationClasses)) + file_distance == 3
                     &&
                     file_distance != 0;
+        });
+    }
+    else if (move.pieceType == PieceType.pawn) {
+        // Check if they are on the same row and or same rank.
+        const destinationClasses = move.dest.attr('class');
+
+        if (takes && !isPieceAt(file(destinationClasses), rank(destinationClasses))) {
+            move.operations.push(() => {
+                board.find(`.S${file(destinationClasses)}${rank(destinationClasses) + (white ? -1 : 1)} > .piece`);
+            });
+        }
+
+        possibilities = possibilities.filter(i => {
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
+
+            const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
+           signed_rank_distance = rank(destinationClasses) - rank(originClasses);
+            
+           // 0 < delta rank <= 2 
+            return  (white ? 
+                        (0 < signed_rank_distance && signed_rank_distance <= 2) 
+                        : 
+                        (-2 <= signed_rank_distance && signed_rank_distance <= 0)
+                    )
+                    &&
+                    file_distance == (takes ? 1 : 0);
         });
     }
     
@@ -337,7 +412,7 @@ function compile_move(str, white) {
     if (move.pieceType == PieceType.rook) {
         const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            const originClasses = $(possibilities[i]).parent().attr('class');
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
             
             const rankDest = rank(destinationClasses),
                 rankOrigin = rank(originClasses);
@@ -363,10 +438,10 @@ function compile_move(str, white) {
             return true;
         });
     }
-    if (move.pieceType == PieceType.bishop) {
+    else if (move.pieceType == PieceType.bishop) {
         const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            const originClasses = $(possibilities[i]).parent().attr('class');
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
             
             const rankDest = rank(destinationClasses),
                 rankOrigin = rank(originClasses),
@@ -385,10 +460,10 @@ function compile_move(str, white) {
             return true;
         });
     }  
-    if (move.pieceType == PieceType.queen) {
+    else if (move.pieceType == PieceType.queen) {
         const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            const originClasses = $(possibilities[i]).parent().attr('class');
+            const originClasses = board.find(possibilities[i]).parent().attr('class');
             
             const rankDest = rank(destinationClasses),
                 rankOrigin = rank(originClasses),
@@ -425,4 +500,47 @@ function compile_move(str, white) {
     
     console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
+}
+
+// 
+
+let currentMove = 0;
+const moves = [
+    "e4",
+    "e5",
+    "Nf3",
+    "...f6?",
+    "Nxe5",
+    "...fxe5?",
+    "Qh5+",
+    "...Ke7",
+    "Qxe5+",
+    "...Kf7",
+    "Bc4+",
+    ".... d5!",
+    "Bxd5+",
+    "... Kg6",
+    "h4",
+    "... h5",
+    " Bxb7!!",
+    "... Bxb7?",
+    "Qf5+",
+    "... Kh6",
+    "d4+",
+    "... g5",
+    "Qf7!",
+    "... Qe7",
+    "hxg5+",
+    "... Qxg5",
+    "Rxh5#"
+];
+
+function nextMove(board) {
+    const move = compile_move(moves[currentMove], currentMove++ % 2 == 0, board);
+
+    const children = move.dest.find(">:first-child");
+    if (children.length != 0) children.remove();
+
+    $(move.piece).appendTo(move.dest);
+    move.operations.forEach(fn => fn());
 }
