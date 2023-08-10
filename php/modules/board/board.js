@@ -183,12 +183,48 @@ class Move {
 
 const PieceType = {
     pawn: "P",
-    rook: "R",
+    rook: "R", //
+    king: "K", //
     knight: "N",
-    king: "K",
-    queen: "Q",
-    bishop: "B",
+    queen: "Q", //
+    bishop: "B", //
 }
+
+/**
+ * @param {string} classes 
+ * @returns {number}
+ */
+const rank = (classes) => parseInt(classes[classes.search(/rank-\d/) + 5]);
+/**
+ * @param {string} classes 
+ * @returns {string}
+ */
+const file = (classes) => classes.charAt(classes.search(/file-[a-z]/) + 5); 
+/**
+ * @param {String} a classes of first object to compare
+ * @param {String} b classes of second object to compare
+ * @param {String} type either "rank" or "file"
+ */
+const compareClass = (type,a,b) => {
+    const rexp = new RegExp(`${type}-[a-z]`)
+    return a[a.search(rexp) + 5] == b[b.search(rexp) + 5] 
+};
+/**
+ * @param cell jQuery object of a cell on the board.
+ * @param {string} file 
+ * @param {number} rank 
+ * @returns Whether the given cell matches the entered file and rank.
+ */
+const isAt = (cell, file = "-1", rank = -1) => {
+    return  (file == "-1" || cell.hasClass(`file-${file}`)) 
+            &&
+            (rank == -1 || cell.parent().hasClass(`rank-${rank}`)) 
+};
+/**
+ * @param {string} file 
+ * @param {number} rank 
+ */
+const isPieceAt = (file, rank) => $(`.S${file}${rank} > .piece`).length != 0;
 
 /**
  * Returns data about a move on the given board given a chess noation move string.
@@ -206,107 +242,187 @@ function compile_move(str, white) {
     // x <- takes
     // = <- upgrade
     
-    let pieceType = null;
-    for (const type in PieceType) { // note that "type" is the key
+    for (const type in PieceType) // note that "type" is the key
         if (PieceType[type] == str[0]) {
-            pieceType = type;
+            move.pieceType = type;
             break;
         }
-    }
-    if (pieceType == null) {
-        pieceType = PieceType.pawn;
+    if (move.pieceType == null) {
+        move.pieceType = PieceType.pawn;
         str = str.padStart(str.length + 1, PieceType.pawn);
     }
-    move.pieceType = PieceType[Object.keys(PieceType).find(type => PieceType[type] === str[0])];
+
+    move.pieceType = PieceType[Object.keys(PieceType).find(type => PieceType[type] == str[0])];
     move.dest = $(`.S${str.substring(str.length - 2,str.length)}`);
 
     // DISAMBIGATION
 
     /** @type {Array} */
     let possibilities = $(`.${move.pieceType}.${white ? "white" : "black"}`);
+    
+    /**
+     * If there's only one of the pieces, simply select that one.
+     * @returns {Move}
+     */
+    const checkpoint = () => {
+        move.piece = possibilities[0];
+        move.origin = $(possibilities[0]).parent();
+        return move;
+    };
 
     // Make sure that all possibilites meet origin requirements.
     if (str.length > 3) {
-        let origin_str = str.substring(1,str.length-2);
-        let file = origin_str.search(/[a-z]/);
-        let rank = origin_str.search(/\d/);
+        let originStr = str.substring(1,str.length-2);
 
-        possibilities = possibilities.filter(i => { 
-            return  (file == -1 || $(possibilities[i]).parent().hasClass(`file-${origin_str.charAt(file)}`)) 
-                    && 
-                    (rank == -1 || $(possibilities[i]).parent().hasClass(`rank-${origin_str.charAt(rank)}`)); 
-        });
+        possibilities = possibilities.filter(i => isAt( $(possibilities[i]).parent(), originStr.charAt(originStr.search(/[a-z]/)), parseInt( originStr.charAt(originStr.search(/\d/)) )) );
     }
 
-    // If there's only one of the pieces, simply select that one.
-    // CHECKPOINT 1 (Piece type and color)
-    // console.log(`Checkpoint 1 (Piece type and color) : ${possibilities.length}`);
-    if (possibilities.length == 1) {
-        move.piece = possibilities[0];
-        move.origin = $(possibilities[0]).parent();
-        return move;
-    }
+    console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
+    if (possibilities.length == 1) return checkpoint();
 
     if (move.pieceType == PieceType.rook) {
         // Check if they are on the same row and or same rank.
-        let destinationClasses = move.dest.attr('class');
+        const destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
-            let originClasses = $(possibilities[i]).parent().attr('class');
+            const originClasses = $(possibilities[i]).parent().attr('class');
 
             //return o_file == d_file || o_rank == d_rank;
-            return  originClasses[originClasses.search(/file-[a-z]/) + 5] == destinationClasses[destinationClasses.search(/file-[a-z]/) + 5] 
+            return  compareClass("file", originClasses, destinationClasses)
                     ||
-                    originClasses[originClasses.search(/rank-\d/) + 5] == destinationClasses[destinationClasses.search(/rank-\d/) + 5];
-
+                    compareClass("rank", originClasses, destinationClasses);
         });
     }
-    
-    // If there's only one of the pieces, simply select that one again.
-    // CHECKPOINT 2 (Specific movement types)
-    // console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
-    if (possibilities.length == 1) {
-        move.piece = possibilities[0];
-        move.origin = $(possibilities[0]).parent();
-        return move;
-    }
-    
-    if (move.pieceType == PieceType.rook) {
+    if (move.pieceType == PieceType.bishop) {
         // Check if they are on the same row and or same rank.
         let destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
             let originClasses = $(possibilities[i]).parent().attr('class');
+
+            return Math.abs(rank(originClasses) - rank(destinationClasses)) == Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
+        });
+    }
+    if (move.pieceType == PieceType.queen) {
+        // Check if they are on the same row and or same rank.
+        const destinationClasses = move.dest.attr('class');
+        possibilities = possibilities.filter(i => {
+            const originClasses = $(possibilities[i]).parent().attr('class');
+
+            return  compareClass("file", originClasses, destinationClasses)
+                    ||
+                    compareClass("rank", originClasses, destinationClasses)
+                    ||
+                    Math.abs(rank(originClasses) - rank(destinationClasses)) == Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
+        });
+    }
+    if (move.pieceType == PieceType.knight) {
+        // Check if they are on the same row and or same rank.
+        const destinationClasses = move.dest.attr('class');
+        possibilities = possibilities.filter(i => {
+            const originClasses = $(possibilities[i]).parent().attr('class');
+
+            const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
+
+            console.log(`delta f : ${file_distance}`);
+
+            // delta rank + delta file = 3
+            return  Math.abs(rank(originClasses) - rank(destinationClasses)) + file_distance == 3
+                    &&
+                    file_distance != 0;
+        });
+    }
+    
+    console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
+    if (possibilities.length == 1) return checkpoint();
+    
+    if (move.pieceType == PieceType.rook) {
+        const destinationClasses = move.dest.attr('class');
+        possibilities = possibilities.filter(i => {
+            const originClasses = $(possibilities[i]).parent().attr('class');
             
-            let rankDest = parseInt(destinationClasses[destinationClasses.search(/rank-\d/) + 5]);
-            let rankOrigin = parseInt(originClasses[originClasses.search(/rank-\d/) + 5]);
-            let fileDest = destinationClasses.charCodeAt(destinationClasses.search(/file-[a-z]/) + 5) - 97;
-            let fileOrigin = originClasses.charCodeAt(originClasses.search(/file-[a-z]/) + 5) - 97;
+            const rankDest = rank(destinationClasses),
+                rankOrigin = rank(originClasses);
+            const fileDest = file(destinationClasses).charCodeAt(0) - 97,
+                fileOrigin = file(originClasses).charCodeAt(0) - 97;
 
             if (rankDest == rankOrigin) {
                 // go through file
                 if (fileDest > fileOrigin) for (let i = fileOrigin + 1; i < fileDest; i++) {
-                    if ($(`.S${alphabet[i]}${rankDest} > .piece`).length != 0) return false;
+                    if (isPieceAt(alphabet[i], rankDest)) return false;
                 } else for (let i = fileOrigin - 1; i > fileDest; i--) {
-                    if ($(`.S${alphabet[i]}${rankDest} > .piece`).length != 0) return false;
+                    if (isPieceAt(alphabet[i], rankDest)) return false;
                 }
             } else {
                 // go through rank
                 if (rankDest > rankOrigin) for (let i = rankOrigin + 1; i < rankDest; i++) {
-                    if ($(`.S${alphabet[fileDest]}${i} > .piece`).length != 0) return false;
+                    if (isPieceAt(alphabet[fileDest], i)) return false;
                 } else for (let i = rankOrigin - 1; i > rankDest; i--) {
-                    if ($(`.S${alphabet[fileDest]}${i} > .piece`).length != 0) return false;
+                    if (isPieceAt(alphabet[fileDest], i)) return false;
                 }
             }
             
             return true;
         });
     }
+    if (move.pieceType == PieceType.bishop) {
+        const destinationClasses = move.dest.attr('class');
+        possibilities = possibilities.filter(i => {
+            const originClasses = $(possibilities[i]).parent().attr('class');
+            
+            const rankDest = rank(destinationClasses),
+                rankOrigin = rank(originClasses),
+              rankIncrease = rankDest > rankOrigin;
 
-    // If there's only one of the pieces, simply select that one again.
-    // CHECKPOINT 3 (Walled)
-    // console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
-    if (possibilities.length == 1) {
-        move.piece = possibilities[0];
-        move.origin = $(possibilities[0]).parent();
-        return move;
+            const fileDest = file(destinationClasses).charCodeAt(0) - 97,
+                fileOrigin = file(originClasses).charCodeAt(0) - 97,
+              fileIncrease = fileDest > fileOrigin;
+
+            const difference = Math.abs(rankDest - rankOrigin);
+
+            for (let i = 1; i < difference; i++) {
+                if (isPieceAt(alphabet[fileOrigin + (fileIncrease ? i : -i)], rankOrigin + (rankIncrease ? i : -i))) return false;
+            }
+            
+            return true;
+        });
+    }  
+    if (move.pieceType == PieceType.queen) {
+        const destinationClasses = move.dest.attr('class');
+        possibilities = possibilities.filter(i => {
+            const originClasses = $(possibilities[i]).parent().attr('class');
+            
+            const rankDest = rank(destinationClasses),
+                rankOrigin = rank(originClasses),
+              rankIncrease = rankDest > rankOrigin;
+
+            const fileDest = file(destinationClasses).charCodeAt(0) - 97,
+                fileOrigin = file(originClasses).charCodeAt(0) - 97,
+              fileIncrease = fileDest > fileOrigin;
+
+            const difference = Math.abs(rankDest - rankOrigin);
+            
+            if (rankDest == rankOrigin) {
+                // go through file
+                if (fileIncrease) for (let i = fileOrigin + 1; i < fileDest; i++) {
+                    if (isPieceAt(alphabet[i], rankDest)) return false;
+                } else for (let i = fileOrigin - 1; i > fileDest; i--) {
+                    if (isPieceAt(alphabet[i], rankDest)) return false;
+                }
+            } else if (fileDest == fileOrigin) {
+                // go through rank
+                if (rankIncrease) for (let i = rankOrigin + 1; i < rankDest; i++) {
+                    if (isPieceAt(alphabet[fileDest], i)) return false;
+                } else for (let i = rankOrigin - 1; i > rankDest; i--) {
+                    if (isPieceAt(alphabet[fileDest], i)) return false;
+                }
+            } else for (let i = 1; i < difference; i++) {
+                if (isPieceAt(alphabet[fileOrigin + (fileIncrease ? i : -i)], rankOrigin + (rankIncrease ? i : -i))) return false;
+            }
+            
+            return true;
+        });
     }
+    // Note that knight can jump over things so it doesn't have walling.
+    
+    console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
+    if (possibilities.length == 1) return checkpoint();
 }
