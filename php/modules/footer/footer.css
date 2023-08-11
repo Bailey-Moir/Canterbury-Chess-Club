@@ -1,4 +1,4 @@
-.bg-body-nav {
+.footer {
     height: 10vh;
     width: 100%;
     display: flex;
@@ -8,6 +8,12 @@
     text-decoration-color: rgb(255, 255, 255);
     background-color: rgb(1, 22, 30);
     justify-content: space-between;
+    position: absolute;
+    bottom: 0px;
+}
+
+.footer-spacer {
+    height: 10vh;
 }
 
 .a > text {
