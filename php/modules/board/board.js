@@ -1,23 +1,16 @@
 /**
  * @returns {false}
  */
-const FALSE = () => { return false; };
+const FALSE = () => false;
 
 /**
  * Converts radians to degrees
  * @param {number} rad An angle in radians
  * @returns {number} The given angle converted to degrees
  */
-const radToDegree = rad => { return (rad > 0 ? rad : (2*Math.PI + rad)) * 360 / (2*Math.PI) };
+const radToDegree = rad => (rad > 0 ? rad : (2*Math.PI + rad)) * 360 / (2*Math.PI);
 
-/**
- * @param {HTMLElement} element The element to get the centre of.
- * @returns {Point} The centre of the given element.
- */
-const getCentre = element => {
-    rect = element.getBoundingClientRect();
-    return new Point((rect.left + rect.right)/2, (rect.top + rect.bottom)/2);
-}
+const descends = (child, parent) => $(child).closest(parent).length > 0;
 
 /**
  * Represents a 2D point/coordinate.
@@ -72,7 +65,9 @@ const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 //TODO: add capability to have multiple boards without interfering.
 $(document).ready(function() {
     // Toggling square selection for note taking
-    $(".square").contextmenu(e => {
+    let squares = $(".square");
+
+    squares.contextmenu(e => {
         let target = $(e.currentTarget);
         if (target.hasClass("piece")) target = target.parent();
 
@@ -88,75 +83,83 @@ $(document).ready(function() {
         mousePosition.y = e.pageY;
     });
 
-    // Arrows    
+    // Arrows
+    const squareRect = squares[0].getBoundingClientRect();
     let hoveringCellPosition = new Point(0,0);    
-    $(".square").mouseover(e => hoveringCellPosition = getCentre(e.currentTarget));
+    squares.mouseover(e => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        hoveringCellPosition = new Point((rect.left + rect.right)/2, (rect.top + rect.bottom)/2) 
+    });
 
     let rightMouseDown = false,
         arrowLoopID;
-    $(".square").mousedown(e => { switch(e.which) {
-        case 1:
-            // Clearing all notes
-            $(".square").removeClass("selected");
-            $(".arrow").remove();
-            break;
-        case 3:
-            // Mark that the right mouse is being held down
-            rightMouseDown = true;
+    $(".board").mousedown(e => { 
+        const board = $(e.currentTarget);
+        switch(e.which) {        
+            case 1:
+                if (descends(e.target, ".arrow")) return;
 
-            // Save point that arrow started
-            let arrowStart = getCentre(e.currentTarget);
+                // Clearing all notes
+                board.find(".square").removeClass("selected");
+                board.find(".arrow").remove();
+                break;
+            case 3:
+                // Mark that the right mouse is being held down
+                rightMouseDown = true;
 
-            // Create the container for the arrow
-            let arrowContainer = $(document.createElement('div'))
-                .addClass("arrow")
-                .appendTo(document.body)
-                .bind("contextmenu", FALSE)
-                .bind("mousedown", e => e.which == 1 && $(e.currentTarget).remove())
-                .css({
-                    top: arrowStart.y,
-                    left: arrowStart.x
-                });
-            
-            // Set cell width
-            let rect = e.currentTarget.getBoundingClientRect();
-            let cellWidth = rect.right - rect.left;
+                // Save point that arrow started
+                let arrowStart = hoveringCellPosition;
 
-            // Create the main body of the arrow
-            let arrowBody = $(document.createElement('div'))
-                .appendTo(arrowContainer)
-                .bind("contextmenu", FALSE)
-                .css({
-                    height: 4*cellWidth/15,
-                    top: -2*cellWidth/15
-                });
-
-            // Create the arrow head
-            let arrowHead = $(document.createElement('img'))
-                .appendTo(arrowContainer)
-                .addClass("arrowHead")
-                .bind("contextmenu", FALSE)
-                .attr("src", "/res/arrowHead.svg")
-                .css({
-                    height: cellWidth/2,
-                    width: 2*cellWidth/3, 
-                    top: -cellWidth/2,
-                    visibility: "hidden" // remove?
-                });
-
-            // Create the loop to update the arrow
-            arrowLoopID = setInterval(() => {
-                if (!rightMouseDown) return;
+                // Create the container for the arrow
+                let arrowContainer = $(document.createElement('div'))
+                    .addClass("arrow")
+                    .appendTo(board)
+                    .bind("contextmenu", FALSE)
+                    .bind("mousedown", e => e.which == 1 && $(e.currentTarget).remove())
+                    .css({
+                        top: arrowStart.y,
+                        left: arrowStart.x
+                    });
                 
-                arrowBody.css({ width: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 });
-                arrowHead.css({ 
-                    left: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 - 9,
-                    visibility: hoveringCellPosition._equals(arrowStart) ? "hidden" : "visible"
-                 });
-                arrowContainer.css({ '-webkit-transform': `rotate(${arrowStart.angle(hoveringCellPosition)}deg)` });
-            }, 100);
-            break;
-    }});
+                // Set cell width
+                let cellWidth = squareRect.right - squareRect.left;
+
+                // Create the main body of the arrow
+                let arrowBody = $(document.createElement('div'))
+                    .appendTo(arrowContainer)
+                    .bind("contextmenu", FALSE)
+                    .css({
+                        height: 4*cellWidth/15,
+                        top: -2*cellWidth/15
+                    });
+
+                // Create the arrow head
+                let arrowHead = $(document.createElement('img'))
+                    .appendTo(arrowContainer)
+                    .addClass("arrowHead")
+                    .bind("contextmenu", FALSE)
+                    .attr("src", "/res/arrowHead.svg")
+                    .css({
+                        height: cellWidth/2,
+                        width: 2*cellWidth/3, 
+                        top: -cellWidth/2,
+                        visibility: "hidden" // remove?
+                    });
+
+                // Create the loop to update the arrow
+                arrowLoopID = setInterval(() => {
+                    if (!rightMouseDown) return;
+                    
+                    arrowBody.css({ width: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 });
+                    arrowHead.css({ 
+                        left: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 - 9,
+                        visibility: hoveringCellPosition._equals(arrowStart) ? "hidden" : "visible"
+                    });
+                    arrowContainer.css({ '-webkit-transform': `rotate(${arrowStart.angle(hoveringCellPosition)}deg)` });
+                }, 100);
+                break;
+        }
+    });
 
     // Stop updating arrows
     $(document).mouseup(e => { 
@@ -167,9 +170,6 @@ $(document).ready(function() {
         // Stop the loop that updates an arrow.
         clearInterval(arrowLoopID);
     });
-
-
-
         
     $(".next-move").mousedown(e => {
         if (e.which != 1) return;
