@@ -1,6 +1,14 @@
+.board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .board {
-    width: 800px;
-    height: 800px;
+    margin-bottom: 20px;
 }
 
 .rank {
@@ -8,8 +16,8 @@
 }
 
 .square {
-    width: 100px;
-    height: 100px;
+    width: 5vw;
+    height: 5vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,4 +76,15 @@
 
 .selected {
     background-color: rgb(158, 84, 19) !important;
+}
+
+.next-move, .last-move {
+    background-color: rgb(1, 22, 30);
+    color: white;
+    border: none;
+    width:10vw;
+    height:5vw;
+    border-radius: 1vw;
+    font-size: 2em;
+    text-align: center;
 }

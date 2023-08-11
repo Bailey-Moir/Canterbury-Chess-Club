@@ -24,8 +24,8 @@
         }
         ?>
     </div>
-    <center>
-        <button class="last-move">last move</button>
-        <button class="next-move">next move</button>
-    </center>
+    <div>
+        <button class="last-move"><</button>
+        <button class="next-move">></button>
+    </div>
 </div>

@@ -63,7 +63,7 @@ class Point {
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 //TODO: add capability to have multiple boards without interfering.
-$(document).ready(function() {
+$(document).ready(() => {
     // Toggling square selection for note taking
     let squares = $(".square");
 
@@ -84,11 +84,10 @@ $(document).ready(function() {
     });
 
     // Arrows
-    const squareRect = squares[0].getBoundingClientRect();
     let hoveringCellPosition = new Point(0,0);    
     squares.mouseover(e => {
         const rect = e.currentTarget.getBoundingClientRect()
-        hoveringCellPosition = new Point((rect.left + rect.right)/2, (rect.top + rect.bottom)/2) 
+        hoveringCellPosition = new Point((rect.left + rect.right)/2 + window.scrollX, (rect.top + rect.bottom)/2 + window.scrollY) 
     });
 
     let rightMouseDown = false,
@@ -97,11 +96,9 @@ $(document).ready(function() {
         const board = $(e.currentTarget);
         switch(e.which) {        
             case 1:
-                if (descends(e.target, ".arrow")) return;
-
                 // Clearing all notes
                 board.find(".square").removeClass("selected");
-                board.find(".arrow").remove();
+                $(`.arrow-${board.attr("id").at(-1)}`).remove();
                 break;
             case 3:
                 // Mark that the right mouse is being held down
@@ -113,7 +110,8 @@ $(document).ready(function() {
                 // Create the container for the arrow
                 let arrowContainer = $(document.createElement('div'))
                     .addClass("arrow")
-                    .appendTo(board)
+                    .addClass(`arrow-${board.attr("id").at(-1)}`)
+                    .appendTo("body")
                     .bind("contextmenu", FALSE)
                     .bind("mousedown", e => e.which == 1 && $(e.currentTarget).remove())
                     .css({
@@ -122,7 +120,7 @@ $(document).ready(function() {
                     });
                 
                 // Set cell width
-                let cellWidth = squareRect.right - squareRect.left;
+                let cellWidth = squares[0].getBoundingClientRect().width;
 
                 // Create the main body of the arrow
                 let arrowBody = $(document.createElement('div'))
@@ -141,7 +139,7 @@ $(document).ready(function() {
                     .attr("src", "/res/arrowHead.svg")
                     .css({
                         height: cellWidth/2,
-                        width: 2*cellWidth/3, 
+                        width: 2*cellWidth/3,
                         top: -cellWidth/2,
                         visibility: "hidden" // remove?
                     });
@@ -174,14 +172,23 @@ $(document).ready(function() {
     $(".next-move").mousedown(e => {
         if (e.which != 1) return;
         
-        nextMove($(e.currentTarget).parent().parent().find("> .board"));
+        boards[$(e.currentTarget).attr("id").at(-1)].nextMove();
     });
         
     $(".last-move").mousedown(e => {
         if (e.which != 1) return;
         
-        lastMove($(e.currentTarget).parent().parent().find("> .board"));
+        boards[$(e.currentTarget).attr("id").at(-1)].lastMove();
     });
+
+    $(".board-container").each((i, ele) => {
+        let board = new Board();
+
+        $(ele).attr("id", `board-container-${board.id}`);
+        $(ele).find(".next-move").attr("id", `next-move-${board.id}`);
+        $(ele).find(".last-move").attr("id", `last-move-${board.id}`);
+        $(ele).find(".board").attr("id", `board-${board.id}`);
+    })
 });
 
 // COMPILER
@@ -256,9 +263,10 @@ const isPieceAt = (file, rank) => $(`.S${file}${rank} > .piece`).length != 0;
  * @param {String} str The chess notation move
  * @returns {Move}
  */
-function compile_move(str, white, board) {
+function compile_move(str, white, boardID) {
     /** @type {Move} */
     let move = new Move();
+    const board = $(`#board-${boardID}`);
 
     str = str.replace(/\.|!| |(\(=\))|\?|\+|\#/gmi,""); // Remove computationally meaningless characters
     
@@ -517,10 +525,18 @@ function compile_move(str, white, board) {
     if (possibilities.length == 1) return checkpoint();
 }
 
-// 
+// Implementation of compiler
 
+let boardsN = 0;
+/**
+ * @type {Array<Board>}
+ */
+let boards = {};
 class Board {
-    constructor(boardObject) {
+    constructor() {
+        this.id = boardsN++;
+        boards[this.id] = this;
+
         this.currentMove = 0;
         this.moves = [
             "e4",
@@ -552,7 +568,6 @@ class Board {
             "Rxh5#"
         ];;
         this.compiledMoves = [];
-        this.boardObject = boardObject;
     }    
 
     nextMove() {
@@ -562,7 +577,7 @@ class Board {
         if (this.compiledMoves.length > this.currentMove) {
             move = this.compiledMoves[this.currentMove++];
         } else {
-            move = compile_move(this.moves[this.currentMove], this.currentMove++ % 2 == 0, this.boardObject);
+            move = compile_move(this.moves[this.currentMove], this.currentMove++ % 2 == 0, this.id);
             this.compiledMoves.push(move);
         }
     
@@ -584,16 +599,4 @@ class Board {
 
         move.reverse_operations.forEach(fn => fn());
     }
-}
-
-let boards = {};
-
-function nextMove(board) {
-    if (boards[board] == undefined) boards[board] = new Board(board);
-    boards[board].nextMove();
-}
-
-function lastMove(board) {
-    if (boards[board] == undefined) boards[board] = new Board(board);
-    boards[board].lastMove();
 }
