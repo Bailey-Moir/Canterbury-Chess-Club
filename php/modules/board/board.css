@@ -1,14 +1,49 @@
 .board-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.board {
-    margin-bottom: 20px;
+.board-container > .right {
+    position: relative;
+    width: 20vw;
+    height: 40vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.right > .directions {
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+}
+
+.right > .moves {
+    width: 100%;
+    height: calc(100% - 7.5vw);
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    background-color: rgba(1, 22, 30, 0.9);
+    color: white;
+}
+
+.moves > .move {
+    width: 50%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.move > p {
+    margin: 0px;
+}
+
+.current-move {
+    background-color: rgba(130, 130, 130, 0.3);
 }
 
 .rank {
@@ -83,8 +118,7 @@
     color: white;
     border: none;
     width:10vw;
-    height:5vw;
-    border-radius: 1vw;
+    height:7.5vw;
     font-size: 2em;
     text-align: center;
 }

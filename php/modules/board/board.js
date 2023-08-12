@@ -182,12 +182,12 @@ $(document).ready(() => {
     });
 
     $(".board-container").each((i, ele) => {
-        let board = new Board();
+        $(ele).attr("id", `board-container-${boardsN}`);
+        $(ele).find(".next-move").attr("id", `next-move-${boardsN}`);
+        $(ele).find(".last-move").attr("id", `last-move-${boardsN}`);
+        $(ele).find(".board").attr("id", `board-${boardsN}`);
 
-        $(ele).attr("id", `board-container-${board.id}`);
-        $(ele).find(".next-move").attr("id", `next-move-${board.id}`);
-        $(ele).find(".last-move").attr("id", `last-move-${board.id}`);
-        $(ele).find(".board").attr("id", `board-${board.id}`);
+        new Board();
     })
 });
 
@@ -566,12 +566,17 @@ class Board {
             "hxg5+",
             "... Qxg5",
             "Rxh5#"
-        ];;
+        ];
         this.compiledMoves = [];
+
+        this.object = $(`#board-${this.id}`);
     }    
 
     nextMove() {
         if (this.currentMove == this.moves.length) return;
+
+        this.object.parent().find(`.move-${this.currentMove-1}`).removeClass("current-move");
+        this.object.parent().find(`.move-${this.currentMove}`).addClass("current-move");
 
         let move;
         if (this.compiledMoves.length > this.currentMove) {
@@ -592,6 +597,9 @@ class Board {
         if (this.currentMove == 0) return;
         
         const move = this.compiledMoves[--this.currentMove];
+
+        this.object.parent().find(`.move-${this.currentMove-1}`).addClass("current-move");
+        this.object.parent().find(`.move-${this.currentMove}`).removeClass("current-move");
         
         $(move.piece).appendTo(move.origin);
 
