@@ -29,7 +29,7 @@ session_start();
 					
 					<div class="col-1 ">
 						<div class="card" >
-							<a href="#">
+							<a href="/php/game.php">
 								<div class="card-body bg-body-title">
 								<p class="card-text">Game Title</p>
 								</div>
@@ -39,7 +39,7 @@ session_start();
 					</div>
 					<div class="col-1 ">
 						<div class="card" >
-							<a href="#">
+							<a href="/php/game.php">
 								<div class="card-body bg-body-title">
 								<p class="card-text">Game Title</p>
 								</div>
@@ -50,7 +50,7 @@ session_start();
 
 					<div class="col-1 ">
 						<div class="card" >
-							<a href="#">
+							<a href="/php/game.php">
 								<div class="card-body bg-body-title">
 								<p class="card-text">Game Title</p>
 								</div>
