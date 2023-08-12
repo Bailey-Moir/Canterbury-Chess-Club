@@ -26,6 +26,14 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>     
+
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="/php/calendar.php">Calendar</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="/php/coaching.php">Coaching</a>
+                </li>
             </ul>
 
             <form class="d-flex" role="search">

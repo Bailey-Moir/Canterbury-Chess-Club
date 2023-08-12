@@ -14,12 +14,18 @@ session_start();
 	<?php include "php/modules/navbar/navbar.php"; ?>
 	<div id="main">
 		
-		<h2>Canterbury Chess Club</h2>
+		<h2 style="padding-bottom: 20px;">Canterbury Chess Club</h2>
 
+			<div class="container-fluid content">
+				<h3>Club Nights</h3>
+				<p>Club tournaments are held for competiive members on Wednesday nights from 7pm onwards.</p>
+				<p>Social Chess for members and non-members are held alike on Thursday nights from 6:15pm till 9pm (first night free, $2 per night afterwards).</p>
+				<p style="padding-bottom: 20px;">Beginners are more than welcome.</p>
+			</div>
 
 			<div class="container-fluid content">
 				<h3>Recent Games</h3>
-				<div class="row justify-content-around">
+				<div class="row justify-content-around" style="padding-bottom: 30px;">
 					
 					<div class="col-1 ">
 						<div class="card" >
@@ -31,7 +37,6 @@ session_start();
 							</a>
 						</div>
 					</div>
-
 					<div class="col-1 ">
 						<div class="card" >
 							<a href="/php/game.php">
@@ -56,6 +61,42 @@ session_start();
 
 				</div>
 			</div>
+
+			<div class="row justify-content-around">
+					
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
+
+					<div class="col-1 ">
+						<div class="card" >
+							<a href="#">
+								<div class="card-body bg-body-title">
+								<p class="card-text">Game Title</p>
+								</div>
+								<img src="/res/recent_game.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard with any moves yet to be played">
+							</a>
+						</div>
+					</div>
+
+				</div>
 		
 	</div>
 	<?php include "php/modules/footer/footer.php"; ?>
