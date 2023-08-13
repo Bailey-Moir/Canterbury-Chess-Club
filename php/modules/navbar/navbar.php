@@ -32,7 +32,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/php/coaching.php">Coaching</a>
+                    <a class="nav-link active text-white" aria-current="page" href="/php/pages/coaching/coaching.php">Coaching</a>
                 </li>
             </ul>
 

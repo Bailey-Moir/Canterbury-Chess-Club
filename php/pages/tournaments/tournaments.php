@@ -9,14 +9,16 @@
 	<div id="main">
 		
 		<h2>Canterbury Chess Club</h2>
-		<!--
+
+		<div class="row justify-content-around">
 			<p style="width: 80%;">
 				Club tournaments are played on Wednesday nights. The doors open from 7pm, pairings/draw is done at 7:15pm and games start at 7:30pm.
 				Players must be at the clubrooms or message the club's Facebook page by 7:15pm to be included in the draw.
 				Players may request half-point byes in rapid and standard tournaments by messaging the club's Facebook page by 7:15pm (or when entering for a first round bye) - maximum 2 per tournament, not available in a tournament's last 2 rounds.
 				Players must be financial full, life, junior or trial members to play on Wednesday nights.
 			</p>
-		-->
+		</div>
+
 			<div class="container-fluid content">
 				<h3>Upcoming</h3>
 	

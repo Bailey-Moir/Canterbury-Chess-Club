@@ -4,7 +4,7 @@
     font-family: 'Segoe UI';
     text-decoration: bold;
     resize: none;
-    align-self: center;
+    align-self: 
 }
 
 body {
@@ -111,7 +111,7 @@ p {
 }
 
 .row {
-    
+
 }
 
 .card-header {

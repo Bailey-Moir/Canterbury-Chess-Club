@@ -15,7 +15,7 @@ if(isset($_SESSION['admin'])) {
 <body>
     <div id="main">
         
-        <div class="row justify-content-center" style="width: 100%; margin-top: 15%;">
+        <div class="row justify-content-center" style="width: 100%; margin-top: 10%;">
             <p><a class="navbar-brand" href="/index.php"><img src="/res/black_logo.svg" alt="Icon"></a></p>
             <div class="col-6">
 

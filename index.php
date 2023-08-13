@@ -18,7 +18,7 @@ session_start();
 
 			<div class="container-fluid content">
 				<h3>Club Nights</h3>
-				<p>Club tournaments are held for competiive members on Wednesday nights from 7pm onwards.</p>
+				<p>Club tournaments are held for competitive members on Wednesday nights from 7pm onwards.</p>
 				<p>Social Chess for members and non-members are held alike on Thursday nights from 6:15pm till 9pm (first night free, $2 per night afterwards).</p>
 				<p style="padding-bottom: 20px;">Beginners are more than welcome.</p>
 			</div>
