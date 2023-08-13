@@ -4,7 +4,7 @@
     font-family: 'Segoe UI';
     text-decoration: bold;
     resize: none;
-    align-self: 
+    align-self: center;
 }
 
 body {
@@ -96,9 +96,7 @@ p {
     width: 50%;
 }
 
-.col-4 {
-   
-}
+
 
 .col-1 > a {
     text-decoration: none;
@@ -108,10 +106,6 @@ p {
 .form-floating {
     padding-bottom: 15px;
     
-}
-
-.row {
-
 }
 
 .card-header {

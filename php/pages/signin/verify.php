@@ -21,10 +21,10 @@
       $hash_password = $user_aa['password'];
 
       if (password_verify($password, $hash_password)) {
-        $_SESSION['logged_in']['username'] = $username;
+        $_SESSION['logged_in']['user_id'] = $user_aa['user_id'];
         $_SESSION['logged_in']['security'] = $user_aa['security'];
 
-        if (!$user_aa['security']) header("Location: ../../account.php");
+        if (!$user_aa['security']) header("Location: ../../pages/account/account.php");
         else header("Location: ../../adminpanel.php");
 
       } else header("Location: signin.php?error=fail");
