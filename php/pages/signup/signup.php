@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include "header.php"; ?>
+	<?php include "../../header.php"; ?>
 	<title>Canterbury Chess Club</title>
 </head>
 <body>
-	
+	<?php include "../../modules/navbar/navbar.php"; ?>
 	<div id="main">
         
         <div class="row justify-content-center" style="margin-top: 8%;">
@@ -17,8 +17,7 @@
                         Sign up
                     </h3>
 
-                    <form-signup style="border-radius: 0px; padding-top: 15px; width: 80%;" action="verify2.php" method="post">
-                        <p>By making an account with us you equip yourself with access to club forums, games studies and more.</p>
+                    <form style="border-radius: 0px; padding-top: 15px; width: 80%;" action="verify.php" method="post">
                         
                         <div class="form-floating border-secondary" style="border-radius: 0px;">
                             <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username">
@@ -36,6 +35,16 @@
                             <label for="floatingPassword">Password</label>
                             <span class="material-symbols-outlined">eye-open</span>
                         </div>
+
+                        <?php
+                            if(isset($_GET['error'])) {
+                                ?>
+                                <div class="alter alert-danger" role="alert" style="color: rgb(255, 0, 0); padding-bottom: 10px;    ">
+                                    Useranme or Password is already in use, please use something else
+                                </div>
+                                <?php 
+                            } 
+                        ?>
                         
                         <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
                     </form>
@@ -47,6 +56,6 @@
 
         
 	</div>
-	
+	<?php include "../../modules/footer/footer.php"; ?>
 </body>
 </html>

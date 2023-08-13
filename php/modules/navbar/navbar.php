@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/php/tournaments.php">Tournaments</a>
+                    <a class="nav-link active text-white" aria-current="page" href="/php/pages/tournaments/tournaments.php">Tournaments</a>
                 </li>
                 
                 <li class="nav-item dropdown">
@@ -42,7 +42,7 @@
 
             <a href="https://www.facebook.com/CanterburyChessClub/"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">account_circle</span><b>facebook</b></button></a>
 
-            <a href="/php/signin.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">account_circle</span><b>Profile</b></button></a>
+            <a href="/php/pages/signin/signin.php"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">account_circle</span><b>Profile</b></button></a>
 
         </div>
     </div>
