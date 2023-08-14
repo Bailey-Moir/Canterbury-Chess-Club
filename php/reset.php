@@ -31,7 +31,7 @@
         date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         rating_standard INT(4) UNSIGNED NOT NULL,
         rating_rapid INT(4) UNSIGNED NOT NULL,
-        rating_blitz INT(4) UNSIGNED NOT NULL,
+        rating_blitz INT(4) UNSIGNED NOT NULL
     );");
     $conn->query("CREATE TABLE tournaments (
         tournament_id INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
