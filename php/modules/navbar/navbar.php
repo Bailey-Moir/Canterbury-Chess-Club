@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/php/pages/tournaments/tournaments.php">Tournaments</a>
+                    <a class="nav-link active text-white" aria-current="page" href="/php/pages/tournaments/tournaments.php"><b>Tournaments</b></a>
                 </li>
                 
                 <li class="nav-item dropdown">
@@ -28,11 +28,11 @@
                 </li>     
 
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/php/calendar.php">Calendar</a>
+                    <a class="nav-link active text-white" aria-current="page" href="/php/calendar.php"><b>Calendar</b></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/php/pages/coaching/coaching.php">Coaching</a>
+                    <a class="nav-link active text-white" aria-current="page" href="/php/pages/coaching/coaching.php"><b>Coaching</b></a>
                 </li>
             </ul>
 
