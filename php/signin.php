@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_SESSION['admin'])) {
-    header("Location: /php/pages/home/index.php?page=adminpanel");
+    header("Location: /php/pages/home/home.php?page=adminpanel");
 }
 
 ?>
@@ -16,7 +16,7 @@ if(isset($_SESSION['admin'])) {
     <div id="main">
         
         <div class="row justify-content-center" style="width: 100%; margin-top: 10%;">
-            <p><a class="navbar-brand" href="/php/pages/home/index.php"><img src="/res/black_logo.svg" alt="Icon"></a></p>
+            <p><a class="navbar-brand" href="/php/pages/home/home.php"><img src="/res/black_logo.svg" alt="Icon"></a></p>
             <div class="col-6">
 
                 <div class="card" style="border-radius: 0px;"> 

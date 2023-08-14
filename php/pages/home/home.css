@@ -1,22 +1,22 @@
-.upcoming-tournaments {
+.games {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.upcoming-tournaments > div {
+.games > div {
     margin-left: 3.75rem;
     margin-right: 3.75rem;
     margin-bottom: 3.75rem;
 }
 
-.upcoming-tournaments * {
+.games * {
     width: 15rem;
     white-space: nowrap;
 }
 
-.upcoming-tournaments p {
+.games p {
     white-space: nowrap;
     text-overflow: ellipsis;
     word-wrap: break-word;

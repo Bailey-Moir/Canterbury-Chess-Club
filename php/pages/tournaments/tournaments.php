@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include "../../header.php"; ?>
+	<?php 
+	session_start();
+	include "../../dbconnect.php";
+	include "../../header.php"; 
+	?>
+	<link rel="stylesheet" href="/php/pages/tournaments/tournaments.css">
 	<title>Canterbury Chess Club</title>
 </head>
 <body>
@@ -21,78 +26,24 @@
 
 			<div class="container-fluid content">
 				<h3>Upcoming</h3>
-	
-				<div class="row justify-content-around">
-					
-					<div class="col-1 ">
-						<div class="card" >
-							<a href="#">
-								<div class="card-body bg-body-title">
-								<p class="card-text">Tourney 1</p>
-								</div>
-								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
-							</a>
-						</div>
-					</div>
 
-					<div class="col-1 ">
-						<div class="card" >
-							<a href="#">
-								<div class="card-body bg-body-title">
-								<p class="card-text">Tourney 2</p>
-								</div>
-								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
-							</a>
-						</div>
-					</div>
+				<div class="upcoming-tournaments">
+					<?php
+					$results = $dbconnect->query("SELECT * FROM tournaments ORDER BY date_start");
 
-					<div class="col-1 ">
-						<div class="card" >
-							<a href="#">
+					while ($row = $results->fetch_assoc()) {
+						?>
+						<div class="card">
+							<a href="/php/pages/tournament/tournament.php?id=<?php echo $row['tournament_id']; ?>">
 								<div class="card-body bg-body-title">
-								<p class="card-text">Tourney 3</p>
+								<p class="card-text"><?php echo $row['name'] ?></p>
 								</div>
-								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
+								<img src="/res/tourney.JPG" class="card-img-top" alt="Chessboard">
 							</a>
 						</div>
-					</div>
-				</div>
-
-				<h3 style="margin-top: 10px;">Recent</h3>
-				<div class="row justify-content-around">
-					
-					<div class="col-2 ">
-						<div class="card" >
-							<a href="#">
-								<div class="card-body bg-body-title">
-								<p class="card-text">Tourney 4</p>
-								</div>
-								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
-							</a>
-						</div>
-					</div>
-
-					<div class="col-2 ">
-						<div class="card" >
-							<a href="#">
-								<div class="card-body bg-body-title">
-								<p class="card-text">Tourney 5</p>
-								</div>
-								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
-							</a>
-						</div>
-					</div>
-
-					<div class="col-2 ">
-						<div class="card" >
-							<a href="#">
-								<div class="card-body bg-body-title">
-								<p class="card-text">Tourney 6</p>
-								</div>
-								<img src="/res/tourney.JPG" class="card-img-top" style="width: 15rem;" alt="Chessboard">
-							</a>
-						</div>
-					</div>
+						<?php
+					}
+					?>
 				</div>
 			</div>
 
@@ -147,9 +98,6 @@
 				</p>
 
 			</div>
-
-
-
 		
 	</div>
 	<?php include "../../modules/footer/footer.php"; ?>

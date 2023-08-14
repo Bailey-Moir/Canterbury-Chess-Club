@@ -3,17 +3,18 @@
 <?php
 
 $stmt = $dbconnect->prepare("SELECT * FROM games WHERE game_id = ?");
-$stmt->bind_param("i", $_GET["id"]);
+$stmt->bind_param("i", $id);
 $stmt->execute();
 $results = $stmt->get_result()->fetch_assoc();
 
 $moves = preg_split("/(\r|\n| )+/", $results['moves']);
+
 ?>
 
-<script src="/php/modules/board/board.js"></script>
+<script src="/php/modules/board/board-thumbnail.js"></script>
 
-<div class="board-container" id="board-container-<?php echo $results['game_id']; ?>">
-    <div class="board white-view" id="board-<?php echo $results['game_id']; ?>">
+<div class="board-container-thumbnail" style="width: 15rem; height: 15rem;" id="board-container-<?php echo $id; ?>">
+    <div class="board-thumbnail white-view" id="board-<?php echo $id; ?>" >
         <?php    
         $piece_order = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'];
         $alphabet = range('a', 'z');
@@ -35,25 +36,14 @@ $moves = preg_split("/(\r|\n| )+/", $results['moves']);
         }
         ?>
     </div>
-    <div class="right">
-        <div class="moves">
-            <?php
-            for ($i = 0; $i < count($moves); $i++) {
-                echo "<div class=\"move move-$i\"> <p class=\"".($i%2 ? "black" : "white")."\"> $moves[$i] </p> </div>";
-            }
-            ?>
-        </div>
-        <div class="directions">
-            <button class="last-move" id="last-move-<?php echo $results['game_id']; ?>"><</button>
-            <button class="next-move" id="next-move-<?php echo $results['game_id']; ?>">></button>
-        </div>
-    </div>
 </div>
 
 <script>
-    let board = new Board(<?php echo $results['game_id']; ?>);
+    board = new Board(<?php echo $id; ?>);
 
     board.moves = [
         <?php echo "\"".implode('", "', $moves)."\""; ?>
     ];
+
+    board.setMove(2*<?php echo count($moves); ?>);
 </script>

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include "header.php"; ?>
+	<?php 
+    session_start();
+    include "dbconnect.php";
+    include "header.php";
+    ?>
 	<title>Canterbury Chess Club</title>
 </head>
 <body>

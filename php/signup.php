@@ -9,7 +9,7 @@
 	<div id="main">
         
         <div class="row justify-content-center" style="margin-top: 8%;">
-            <p><a class="navbar-brand" href="/php/pages/home/index.php"><img src="/res/black_logo.svg" alt="Icon"></a></p>
+            <p><a class="navbar-brand" href="/php/pages/home/home.php"><img src="/res/black_logo.svg" alt="Icon"></a></p>
             <div class="col-6">
 
                 <div class="card" style="padding-bottom: 20px; border-radius: 0px;"> 
