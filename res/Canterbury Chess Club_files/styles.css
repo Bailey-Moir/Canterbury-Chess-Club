@@ -1,0 +1,120 @@
+* {
+    margin:  0px;
+    padding: 0px;
+    font-family: 'Segoe UI';
+    text-decoration: bold;
+    resize: none;
+    align-self: center;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+#main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    
+}
+
+
+
+#profile_name {
+    background-color: rgb(255, 255, 255);
+    text-decoration-color: rgb(1, 22, 30);
+}   
+
+#forum {
+    background-color: rgb(255, 255, 255);
+    text-decoration-color: rgb(1, 22, 30);
+}
+
+#studies {
+    background-color: rgb(255, 255, 255);
+    text-decoration-color: rgb(1, 22, 30);
+}
+
+#forums {
+    background-color: rgb(1, 22, 30);
+    text-decoration-color: rgb(255, 255, 255);
+}
+
+#player {
+    background-color: rgb(1, 22, 30);
+    text-decoration-color: rgb(245,245,245);
+}
+
+.h2 {
+    font: bold;
+}
+
+.h3 {
+    font: bold;
+    background-color: rgb(1, 22, 30);
+    text-decoration-color: white; 
+}
+
+p {
+    font-size: large;
+}
+
+#button {
+    color: rgb(255, 255, 255);
+}
+
+.material-symbols-outlined {
+    color: white;
+}
+
+.bg-body-title {
+    text-decoration-color: rgb(255, 255, 255);
+    background-color: rgb(1, 22, 30);
+}
+
+.card {
+   align-items: center;
+
+}
+
+.card-header {
+    background-color: rgb(1, 22, 30);
+    width: 100%;
+    
+}
+
+.card > a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.card1 > a {
+    text-decoration: none;
+    color:rgb(1, 22, 30);
+    width: 50%;
+}
+
+
+
+.col-1 > a {
+    text-decoration: none;
+    color: rgb(1, 22, 30);
+}
+
+.form-floating {
+    padding-bottom: 15px;
+    
+}
+
+.card-header {
+    background-color: rgb(1, 22, 30) !important;
+    color: white !important; 
+}
+
+.card-body1 {
+    background-color: white !important; 
+    color: rgb(1, 22, 30) !important;
+    text-align: left !important;
+}
