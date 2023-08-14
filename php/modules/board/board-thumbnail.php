@@ -13,7 +13,7 @@ $moves = preg_split("/(\r|\n| )+/", $results['moves']);
 
 <script src="/php/modules/board/board-thumbnail.js"></script>
 
-<div class="board-container-thumbnail" style="width: 15rem; height: 15rem;" id="board-container-<?php echo $id; ?>">
+<div class="board-container board-container-thumbnail" style="width: 15rem; height: 15rem;" id="board-container-<?php echo $id; ?>">
     <div class="board-thumbnail white-view" id="board-<?php echo $id; ?>" >
         <?php    
         $piece_order = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'];

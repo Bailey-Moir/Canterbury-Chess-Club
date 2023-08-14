@@ -335,6 +335,8 @@ class Board {
     }    
 
     nextMove() {
+        if (this.currentMove >= this.moves.length) return;
+        
         let move = compile_move(this.moves[this.currentMove], this.currentMove++ % 2 == 0, this.object);
         
         const children = move.dest.find(">:first-child");

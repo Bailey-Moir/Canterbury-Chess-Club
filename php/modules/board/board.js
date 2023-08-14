@@ -167,19 +167,19 @@ $(document).ready(() => {
         clearInterval(arrowLoopID);
     });
         
-    $(".next-move").mousedown(e => {
+    $(".next-move").mouseup(e => {
         if (e.which != 1) return;
         
         boards[$(e.currentTarget).attr("id").at(-1)].nextMove();
     });
         
-    $(".last-move").mousedown(e => {
+    $(".last-move").mouseup(e => {
         if (e.which != 1) return;
         
         boards[$(e.currentTarget).attr("id").at(-1)].lastMove();
     });
 
-    $(".move").mousedown(e => {
+    $(".move").mouseup(e => {
         if (e.which != 1) return;
 
         const classes = $(e.currentTarget).attr("class");
@@ -546,13 +546,21 @@ class Board {
         this.container.find(`.move-${this.currentMove-1}`).removeClass("current-move");
         this.container.find(`.move-${this.currentMove}`).addClass("current-move");
 
+        if (this.currentMove != 0) {
+            this.compiledMoves[this.currentMove-1].dest.removeClass("destination");
+            this.compiledMoves[this.currentMove-1].origin.removeClass("origin");
+        }
+
         let move;
         if (this.compiledMoves.length > this.currentMove) {
-            move = this.compiledMoves[this.currentMove++];
+            move = this.compiledMoves[this.currentMove++]; // WHERE IT INCREASES
         } else {
             move = compile_move(this.moves[this.currentMove], this.currentMove++ % 2 == 0, this.object);
             this.compiledMoves.push(move);
         }
+
+        move.dest.addClass("destination");
+        move.origin.addClass("origin");
     
         const children = move.dest.find(">:first-child");
         children.length != 0 && children.remove();
@@ -562,14 +570,20 @@ class Board {
         
         const moves_container = this.container.find(".moves");
         moves_container.animate({
-            scrollTop: moves_container.height() * 0.1 * (Math.floor((this.currentMove+1)*0.5) - 1)
+            scrollTop: moves_container.height() * 0.1 * (Math.floor((this.currentMove-1)*0.5) - 1)
         },0);
     }
 
     lastMove() {
         if (this.currentMove == 0) return;
-        
+
         const move = this.compiledMoves[--this.currentMove];
+        
+        move.dest.removeClass("destination");
+        move.origin.removeClass("origin");
+
+        this.compiledMoves[this.currentMove-1].dest.addClass("destination");
+        this.compiledMoves[this.currentMove-1].origin.addClass("origin");
         
         this.container.find(`.move-${this.currentMove-1}`).addClass("current-move");
         this.container.find(`.move-${this.currentMove}`).removeClass("current-move");
@@ -582,7 +596,7 @@ class Board {
 
         const moves_container = this.container.find(".moves");
         moves_container.animate({
-            scrollTop: moves_container.height() * 0.1 * (Math.floor((this.currentMove+1)*0.5) - 1)
+            scrollTop: moves_container.height() * 0.1 * (Math.floor((this.currentMove-1)*0.5) - 1)
         },0);
     }
 

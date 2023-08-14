@@ -2,19 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
-.board-container-thumbnail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.board-container > .board {
+:not(.board-container-thumbnail) > .board {
     width: 40vw;
     height: 40vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .board-container-thumbnail > .board-thumbnail {
@@ -22,7 +16,7 @@
     height: 100%;
 }
 
-.board-container > .right {
+.board-container .right {
     position: relative;
     width: 20vw;
     height: 40vw;
@@ -30,13 +24,13 @@
     flex-direction: column;
 }
 
-.right > .directions {
+.board-container .directions {
     position: absolute;
     bottom: 0px;
     display: flex;
 }
 
-.right > .moves {
+.board-container .moves {
     width: 100%;
     height: calc(100% - 7.5vw);
     display: flex;
@@ -46,28 +40,40 @@
     color: white;
 }
 
-.moves > .move {
+.board-container .move {
     width: 50%;
     height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+.board-container .move:hover {
+    background-color: rgba(255,255,255,0.1);
 }
 
-.move > p {
+.board-container .move > p {
     margin: 0px;
 }
 
-.current-move {
-    background-color: rgba(130, 130, 130, 0.3);
+.board-container .current-move {
+    background-color: rgba(255,255,255,0.05);
 }
 
-.rank {
+.board-container .destination {
+    background-color: green !important;
+}
+
+.board-container .origin {
+    background-color: yellow !important;
+}
+
+.board-container .rank {
     display: flex;
     height: 12.5%;
 }
 
-.square {
+.board-container .square {
     width: 12.5%;
     height: 100%;
     display: flex;
@@ -75,16 +81,15 @@
     justify-content: center;
 }
  
-.square.white {
+.board-container .square.white {
     background-color: #d5e1e5;
 }
-.square.black {
+.board-container .square.black {
     background-color: #779bb1;
 }
-
  
 /* Piece definitions */
-.square > .piece {
+.board-container .square > .piece {
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
@@ -93,44 +98,44 @@
 }
 
 /* Placeholer colours and borders for identification */
-.piece.black.R { background-image: url("../../../res/pieces/blackR.svg"); }
-.piece.black.N { background-image: url("../../../res/pieces/blackN.svg"); }
-.piece.black.B { background-image: url("../../../res/pieces/blackB.svg"); }
-.piece.black.Q { background-image: url("../../../res/pieces/blackQ.svg"); }
-.piece.black.K { background-image: url("../../../res/pieces/blackK.svg"); }
-.piece.black.P { background-image: url("../../../res/pieces/blackP.svg"); }
+.board-container .piece.black.R { background-image: url("../../../res/pieces/blackR.svg"); }
+.board-container .piece.black.N { background-image: url("../../../res/pieces/blackN.svg"); }
+.board-container .piece.black.B { background-image: url("../../../res/pieces/blackB.svg"); }
+.board-container .piece.black.Q { background-image: url("../../../res/pieces/blackQ.svg"); }
+.board-container .piece.black.K { background-image: url("../../../res/pieces/blackK.svg"); }
+.board-container .piece.black.P { background-image: url("../../../res/pieces/blackP.svg"); }
 
-.piece.white.R { background-image: url("../../../res/pieces/whiteR.svg"); }
-.piece.white.N { background-image: url("../../../res/pieces/whiteN.svg"); }
-.piece.white.B { background-image: url("../../../res/pieces/whiteB.svg"); }
-.piece.white.Q { background-image: url("../../../res/pieces/whiteQ.svg"); }
-.piece.white.K { background-image: url("../../../res/pieces/whiteK.svg"); }
-.piece.white.P { background-image: url("../../../res/pieces/whiteP.svg"); }
+.board-container .piece.white.R { background-image: url("../../../res/pieces/whiteR.svg"); }
+.board-container .piece.white.N { background-image: url("../../../res/pieces/whiteN.svg"); }
+.board-container .piece.white.B { background-image: url("../../../res/pieces/whiteB.svg"); }
+.board-container .piece.white.Q { background-image: url("../../../res/pieces/whiteQ.svg"); }
+.board-container .piece.white.K { background-image: url("../../../res/pieces/whiteK.svg"); }
+.board-container .piece.white.P { background-image: url("../../../res/pieces/whiteP.svg"); }
 
-.arrow {
+.board-container .arrow {
     position: absolute;
     width: 0;
     height: 0;
 }
 
-.arrow>div {
+.board-container .arrow>div {
     background-color:rgba(227, 121, 27, 0.75);
     position: relative;
 }
 
-.arrow>img {
+.board-container .arrow>img {
     position: relative;
 }
 
-.arrow>.arrowHead {
+.board-container .arrow>.arrowHead {
     -webkit-transform: rotate(90deg);
 }
 
-.selected {
+.board-container .selected {
     background-color: rgb(158, 84, 19) !important;
 }
 
-.next-move, .last-move {
+.board-container .next-move, .last-move {
     background-color: rgb(1, 22, 30);
     color: white;
     border: none;
