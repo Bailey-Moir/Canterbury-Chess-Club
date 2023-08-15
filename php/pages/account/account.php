@@ -54,17 +54,26 @@
                                 $pages = array("games", "tournaments", "about", "studies", "forums");
                                 foreach ($pages as &$page) { 
                                     ?>
+                                    
                                     <li class="nav-item"><a href="/php/pages/account/account.php?id=<?php echo $_GET['id']; ?>&page=<?php echo $page; ?>"  class="nav-link_"><?php echo strtoupper($page); ?></a></li>
                                     <?php 
                                 }
                                 ?>
+                            
                             </ul>
                             <!-- END profile-header-tab -->
                         </div>
+ 
                     </div>
                     <!-- end profile -->
                     <!-- begin profile-content -->
                     <div class="profile-content">
+
+                        <?php
+                        if ($_GET["page"] == "forum") {
+                            //
+                        }
+                        ?>
                         <!-- begin tab-content -->
                         <div class="tab-content p-0">
                             <!-- begin #profile-post tab -->
