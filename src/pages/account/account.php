@@ -44,13 +44,21 @@
                             <?php 
                         }
                         ?>
+                    
                     </ul>
                     <!-- END profile-header-tab -->
                 </div>
+
             </div>
             <!-- end profile -->
             <!-- begin profile-content -->
             <div class="profile-content">
+
+                <?php
+                if ($_GET["page"] == "forum") {
+                    //
+                }
+                ?>
                 <!-- begin tab-content -->
                 <div class="tab-content p-0">
                     <!-- begin #profile-post tab -->
