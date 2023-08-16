@@ -1,0 +1,146 @@
+.board-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:not(.board-container-thumbnail) > .board {
+    width: 40vw;
+    height: 40vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.board-container-thumbnail > .board-thumbnail {
+    width: 100%;
+    height: 100%;
+}
+
+.board-container .right {
+    position: relative;
+    width: 20vw;
+    height: 40vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.board-container .directions {
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+}
+
+.board-container .moves {
+    width: 100%;
+    height: calc(100% - 7.5vw);
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    background-color: rgba(1, 22, 30, 0.9);
+    color: white;
+}
+
+.board-container .move {
+    width: 50%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.board-container .move:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.board-container .move > p {
+    margin: 0px;
+}
+
+.board-container .current-move {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.board-container .destination {
+    background-color: green !important;
+}
+
+.board-container .origin {
+    background-color: yellow !important;
+}
+
+.board-container .rank {
+    display: flex;
+    height: 12.5%;
+}
+
+.board-container .square {
+    width: 12.5%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.board-container .square.white {
+    background-color: #d5e1e5;
+}
+.board-container .square.black {
+    background-color: #779bb1;
+}
+ 
+/* Piece definitions */
+.board-container .square > .piece {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Placeholer colours and borders for identification */
+.board-container .piece.black.R { background-image: url("/res/pieces/blackR.svg"); }
+.board-container .piece.black.N { background-image: url("/res/pieces/blackN.svg"); }
+.board-container .piece.black.B { background-image: url("/res/pieces/blackB.svg"); }
+.board-container .piece.black.Q { background-image: url("/res/pieces/blackQ.svg"); }
+.board-container .piece.black.K { background-image: url("/res/pieces/blackK.svg"); }
+.board-container .piece.black.P { background-image: url("/res/pieces/blackP.svg"); }
+
+.board-container .piece.white.R { background-image: url("/res/pieces/whiteR.svg"); }
+.board-container .piece.white.N { background-image: url("/res/pieces/whiteN.svg"); }
+.board-container .piece.white.B { background-image: url("/res/pieces/whiteB.svg"); }
+.board-container .piece.white.Q { background-image: url("/res/pieces/whiteQ.svg"); }
+.board-container .piece.white.K { background-image: url("/res/pieces/whiteK.svg"); }
+.board-container .piece.white.P { background-image: url("/res/pieces/whiteP.svg"); }
+
+.board-container .arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.board-container .arrow>div {
+    background-color:rgba(227, 121, 27, 0.75);
+    position: relative;
+}
+
+.board-container .arrow>img {
+    position: relative;
+}
+
+.board-container .arrow>.arrowHead {
+    -webkit-transform: rotate(90deg);
+}
+
+.board-container .selected {
+    background-color: rgb(158, 84, 19) !important;
+}
+
+.board-container .next-move, .last-move {
+    background-color: rgb(1, 22, 30);
+    color: white;
+    border: none;
+    width:10vw;
+    height:7.5vw;
+    font-size: 2em;
+    text-align: center;
+}
