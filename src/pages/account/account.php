@@ -252,6 +252,6 @@
     </div>
 </div>
 <?php 
-    if ($_GET['page'] == "forums") include PATH."/src/modules/footer/sticky-footer.php";
-    else include PATH."/src/modules/footer/footer.php";
+    if ($_GET['page'] == "forums") require PATH."/src/modules/footer/sticky-footer.php";
+    else require PATH."/src/modules/footer/footer.php";
 ?>

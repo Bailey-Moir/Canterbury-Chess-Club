@@ -3,7 +3,7 @@
 <div class="row justify-content-center" style="width: 100%;">
     <div class="col-8">
         <div class="card">
-            <?php include PATH."/src/modules/board/board.php"; ?>
+            <?php require PATH."/src/modules/board/board.php"; ?>
         </div>
     </div>
 </div>

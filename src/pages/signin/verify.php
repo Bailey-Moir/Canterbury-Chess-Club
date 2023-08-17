@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include $_SERVER['DOCUMENT_ROOT']."/src/dbconnect.php";
+  require $_SERVER['DOCUMENT_ROOT']."/src/dbconnect.php";
   
   $username = $dbconnect->real_escape_string($_POST['username-or-email']);
   $password = $dbconnect->real_escape_string($_POST['password']);
