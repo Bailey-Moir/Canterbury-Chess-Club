@@ -21,9 +21,9 @@
         $black = $black_results->fetch_assoc();
     ?>
         <tr>
-            <td><a href="/account.php?id=<?php echo $row['white_member_id']; ?>"><?php echo $white['name']; ?></a></td>
+            <td><a href="/account?id=<?php echo $row['white_member_id']; ?>"><?php echo $white['name']; ?></a></td>
             <td><?php echo $row['result']; ?></td>
-            <td><a href="/account.php?id=<?php echo $row['black_member_id']; ?>"><?php echo $black['name']; ?></a></td>
+            <td><a href="/account?id=<?php echo $row['black_member_id']; ?>"><?php echo $black['name']; ?></a></td>
         </tr>
     <?php
     }

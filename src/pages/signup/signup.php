@@ -2,7 +2,7 @@
     Sign up
 </h3>
 
-<form style="border-radius: 0px; padding-top: 15px; width: 80%;" action="verify.php" method="post">
+<form style="border-radius: 0px; padding-top: 15px; width: 80%;" action="/src/pages/signup/verify.php" method="post">
     
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username">
