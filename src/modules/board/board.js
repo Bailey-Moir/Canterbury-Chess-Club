@@ -25,6 +25,16 @@ class Point {
     }
 
     /**
+     * @param {HTMLElement} ele The element to get the position of.
+     * @returns {Point} 
+     */
+    static getPoint(ele) {
+        let hoveringCellPosition = new Point(0,0);
+        const rect = e.currentTarget.getBoundingClientRect()
+        hoveringCellPosition = new Point((rect.left + rect.right)/2 + window.scrollX, (rect.top + rect.bottom)/2 + window.scrollY);
+    }
+
+    /**
      * To be thought as the same as using '+' on this and the given point. 
      * @param {Point} p the point that you are adding.
      * @returns {Point} the result of the addition.
@@ -83,10 +93,7 @@ $(document).ready(() => {
 
     // Arrows
     let hoveringCellPosition = new Point(0,0);    
-    squares.mouseover(e => {
-        const rect = e.currentTarget.getBoundingClientRect()
-        hoveringCellPosition = new Point((rect.left + rect.right)/2 + window.scrollX, (rect.top + rect.bottom)/2 + window.scrollY) 
-    });
+    squares.mouseover(e => hoveringCellPosition = Point.getPoint(e.currentTarget) );
 
     let rightMouseDown = false,
         arrowLoopID;
