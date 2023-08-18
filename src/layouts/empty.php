@@ -3,8 +3,8 @@
 <head>
 	<?php 
     session_start();
-    include PATH."/src/dbconnect.php";
-    include PATH."/src/header.php";
+    require PATH."/src/dbconnect.php";
+    require PATH."/src/header.php";
     $page->render_tags();
     ?>
 	<title>Canterbury Chess Club</title>

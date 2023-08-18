@@ -25,7 +25,7 @@
                     <p class="card-text">Game Title</p>
                     </div>
                     <?php
-                    include PATH."/src/modules/board/board-thumbnail.php";
+                    require PATH."/src/modules/board/board-thumbnail.php";
                     ?>
                 </a>
             </div>					

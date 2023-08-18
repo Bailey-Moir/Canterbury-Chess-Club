@@ -1,6 +1,4 @@
 <?php
-    session_start();
-    require PATH."/src/dbconnect.php";
     if(!isset($_SESSION['logged_in'])) {
         header("Location: /signin");
     }
@@ -40,7 +38,7 @@
                         $pages = array("games", "tournaments", "about", "studies", "forums");
                         foreach ($pages as &$page) { 
                             ?>
-                            <li class="nav-item"><a href="/account.php?id=<?php echo $_GET['id']; ?>&page=<?php echo $page; ?>"  class="nav-link_"><?php echo strtoupper($page); ?></a></li>
+                            <li class="nav-item"><a href="/account?id=<?php echo $_GET['id']; ?>&page=<?php echo $page; ?>"  class="nav-link_"><?php echo strtoupper($page); ?></a></li>
                             <?php 
                         }
                         ?>
@@ -254,6 +252,6 @@
     </div>
 </div>
 <?php 
-    if ($_GET['page'] == "forums") include PATH."/src/modules/footer/sticky-footer.php";
-    else include PATH."/src/modules/footer/footer.php";
+    if ($_GET['page'] == "forums") require PATH."/src/modules/footer/sticky-footer.php";
+    else require PATH."/src/modules/footer/footer.php";
 ?>
