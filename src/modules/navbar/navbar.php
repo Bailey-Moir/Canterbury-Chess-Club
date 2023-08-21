@@ -12,10 +12,17 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/tournaments"><b>Tournaments</b></a>
-                </li>
-                
+
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" style="color: white; text-align: center" type="button" data-toggle="dropdown"><span class="caret"><li class="nav-item"><a class="nav-link active text-white" aria-current="page" href="/tournaments"><b>Tournaments</b></a></li></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                    </ul>
+                </div>
+
+                <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                    
@@ -26,6 +33,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>     
+                -->
 
                 <li class="nav-item">
                     <a class="nav-link active text-white" aria-current="page" href="/calendar"><b>Calendar</b></a>
