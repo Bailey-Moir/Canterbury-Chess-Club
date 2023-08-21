@@ -112,25 +112,6 @@
 .board-container .piece.white.K { background-image: url("/res/pieces/whiteK.svg"); }
 .board-container .piece.white.P { background-image: url("/res/pieces/whiteP.svg"); }
 
-.board-container .arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-}
-
-.board-container .arrow>div {
-    background-color:rgba(227, 121, 27, 0.75);
-    position: relative;
-}
-
-.board-container .arrow>img {
-    position: relative;
-}
-
-.board-container .arrow>.arrowHead {
-    -webkit-transform: rotate(90deg);
-}
-
 .board-container .selected {
     background-color: rgb(158, 84, 19) !important;
 }
@@ -143,4 +124,25 @@
     height:7.5vw;
     font-size: 2em;
     text-align: center;
+}
+
+/** GLOBAL **/
+
+.arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.arrow>div {
+    background-color:rgba(227, 121, 27, 0.75);
+    position: relative;
+}
+
+.arrow>img {
+    position: relative;
+}
+
+.arrow>.arrowHead {
+    -webkit-transform: rotate(90deg);
 }

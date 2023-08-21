@@ -6,10 +6,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="/location"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">location_on</span><b>Location</b></button></a>
+                    <a href="/about#location"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">location_on</span><b>Location</b></button></a>
                 </li>
                 <li class="nav-item">
-                    <a href="/contact"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">mail</span><b>Contact</b></button></a>
+                    <a href="/about#contact"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">mail</span><b>Contact</b></button></a>
                 </li>
                 <li class="nav-item">
                     <a href="/about"><button class="btn text-white" type="submit"><span class="material-symbols-outlined align-middle">history</span><b>About</b></button></a>

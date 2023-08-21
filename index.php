@@ -76,20 +76,8 @@ $pages = [
         pg: "/src/pages/clubplayers/clubplayers"
     ),
     new Page(
-        uri: "/contact",
-        pg: "/src/pages/contact/contact"
-    ),
-    new Page(
-        uri: "/contact",
-        pg: "/src/pages/contact/contact"
-    ),
-    new Page(
         uri: "/forums",
         pg: "/src/pages/forums/forums"
-    ),
-    new Page(
-        uri: "/location",
-        pg: "/src/pages/location/location"
     ),
     new Page(
         uri: "/player",
