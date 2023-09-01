@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="/src/modules/board/board.css">
-<script src="/src/modules/board/board.js"></script>
 <?php
 
 $stmt = $dbconnect->prepare("SELECT * FROM games WHERE game_id = ?");
