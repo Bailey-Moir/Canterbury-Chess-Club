@@ -1,13 +1,43 @@
-.bg-body-nav {
+.mnav {
     height: 10vh;
     width: 100%;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    padding-left: 15px;
-    padding-right: 15px;
-    text-decoration-color: rgb(255, 255, 255);
     background-color: rgb(1, 22, 30);
-    justify-content: space-between;
+}
+
+.mnav .mnav-icon-cntr * {
+    margin-left: 2vh;
+    height: 6vh;
+}
+
+.mnav .mnav-btn {
+    font-size: 1.2rem;
+    height: 1.8rem;
+    color: white;
+    text-decoration: none;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    display: flex;
+    align-items: center;
 }
 
 
+.mnav .mnav-btn > span {
+    position: relative;
+    top: 0.07rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mnav .right {
+    margin-left: auto;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
