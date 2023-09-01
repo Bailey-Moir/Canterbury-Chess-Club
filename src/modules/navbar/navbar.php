@@ -11,6 +11,6 @@
 
         <div class="right">
             <a class="mnav-btn" href="https://www.facebook.com/CanterburyChessClub/"><span class="material-symbols-outlined">account_circle</span><b>Facebook</b></a>
-            <a class="mnav-btn" href="/signin"><span class="material-symbols-outlined">account_circle</span><b>Profile</b></a>
+            <a class="mnav-btn" href="/signin"><span class="material-symbols-outlined">account_circle</span><b><?php if (isset($_SESSION['logged_in'])) echo "Profile"; else echo "Signin"; ?></b></a>
         </div>
 </div>

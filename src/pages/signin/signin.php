@@ -1,5 +1,6 @@
 <?php
-if(isset($_SESSION['admin'])) header("Location: /?page=adminpanel");
+if (isset($_SESSION['admin'])) header("Location: /?page=adminpanel");
+if (isset($_SESSION['logged_in'])) header("Location: /account");
 ?>
 
 <h3 class="card-header">

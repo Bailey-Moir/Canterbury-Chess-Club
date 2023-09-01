@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require $_SERVER['DOCUMENT_ROOT']."/src/dbconnect.php";
 
     $username = $dbconnect->real_escape_string($_POST['username']);
@@ -13,10 +14,14 @@
 
     if ($results->num_rows) header("Location: /signup?error=fail");
     else {
-        $stmt = $dbconnect->prepare("INSERT INTO users (email, username, password) VALUES (?, ?, ?)");
-        $stmt -> bind_param("sss", $email, $username, password_hash($password, PASSWORD_DEFAULT));
-        $stmt -> execute();
+        $_SESSION['logged_in']['security'] = password_hash($password, PASSWORD_DEFAULT);
 
-        header("Location: /signin");
+        $stmt = $dbconnect->prepare("INSERT INTO users (email, username, password) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $email, $username, $_SESSION['logged_in']['security']);
+        $stmt->execute();
+
+        $_SESSION['logged_in']['user_id'] = mysqli_insert_id($dbconnect);
+
+        header("Location: /account");
     }
 ?>
