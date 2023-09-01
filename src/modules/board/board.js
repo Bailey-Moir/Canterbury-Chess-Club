@@ -29,9 +29,8 @@ class Point {
      * @returns {Point} 
      */
     static getPoint(ele) {
-        let hoveringCellPosition = new Point(0,0);
-        const rect = e.currentTarget.getBoundingClientRect()
-        hoveringCellPosition = new Point((rect.left + rect.right)/2 + window.scrollX, (rect.top + rect.bottom)/2 + window.scrollY);
+        const rect = ele.getBoundingClientRect()
+        return new Point((rect.left + rect.right)/2 + window.scrollX, (rect.top + rect.bottom)/2 + window.scrollY);
     }
 
     /**
@@ -92,7 +91,7 @@ $(document).ready(() => {
     });
 
     // Arrows
-    let hoveringCellPosition = new Point(0,0);    
+    let hoveringCellPosition = new Point(0,0);
     squares.mouseover(e => hoveringCellPosition = Point.getPoint(e.currentTarget) );
 
     let rightMouseDown = false,
