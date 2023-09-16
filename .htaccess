@@ -1,4 +1,19 @@
 RewriteEngine on
+RewriteBase /
+
+# Exclude specific files and directories from rewriting
+RewriteRule ^res/ - [L]
+RewriteRule ^src/ - [L]
+
+# Ignore existing files and directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /index.php [L,QSA]
+
+# Rewrite /game/{id}
+RewriteRule ^games/([0-9]+)$ index.php?id=$1&page=game [NC,L]
+
+# Rewrite /tournaments/{name}
+RewriteRule ^tournaments/(.+)$ index.php?name=$1&page=tournament [NC,L]
+
+# Rewrite other requests to index.php with the entire query string
+RewriteRule ^(.*)$ index.php?page=$1 [NC,L,QSA]

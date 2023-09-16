@@ -1,16 +1,10 @@
 <link rel="stylesheet" href="/src/modules/board/board.css">
 <?php
-
-$stmt = $dbconnect->prepare("SELECT * FROM games WHERE game_id = ?");
-$stmt->bind_param("i", $_GET["id"]);
-$stmt->execute();
-$results = $stmt->get_result()->fetch_assoc();
-
-$moves = preg_split("/(\r|\n| )+/", $results['moves']);
+$moves = preg_split("/(\r|\n| )+/", $board_results['moves']);
 ?>
 
-<div class="board-container" id="board-container-<?php echo $results['game_id']; ?>">
-    <div class="board white-view" id="board-<?php echo $results['game_id']; ?>">
+<div class="board-container" id="board-container-<?php echo $board_results['id']; ?>">
+    <div class="board white-view" id="board-<?php echo $board_results['id']; ?>">
         <?php    
         $piece_order = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'];
         $alphabet = range('a', 'z');
@@ -41,14 +35,14 @@ $moves = preg_split("/(\r|\n| )+/", $results['moves']);
             ?>
         </div>
         <div class="directions">
-            <button class="last-move" id="last-move-<?php echo $results['game_id']; ?>"><</button>
-            <button class="next-move" id="next-move-<?php echo $results['game_id']; ?>">></button>
+            <button class="last-move" id="last-move-<?php echo $board_results['id']; ?>"><</button>
+            <button class="next-move" id="next-move-<?php echo $board_results['id']; ?>">></button>
         </div>
     </div>
 </div>
 
 <script>
-    let board = new Board(<?php echo $results['game_id']; ?>);
+    let board = new Board(<?php echo $board_results['id']; ?>);
 
     board.moves = [
         <?php echo "\"".implode('", "', $moves)."\""; ?>

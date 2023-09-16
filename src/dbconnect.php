@@ -4,10 +4,10 @@
     $password = "";
     $dbname = "canterbury_chess_club";
 
-    $dbconnect =  new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($dbconnect->connect_error) {
-        die("Connection failed: " . $dbconnect->connect_error);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
 ?>

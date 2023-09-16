@@ -5,6 +5,11 @@
     align-items: center;
 }
 
+.upcoming-tournaments .card {
+    border: none;
+}
+
+
 .upcoming-tournaments > div {
     margin-left: 3.75rem;
     margin-right: 3.75rem;
@@ -12,12 +17,18 @@
 }
 
 .upcoming-tournaments * {
+    max-width: 15rem;
+}
+
+.upcoming-tournaments img {
     width: 15rem;
-    white-space: nowrap;
+    border-radius: 0;
 }
 
 .upcoming-tournaments p {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
+    line-height: 1.2rem;
+    height: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

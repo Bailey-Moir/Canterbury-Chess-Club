@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/src/pages/tournaments/tournaments.css">
 <h2>Canterbury Chess Club</h2>
 
 <div class="row justify-content-around" style="text-align: left !important;">
@@ -15,12 +14,12 @@
 
     <div class="upcoming-tournaments">
         <?php
-        $results = $dbconnect->query("SELECT * FROM tournaments ORDER BY date_start");
+        $results = $conn->query("SELECT name FROM tournaments ORDER BY date_start");
 
         while ($row = $results->fetch_assoc()) {
             ?>
             <div class="card">
-                <a href="/tournament?id=<?php echo $row['tournament_id']; ?>">
+                <a href="/tournaments/<?php echo urlencode($row['name']); ?>">
                     <div class="card-body bg-body-title">
                     <p class="card-text"><?php echo $row['name'] ?></p>
                     </div>

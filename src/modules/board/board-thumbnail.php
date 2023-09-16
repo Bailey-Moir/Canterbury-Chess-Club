@@ -1,14 +1,7 @@
 <link rel="stylesheet" href="/src/modules/board/board.css">
 
 <?php
-
-$stmt = $dbconnect->prepare("SELECT * FROM games WHERE game_id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$results = $stmt->get_result()->fetch_assoc();
-
-$moves = preg_split("/(\r|\n| )+/", $results['moves']);
-
+$moves = preg_split("/(\r|\n| )+/", $row['moves']);
 ?>
 
 <div class="board-container board-container-thumbnail" style="width: 15rem; height: 15rem;" id="board-container-<?php echo $id; ?>">

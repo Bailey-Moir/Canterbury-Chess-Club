@@ -3,7 +3,7 @@
         header("Location: /signin");
     }
 
-    $results = $dbconnect->query("SELECT * FROM users WHERE user_id = ". $_SESSION['logged_in']['user_id']);
+    $results = $conn->query("SELECT * FROM users WHERE user_id = ". $_SESSION['logged_in']['user_id']);
     $data = $results->fetch_assoc();
 ?>
 <div class="container">

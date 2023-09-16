@@ -1,8 +1,7 @@
 <?php
-
 define("PATH", $_SERVER['DOCUMENT_ROOT']);
 
-$uri = urldecode( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) );
+$uri = $_GET['page'] ?? "";
 
 class Page {
     public $uri = '';
@@ -14,6 +13,8 @@ class Page {
         $this->uri = $uri;
         $this->pg = $pg;
         $this->lyt = $lyt;
+        if (file_exists($pg.".css")) $this->add_css($pg.".css");
+        if (file_exists($pg.".js")) $this->add_js($pg.".js");
         if ($custom_css != NULL) foreach ($custom_css as $css) $this->add_css($css);
         if ($custom_js != NULL) foreach ($custom_js as $js) $this->add_js($js);
     }
@@ -32,71 +33,72 @@ class Page {
 
 $pages = [
     new Page(
-        uri: "/",
+        uri: "",
         pg: "/src/pages/home/home",
         custom_js: ["/src/modules/board/board-thumbnail.js"]
     ),
     new Page(
-        uri: "/game",
-        pg: "/src/pages/game/game"
+        uri: "game",
+        pg: "/src/pages/game/game",
+        custom_js: ["/src/modules/board/board.js"]
     ),
     new Page(
-        uri: "/tournaments",
+        uri: "tournaments",
         pg: "/src/pages/tournaments/tournaments"
     ),
     new Page(
-        uri: "/tournament",
+        uri: "tournament",
         pg: "/src/pages/tournament/tournament"
     ),
     new Page(
-        uri: "/calendar",
+        uri: "calendar",
         pg: "/src/pages/calendar/calendar"
     ),
     new Page(
-        uri: "/coaching",
+        uri: "coaching",
         pg: "/src/pages/coaching/coaching"
     ),
     new Page(
-        uri: "/signin",
+        uri: "signin",
         pg: "/src/pages/signin/signin",
         lyt: "/src/layouts/empty.php"
     ),
     new Page(
-        uri: "/signup",
+        uri: "signup",
         pg: "/src/pages/signup/signup",
         lyt: "/src/layouts/empty.php"
     ),
     new Page(
-        uri: "/signin/forgotpassword",
+        uri: "signin/forgotpassword",
         pg: "/src/pages/forgotpassword/forgotpassword",
         lyt: "/src/layouts/empty.php"
     ),
     new Page(
-        uri: "/clubplayers",
+        uri: "clubplayers",
         pg: "/src/pages/clubplayers/clubplayers"
     ),
     new Page(
-        uri: "/forums",
+        uri: "forums",
         pg: "/src/pages/forums/forums"
     ),
     new Page(
-        uri: "/player",
+        uri: "player",
         pg: "/src/pages/player/player"
     ),
     new Page(
-        uri: "/players",
+        uri: "players",
         pg: "/src/pages/players/players"
     ),
     new Page(
-        uri: "/study",
+        uri: "study",
         pg: "/src/pages/study/study"
     ),
     new Page(
-        uri: "/account",
+        uri: "account",
         pg: "/src/pages/account/account"
     ),
     new Page(
-        uri: "/about",
+        uri: "about",
         pg: "/src/pages/about/about"
     )
 ];
