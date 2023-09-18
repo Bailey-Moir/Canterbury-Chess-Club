@@ -4,7 +4,8 @@
     }
 
     $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-    $stmt->bind_param("s", $_GET['name']);
+    $decoded = urldecode($_GET['name']);
+    $stmt->bind_param("s", $decoded);
     $stmt->execute();
     $user_results = $stmt->get_result()->fetch_assoc();
 ?>
@@ -40,7 +41,7 @@
                         $pages = array("games", "tournaments");
                         foreach ($pages as &$page) { 
                             ?>
-                            <li class="nav-item"><a href="/account?id=<?php echo $_GET['id']; ?>&page=<?php echo $page; ?>"  class="nav-link_"><?php echo strtoupper($page); ?></a></li>
+                            <li class="nav-item"><a href="/accounts/<?php echo $_GET['name']; ?>/<?php echo $page; ?>" class="nav-link_"><?php echo strtoupper($page); ?></a></li>
                             <?php 
                         }
                         ?>
