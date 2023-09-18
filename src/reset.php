@@ -42,9 +42,9 @@
     );");
     $conn->query("CREATE TABLE users (
         user_id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        member_id INT(4) UNSIGNED NOT NULL,
+        member_id INT(4) UNSIGNED,
         email VARCHAR(48) NOT NULL,
-        username VARCHAR(16) NOT NULL,
+        username VARCHAR(16) NOT NULL UNIQUE,
         password VARCHAR(60) NOT NULL,
         security TINYINT(1) UNSIGNED NOT NULL, # Admin
         verified TINYINT(1) UNSIGNED NOT NULL,

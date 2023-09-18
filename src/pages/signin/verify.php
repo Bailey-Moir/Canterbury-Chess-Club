@@ -21,6 +21,7 @@
 
     if (password_verify($password, $hash_password)) {
       $_SESSION['logged_in']['user_id'] = $user_aa['user_id'];
+      $_SESSION['logged_in']['name'] = $username;
       $_SESSION['logged_in']['security'] = $user_aa['security'];
 
       if (!$user_aa['security']) header("Location: /account");
