@@ -3,8 +3,10 @@
         header("Location: /signin");
     }
 
-    $results = $conn->query("SELECT * FROM users WHERE user_id = ". $_SESSION['logged_in']['user_id']);
-    $data = $results->fetch_assoc();
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+    $stmt->bind_param("s", $_GET['name']);
+    $stmt->execute();
+    $user_results = $stmt->get_result()->fetch_assoc();
 ?>
 <div class="container">
     <div class="row">
@@ -25,7 +27,7 @@
                         <!-- END profile-header-img -->
                         <!-- BEGIN profile-header-info -->
                         <div class="profile-header-info">
-                        <h4 class="m-t-10 m-b-5"><?php echo $data['username'] ?></h4>
+                        <h4 class="m-t-10 m-b-5"><?php echo $user_results['username'] ?></h4>
                         <p class="m-b-10">Full Name</p>
                         <a href="#" class="btn btn-sm btn-info mb-2">Edit Profile</a>
                         </div>
@@ -35,7 +37,7 @@
                     <!-- BEGIN profile-header-tab -->
                     <ul class="profile-header-tab nav nav-tabs">
                         <?php                 
-                        $pages = array("games", "tournaments", "about", "studies", "forums");
+                        $pages = array("games", "tournaments");
                         foreach ($pages as &$page) { 
                             ?>
                             <li class="nav-item"><a href="/account?id=<?php echo $_GET['id']; ?>&page=<?php echo $page; ?>"  class="nav-link_"><?php echo strtoupper($page); ?></a></li>
@@ -53,7 +55,7 @@
             <!-- being profile content -->
             <div class="profile-content">
                 <?php
-                if ($_GET["pages"] == "about") {
+                if ($_GET["acc_page"] == "about") {
                     //
                 }
                 ?>
@@ -68,7 +70,7 @@
                                     <tr>
                                         <th></th>
                                         <th>
-                                            <h4><?php echo $data['username'] ?><small>Full Name</small></h4>
+                                            <h4><?php echo $user_results['username'] ?><small>Full Name</small></h4>
                                         </th>
                                     </tr>
                                 </thead>
@@ -341,7 +343,7 @@
             <div class="profile-content">
 
                 <?php
-                if ($_GET["pages"] == "forums") {
+                if ($_GET["acc_page"] == "forums") {
                     //
                 }
                 ?>
@@ -367,7 +369,7 @@
                             <div class="timeline-body">
                                 <div class="timeline-header">
                                     <span class="userimage"><img src="/res/avatar.png" alt="Standard icon images"></span>
-                                    <span class="username"><a href="javascript:;"><?php echo $data['username'] ?></a> <small></small></span>
+                                    <span class="username"><a href="javascript:;"><?php echo $user_results['username'] ?></a> <small></small></span>
                                     <span class="pull-right text-muted">18 Views</span>
                                 </div>
                                 <div class="timeline-content">
@@ -430,7 +432,7 @@
                             <div class="timeline-body">
                                 <div class="timeline-header">
                                     <span class="userimage"><img src="/res/avatar.png" alt="Standard icon images"></span>
-                                    <span class="username"><?php echo $data['username'] ?></span>
+                                    <span class="username"><?php echo $user_results['username'] ?></span>
                                     <span class="pull-right text-muted">82 Views</span>
                                 </div>
                                 <div class="timeline-content">
@@ -460,7 +462,7 @@
                             <div class="timeline-body">
                                 <div class="timeline-header">
                                     <span class="userimage"><img src="/res/avatar.png" alt="Standard icon images"></span>
-                                    <span class="username"><?php echo $data['username'] ?></span>
+                                    <span class="username"><?php echo $user_results['username'] ?></span>
                                     <span class="pull-right text-muted">1,282 Views</span>
                                 </div>
                                 <div class="timeline-content">
@@ -494,7 +496,7 @@
                             <div class="timeline-body">
                                 <div class="timeline-header">
                                     <span class="userimage"><img src="/res/avatar.png" alt="">Standard icon images</span>
-                                    <span class="username"><?php echo $data['username'] ?></span>
+                                    <span class="username"><?php echo $user_results['username'] ?></span>
                                     <span class="pull-right text-muted">1,021,282 Views</span>
                                 </div>
                                 <div class="timeline-content">
@@ -540,6 +542,6 @@
     </div>
 </div>
 <?php 
-    if ($_GET['page'] == "forums") require PATH."/src/modules/footer/sticky-footer.php";
+    if ($_GET['acc_page'] == "forums") require PATH."/src/modules/footer/sticky-footer.php";
     else require PATH."/src/modules/footer/footer.php";
 ?>

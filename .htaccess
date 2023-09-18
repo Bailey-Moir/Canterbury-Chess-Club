@@ -15,5 +15,8 @@ RewriteRule ^games/([0-9]+)$ index.php?id=$1&page=game [NC,L]
 # Rewrite /tournaments/{name}
 RewriteRule ^tournaments/(.+)$ index.php?name=$1&page=tournament [NC,L]
 
+# Rewrite /accounts/{name}/{page}
+RewriteRule ^accounts/([^/]+)/([^/]+)$ index.php?name=$1&acc_page=$2&page=account [NC,L]
+
 # Rewrite other requests to index.php with the entire query string
 RewriteRule ^(.*)$ index.php?page=$1 [NC,L,QSA]
