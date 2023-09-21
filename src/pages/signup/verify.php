@@ -23,6 +23,6 @@
         $_SESSION['logged_in']['user_id'] = mysqli_insert_id($conn);
         $_SESSION['logged_in']['name'] = $username;
 
-        header("Location: /account");
+        header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
     }
 ?>

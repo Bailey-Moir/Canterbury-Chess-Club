@@ -1,6 +1,6 @@
 <?php
     // This file resets/creates the database.
-
+    
     session_start();
     $_SESSION = [];
     session_destroy();

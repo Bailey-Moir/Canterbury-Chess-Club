@@ -1,11 +1,11 @@
-body{
-    margin-top:20px;
-    background:#eee;
+.btn-primary > a {
+    text-decoration: none;
+    color: white;    
 }
 
 .profile-header {
     position: relative;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .profile-header .profile-header-cover {

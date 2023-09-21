@@ -24,7 +24,7 @@
       $_SESSION['logged_in']['name'] = $username;
       $_SESSION['logged_in']['security'] = $user_aa['security'];
 
-      if (!$user_aa['security']) header("Location: /account");
+      if (!$user_aa['security']) header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
       else header("Location: /?page=adminpanel");
 
     } else header("Location: /signin?error=fail");
