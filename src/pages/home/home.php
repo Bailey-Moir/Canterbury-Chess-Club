@@ -1,16 +1,16 @@
-<h2 style="padding-bottom: 20px;">Canterbury Chess Club</h2>
+<h1 class="pb-1">Canterbury Chess Club</h1>
 
 <div class="container-fluid content">
     <h3>Club Nights</h3>
-    <p>Club tournaments are held for competitive members on Wednesday nights from 7pm onwards.</p>
-    <p>Social Chess for members and non-members are held alike on Thursday nights from 6:15pm till 9pm (first night free, $2 per night afterwards).</p>
-    <p style="padding-bottom: 20px;">Beginners are more than welcome.</p>
-</div>
+    <p class="p pb-2">
+        Club tournaments are held for competitive members on Wednesday nights from 7pm onwards. 
+        Social Chess for members and non-members alike are held on Thursday nights from 6:15pm 
+        till 9pm (first night free, $2 per night afterwards). Beginners are more than welcome.
+    </p>
 
-<div class="container-fluid content">
     <h3>Recent Games</h3>
     
-    <div class="games" style="padding-bottom: 30px;">
+    <div class="games">
         <?php
         $results = $conn->query(
             "SELECT
@@ -28,12 +28,14 @@
             ?>
             <div class="card">
                 <a href="/games/<?php echo $id; ?>">
-                    <div class="card-body bg-body-title">
-                    <p class="card-text"><?php echo $row['black_name']." v. ".$row['white_name']; ?></p>
+                    <div class="card-header">
+                        <p class="card-text"><?php echo $row['black_name']." v. ".$row['white_name']; ?></p>
                     </div>
-                    <?php
-                    require PATH."/src/modules/board/board-thumbnail.php";
-                    ?>
+                    <div class="card-body p-0">
+                        <?php
+                        require PATH."/src/modules/board/board-thumbnail.php";
+                        ?>
+                    </div>
                 </a>
             </div>					
             <?php
