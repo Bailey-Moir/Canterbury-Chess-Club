@@ -22,7 +22,7 @@
                         <p class="card-text"><?php echo $row['name'] ?></p>
                     </div>
                     <div class="card-body">
-                        <img src="/res/tourney.JPG" class="card-img-top" alt="Chessboard">
+                        <img src="/res/tourney.JPG" class="card-img-top" alt="Chessboard"/>
                     </div>
                 </div>
             </a>

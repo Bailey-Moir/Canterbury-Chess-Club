@@ -17,7 +17,7 @@
 <p>E-mail: Canterbury@chess.org.nz</p>
 <p>Facebook: http://www.facebook.com/CanterburyChessClub</p>
 <p>Mobile: 021 1289543</p>
-<img src="" alt="">
+<img src="" alt=""/>
 
 <h2>Patron:</h2>
 <p>Chris Benson</p>

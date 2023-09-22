@@ -23,7 +23,7 @@
                     <div class="profile-header-content">
                         <!-- BEGIN profile-header-img -->
                         <div class="profile-header-img">
-                            <img src="/res/avatar.png" alt="standard avatar icon">
+                            <img src="/res/avatar.png" alt="standard avatar icon"/>
                         </div>
                         <!-- END profile-header-img -->
                         <!-- BEGIN profile-header-info -->
@@ -99,7 +99,3 @@
         </div>
     </div>
 </div>
-<?php 
-    if ($_GET['acc_page'] == "forums") require PATH."/src/modules/footer/sticky-footer.php";
-    else require PATH."/src/modules/footer/footer.php";
-?>

@@ -24,14 +24,18 @@
 }
 
 
-.mnav .mnav-btn > span {
-    position: relative;
-    top: 0.07rem;
-    width: 1.8rem;
-    height: 1.8rem;
+.mnav .mnav-btn > img {
     display: flex;
     align-items: center;
     justify-content: center;
+    aspect-ratio: 1;
+    height: 28.8px;
+    width: auto;
+    margin-right: 0.2vw;
+}
+.mnav .mnav-btn > b {
+    position: relative;
+    bottom: 0.5px;
 }
 
 .mnav .right {

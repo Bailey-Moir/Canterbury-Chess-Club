@@ -40,17 +40,9 @@ body {
 }
 
 h1, h2, h3, h4, h5 { font-weight: 600 !important; }
-h1 {
-    text-align: center;
-}
+h1 { text-align: center; }
 
-.p, .list {
-    font-size: 13pt;
-}
-
-.material-symbols-outlined {
-    color: white;
-}
+.p, .list { font-size: 13pt; }
 
 .card {
    align-items: center;
