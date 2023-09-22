@@ -29,14 +29,14 @@
                         <!-- BEGIN profile-header-info -->
                         <div class="profile-header-info">
                             <br/>
-                            <h4 class="m-t-10 m-b-5"><?php echo $user_results['username'] ?></h4>
+                            <h2 class="m-t-10 m-b-5"><?php echo $user_results['username'] ?></h2>
                             <button type="button" class="btn btn-primary"><a href="/src/pages/account/signout.php">Sign Out</a></button>
                             <!-- <p class="m-b-10">Full Name</p> -->
                             <!-- <a href="#" class="btn btn-sm btn-info mb-2">Edit Profile</a> -->
                         </div>
                         <!-- END profile-header-info -->
                     </div>
-                    <br/><br/><br/>
+                    <br/>
                     <!-- END profile-header-content -->
                     <!-- BEGIN profile-header-tab -->
                     <ul class="profile-header-tab nav nav-tabs">

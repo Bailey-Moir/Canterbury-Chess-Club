@@ -8,7 +8,7 @@
         till 9pm (first night free, $2 per night afterwards). Beginners are more than welcome.
     </p>
 
-    <h3>Recent Games</h3>
+    <h3 class="text-center">Recent Games</h3>
     
     <div class="games">
         <?php
@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <p class="card-text"><?php echo $row['black_name']." v. ".$row['white_name']; ?></p>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body">
                         <?php
                         require PATH."/src/modules/board/board-thumbnail.php";
                         ?>

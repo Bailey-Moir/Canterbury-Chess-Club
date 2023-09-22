@@ -2,13 +2,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap:-15px;
+    width: 100%;
 }
 
 :not(.board-container-thumbnail) > .board {
-    width: 40vw;
+    width: 66.666666%;
     height: 40vw;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .board-container-thumbnail > .board-thumbnail {
@@ -18,16 +18,10 @@
 
 .board-container .right {
     position: relative;
-    width: 20vw;
+    width: 33.333333%;
     height: 40vw;
     display: flex;
     flex-direction: column;
-}
-
-.board-container .directions {
-    position: absolute;
-    bottom: 0px;
-    display: flex;
 }
 
 .board-container .moves {
@@ -90,8 +84,8 @@
  
 /* Piece definitions */
 .board-container .square > .piece {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -116,11 +110,18 @@
     background-color: rgb(158, 84, 19) !important;
 }
 
+
+.board-container .directions {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    display: flex;
+}
 .board-container .next-move, .last-move {
     background-color: rgb(1, 22, 30);
     color: white;
     border: none;
-    width:10vw;
+    width: 50%;
     height:7.5vw;
     font-size: 2em;
     text-align: center;

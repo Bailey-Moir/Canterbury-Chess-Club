@@ -11,32 +11,37 @@ body {
     min-height: 100vh;
     position: relative;
 }
-
-.p {
-    font-size: 13pt;
+#main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: white;
+    text-align: center;    
+}
+#main-strip {
     margin-left: auto;
     margin-right: auto;
     text-align: left;
 }
-
-h1, h2, h3, h4, h5 { font-weight: 600 !important; }
-
+/* Size is larger than 900px */
 @media not all and (max-width: 900px) {
-    .p {
+    #main-strip {
         max-width: 70vw;
     }
 }
+/* Size is smaller than 900px */
 @media all and (max-width: 900px) {
-    .p {
+    #main-strip {
         max-width: 90vw;
     }
 }
 
-#main {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: rgb(255, 255, 255);
-    text-align: center;    
+h1, h2, h3, h4, h5 { font-weight: 600 !important; }
+h1 {
+    text-align: center;
+}
+
+.p, .list {
+    font-size: 13pt;
 }
 
 .material-symbols-outlined {
@@ -53,8 +58,17 @@ h1, h2, h3, h4, h5 { font-weight: 600 !important; }
     color: white !important;
     width: 100%; 
 }
+.card-body {
+    width: 100%;
+    padding: 0px !important;
+}
 .card > a {
     text-decoration: none;
+}
+
+.dark-link {
+    color: #779bb1; =
+    text-decoration-color: #779bb1;
 }
 
 .form-floating {

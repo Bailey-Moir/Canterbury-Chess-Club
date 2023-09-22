@@ -12,9 +12,9 @@
 <body>
 	<?php require PATH."/src/modules/navbar/navbar.php"; ?>
     <div id="main">
-        
-        <?php require PATH.$page->pg.'.php'; ?>
-        
+        <div id="main-strip">
+            <?php require PATH.$page->pg.'.php'; ?>
+        </div>
 	</div>
 	<?php require PATH."/src/modules/footer/footer.php"; ?>
 </body>
