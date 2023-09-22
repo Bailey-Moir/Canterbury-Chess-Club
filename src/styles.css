@@ -1,3 +1,8 @@
+/* <html> */
+:root {
+    --black: #01141d;
+    --blue: #779bb1;
+}
 * {
     margin:  0px;
     padding: 0px;
@@ -5,9 +10,6 @@
     text-decoration: bold;
     resize: none;
     align-self: center;
-}
-html {
-    background-color: rgb(1, 22, 30);
 }
 body {
     min-height: 100vh;
@@ -55,10 +57,10 @@ h1 {
 
 }
 .card-header {
-    background-color: rgb(1, 22, 30) !important;
+    background-color: var(--black) !important;
     text-decoration-color: white !important;
     color: white !important;
-    width: 100%; 
+    width: 100%;
 }
 .card-body {
     width: 100%;
@@ -69,8 +71,8 @@ h1 {
 }
 
 .dark-link {
-    color: #779bb1;
-    text-decoration-color: #779bb1;
+    color: var(--blue);
+    text-decoration-color: var(--blue);
 }
 
 .form-floating {

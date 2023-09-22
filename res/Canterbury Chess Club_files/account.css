@@ -27,11 +27,11 @@ body{
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(1, 22, 30);
+    background: var(--black);
 }
 
 .profile-header .profile-header-content {
-    color: #fff;
+    color: white;
     padding: 25px
 }
 
@@ -54,7 +54,7 @@ body{
 
 .profile-header-info h4 {
     font-weight: 500;
-    color: #fff
+    color: white;
 }
 
 .profile-header-img+.profile-header-info {

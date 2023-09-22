@@ -27,11 +27,11 @@
 
 .board-container .moves {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 7.5vw);
     display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
-    background-color: rgba(1, 22, 30, 0.9);
+    background-color: rgba(1, 22, 30, 0.9); /* NOTE: --black not referenced here, */
     color: white;
 }
 
@@ -61,7 +61,7 @@
 .board-container .next-move, .last-move {
     width: 50%;
     height: inherit;
-    background-color: rgb(1, 22, 30);
+    background-color: var(--black);
     color: white;
     border: none;
     font-size: 2em;
@@ -97,7 +97,7 @@
     background-color: #d5e1e5;
 }
 .board-container .square.black {
-    background-color: #779bb1;
+    background-color: var(--blue);
 }
  
 /* Piece definitions */

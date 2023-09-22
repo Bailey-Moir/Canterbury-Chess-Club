@@ -27,7 +27,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(1, 22, 30);
+    background: var(--black);
 }
 
 .profile-header .profile-header-content {

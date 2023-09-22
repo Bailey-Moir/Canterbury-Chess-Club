@@ -24,7 +24,7 @@
     <?php
     if(isset($_GET['error'])) {
         ?>
-        <div class="alter alert-danger text-danger" role="alert" style="color: rgb(255, 0, 0); padding-bottom: 10px;    ">
+        <div class="alter alert-danger text-danger" role="alert" style="color: red; padding-bottom: 10px;    ">
             Username, Email or Password is already in use, please use something else
         </div>
         <?php 

@@ -15,7 +15,7 @@ body {
 #main {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     text-align: center;
     
 }
@@ -23,27 +23,27 @@ body {
 
 
 #profile_name {
-    background-color: rgb(255, 255, 255);
-    text-decoration-color: rgb(1, 22, 30);
+    background-color: white;
+    text-decoration-color: var(--black);
 }   
 
 #forum {
-    background-color: rgb(255, 255, 255);
-    text-decoration-color: rgb(1, 22, 30);
+    background-color: white;
+    text-decoration-color: var(--black);
 }
 
 #studies {
-    background-color: rgb(255, 255, 255);
-    text-decoration-color: rgb(1, 22, 30);
+    background-color: white;
+    text-decoration-color: var(--black);
 }
 
 #forums {
-    background-color: rgb(1, 22, 30);
-    text-decoration-color: rgb(255, 255, 255);
+    background-color: var(--black);
+    text-decoration-color: white;
 }
 
 #player {
-    background-color: rgb(1, 22, 30);
+    background-color: var(--black);
     text-decoration-color: rgb(245,245,245);
 }
 
@@ -53,7 +53,7 @@ body {
 
 .h3 {
     font: bold;
-    background-color: rgb(1, 22, 30);
+    background-color: var(--black);
     text-decoration-color: white; 
 }
 
@@ -62,7 +62,7 @@ p {
 }
 
 #button {
-    color: rgb(255, 255, 255);
+    color: white;
 }
 
 .material-symbols-outlined {
@@ -70,8 +70,8 @@ p {
 }
 
 .bg-body-title {
-    text-decoration-color: rgb(255, 255, 255);
-    background-color: rgb(1, 22, 30);
+    text-decoration-color: white;
+    background-color: var(--black);
 }
 
 .card {
@@ -80,19 +80,19 @@ p {
 }
 
 .card-header {
-    background-color: rgb(1, 22, 30);
+    background-color: var(--black);
     width: 100%;
     
 }
 
 .card > a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: white;
 }
 
 .card1 > a {
     text-decoration: none;
-    color:rgb(1, 22, 30);
+    color:var(--black);
     width: 50%;
 }
 
@@ -100,7 +100,7 @@ p {
 
 .col-1 > a {
     text-decoration: none;
-    color: rgb(1, 22, 30);
+    color: var(--black);
 }
 
 .form-floating {
@@ -109,12 +109,12 @@ p {
 }
 
 .card-header {
-    background-color: rgb(1, 22, 30) !important;
+    background-color: var(--black) !important;
     color: white !important; 
 }
 
 .card-body1 {
     background-color: white !important; 
-    color: rgb(1, 22, 30) !important;
+    color: var(--black) !important;
     text-align: left !important;
 }
