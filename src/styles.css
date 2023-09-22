@@ -6,7 +6,9 @@
     resize: none;
     align-self: center;
 }
-
+html {
+    background-color: rgb(1, 22, 30);
+}
 body {
     min-height: 100vh;
     position: relative;
@@ -67,7 +69,7 @@ h1 {
 }
 
 .dark-link {
-    color: #779bb1; =
+    color: #779bb1;
     text-decoration-color: #779bb1;
 }
 
