@@ -2,6 +2,8 @@
 :root {
     --black: #01141d;
     --blue: #779bb1;
+
+    background-color: var(--black);
 }
 * {
     margin:  0px;
@@ -43,6 +45,9 @@ h1, h2, h3, h4, h5 { font-weight: 600 !important; }
 h1 { text-align: center; }
 
 .p, .list { font-size: 13pt; }
+p {
+    margin-bottom: 0;
+}
 
 .card {
    align-items: center;
@@ -69,4 +74,19 @@ h1 { text-align: center; }
 
 .form-floating {
     padding-bottom: 15px;   
+}
+
+.docs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10%;
+}
+
+.doc {
+    aspect-ratio: 0.717;
+    margin-bottom: 5vw;
+    width: 45%;
+    height: auto;
 }

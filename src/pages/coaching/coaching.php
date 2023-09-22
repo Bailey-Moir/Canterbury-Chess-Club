@@ -25,9 +25,12 @@ Canterbury Chess Club provides coaching courses with experienced coaches. These 
 
 <p class="p">We also offer occasional shorter courses on various topics for students aged 11+. Details of these will be added here and posted to our <a href="https://www.facebook.com/CanterburyChessClub/">Facebook Page</a> - please check back here occasionally or follow us there.</p>
 	
-<p class="p"> 
+<p class="p m-0"> 
 	There is a Minimum number of 4 students, maximum of 12 students per course. We provide all equipment.
 	For queries, please contact Craig Hall using our email or phone number below:
 </p>
-<a class="p" href="mailto:canterbury@chess.org.nz">canterbury@chess.org.nz</a> <br/>
-<a class="p" href="tel:+64211289543">021 1289543</a>
+
+<center>
+	<a class="p" href="mailto:canterbury@chess.org.nz">canterbury@chess.org.nz</a> <br/>
+	<a class="p" href="tel:+64211289543">021 1289543</a>
+</center>
