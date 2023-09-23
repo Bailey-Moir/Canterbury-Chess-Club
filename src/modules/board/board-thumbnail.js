@@ -72,23 +72,21 @@ function compile_move(str, white, board) {
     /** @type {Move} */
     let move = new Move();
 
-    let pieceType = null;
-
     str = str.replace(/\.|!| |(\(=\))|\?|\+|\#/gmi,""); // Remove computationally meaningless characters
     
     if (str.includes("O-O-O")) { // queenside castle
+        move.pieceType = PieceType.king;
         move.dest = board.find(`.Sc${white ? 1 : 8}`);
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
-        move.origin = move.piece.parent();
         move.operations.push(() => {
             board.find(`.Sa${white ? 1 : 8} > .piece`).appendTo(board.find(`.Sd${white ? 1 : 8}`));
         });
         return move;
     }
     if (str.includes("O-O")) { // kingside castle
+        move.pieceType = PieceType.king;
         move.dest = board.find(`.Sg${white ? 1 : 8}`);
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
-        move.origin = move.piece.parent();
         move.operations.push(() => {
             board.find(`.Sh${white ? 1 : 8} > .piece`).appendTo(board.find(`.Sf${white ? 1 : 8}`));
         });
@@ -103,16 +101,16 @@ function compile_move(str, white, board) {
             let piece = move.dest.find(">:first-child");
             piece.removeClass("P");
             piece.addClass(promotingPiece);
-        });
+        })
     }
 
     for (const type in PieceType) // note that "type" is the key
         if (PieceType[type] == str[0]) {
-            pieceType = PieceType[type];
+            move.pieceType = PieceType[type];
             break;
         }
-    if (pieceType == null) {
-        pieceType = PieceType.pawn;
+    if (move.pieceType == null) {
+        move.pieceType = PieceType.pawn;
         str = str.padStart(str.length + 1, PieceType.pawn);
     }
     
@@ -126,7 +124,7 @@ function compile_move(str, white, board) {
     // DISAMBIGATION
 
     /** @type {Array} */
-    let possibilities = board.find(`.${pieceType}.${white ? "white" : "black"}`);
+    let possibilities = board.find(`.${move.pieceType}.${white ? "white" : "black"}`);
     
     /**
      * If there's only one of the pieces, simply select that one.
@@ -134,7 +132,6 @@ function compile_move(str, white, board) {
      */
     const checkpoint = () => {
         move.piece = possibilities[0];
-        move.origin = $(move.piece).parent();
         return move;
     };
 
@@ -148,16 +145,19 @@ function compile_move(str, white, board) {
         possibilities = possibilities.filter(i => isAt( board.find(possibilities[i]).parent(), fileSearch == -1 ? "-1" : originStr.charAt(fileSearch), rankSearch == -1 ? -1 : parseInt( originStr.charAt(rankSearch) )) );
     }
     const destinationClasses = move.dest.attr('class');
-    if (pieceType == PieceType.pawn && (move.taking != null && !isPieceAt(file(destinationClasses), rank(destinationClasses)))) {
+    if (move.pieceType == PieceType.pawn && (move.taking != null && !isPieceAt(file(destinationClasses), rank(destinationClasses)))) {
+        move.takingCell = board.find(`.S${file(destinationClasses)}${rank(destinationClasses) + (white ? -1 : 1)}`);
         move.operations.push(() => {
             move.takingCell.find("> .piece").remove();
         });
+    } else {
+        move.takingCell = move.dest;
     }
 
     // console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
-    else if (pieceType == PieceType.rook) {
+    else if (move.pieceType == PieceType.rook) {
         // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
@@ -168,7 +168,7 @@ function compile_move(str, white, board) {
                     compareClass("rank", originClasses, destinationClasses);
         });
     }
-    else if (pieceType == PieceType.bishop) {
+    else if (move.pieceType == PieceType.bishop) {
         // Check if they are on the same row and or same rank.
         let destinationClasses = move.dest.attr('class');
         possibilities = possibilities.filter(i => {
@@ -177,7 +177,7 @@ function compile_move(str, white, board) {
             return Math.abs(rank(originClasses) - rank(destinationClasses)) == Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
         });
     }
-    else if (pieceType == PieceType.queen) {
+    else if (move.pieceType == PieceType.queen) {
         // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
@@ -189,7 +189,7 @@ function compile_move(str, white, board) {
                     Math.abs(rank(originClasses) - rank(destinationClasses)) == Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0));
         });
     }
-    else if (pieceType == PieceType.knight) {
+    else if (move.pieceType == PieceType.knight) {
         // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
@@ -205,29 +205,37 @@ function compile_move(str, white, board) {
                     rank_distance != 0;
         });
     }
-    else if (pieceType == PieceType.pawn) {
+    else if (move.pieceType == PieceType.pawn) {
         // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
             const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
-           signed_rank_distance = rank(destinationClasses) - rank(originClasses);
+                   current_rank = rank(originClasses),
+                   signed_rank_distance = rank(destinationClasses) - current_rank;
             
-           // 0 < delta rank <= 2 
-            return  (white ? 
-                        (0 < signed_rank_distance && signed_rank_distance <= 2) 
-                        : 
-                        (-2 <= signed_rank_distance && signed_rank_distance <= 0)
-                    )
-                    &&
-                    file_distance == (move.taking != null ? 1 : 0);
+            // note that rank is accounted for higher.
+            return ((white && current_rank == 2) || (!white && current_rank == 7)) ?
+                            (
+                                file_distance == 0 && (white ?
+                                    (0 < signed_rank_distance && signed_rank_distance <= 2) 
+                                    : 
+                                    (-2 <= signed_rank_distance && signed_rank_distance <= 0)
+                                )
+                            )
+                            :
+                            (
+                                file_distance == (move.taking != null ? 1 : 0)
+                                &&
+                                signed_rank_distance == (white ? 1 : -1)
+                            );
         });
     }
     
     // console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
     
-    if (pieceType == PieceType.rook) {
+    if (move.pieceType == PieceType.rook) {
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             
@@ -255,7 +263,7 @@ function compile_move(str, white, board) {
             return true;
         });
     }
-    else if (pieceType == PieceType.bishop) {
+    else if (move.pieceType == PieceType.bishop) {
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             
@@ -276,7 +284,7 @@ function compile_move(str, white, board) {
             return true;
         });
     }  
-    else if (pieceType == PieceType.queen) {
+    else if (move.pieceType == PieceType.queen) {
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
             

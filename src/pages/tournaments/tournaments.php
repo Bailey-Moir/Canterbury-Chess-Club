@@ -11,14 +11,14 @@
 <div class="container-fluid content">
     <h3 class="text-center">Upcoming</h3>
 
-    <div class="upcoming-tournaments">
+    <div class="upcoming-tournaments justify-content-around d-flex flex-wrap">
         <!-- Bailey -->
         <?php
         $results = $conn->query("SELECT name FROM tournaments ORDER BY date_start");
 
         while ($row = $results->fetch_assoc()) {
             ?>
-            <a href="/tournaments/<?php echo urlencode($row['name']); ?>">
+            <a class="mx-3" href="/tournaments/<?php echo urlencode($row['name']); ?>">
                 <div class="card">
                     <div class="card-header">
                         <p class="card-text"><?php echo $row['name'] ?></p>

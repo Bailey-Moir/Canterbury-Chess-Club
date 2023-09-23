@@ -12,7 +12,7 @@
         <?php
         if ($_SESSION['logged_in'] && $_SESSION['logged_in']['name'] == $user_results['username']) {
             ?>
-            <a href="/src/pages/account/signout.php"><button type="button" class="btn btn-primary">Sign Out</button></a>
+            <a href="/src/signout.php"><button type="button" class="btn btn-primary">Sign Out</button></a>
             <?php
         }
         ?>

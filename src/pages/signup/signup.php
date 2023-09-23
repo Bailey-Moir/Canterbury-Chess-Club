@@ -5,13 +5,13 @@
 
 <form class="card-body" style="padding-bottom: 30px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/src/pages/signup/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
-        <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username">
+        <input type="text" class="form-control" id="floatingInput" name="username">
         <label for="floatingInput">Username</label>
     </div>
 
     <div class="form-floating border-secondary" style="border-radius: 0px;">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-        <label for="floatingInput">Email address</label>
+        <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com" name="email">
+        <label for="floatingInput2">Email address</label>
     </div>
     
 

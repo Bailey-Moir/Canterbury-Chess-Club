@@ -11,7 +11,7 @@
 
     <h3 class="text-center">Recent Games</h3>
     
-    <div class="games">
+    <div class="games justify-content-around d-flex flex-wrap">
         <?php
         $results = $conn->query(
             "SELECT
@@ -21,7 +21,8 @@
                 wm.name AS white_name
             FROM games
             JOIN members bm ON games.black_member_id = bm.member_id
-            JOIN members wm ON games.white_member_id = wm.member_id"
+            JOIN members wm ON games.white_member_id = wm.member_id
+            LIMIT 6"
         );
 
         while ($row = $results->fetch_assoc()) {

@@ -1,14 +1,8 @@
 /* Bailey */
-.upcoming-tournaments {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 3.75rem;
-}
 
 .upcoming-tournaments > a {
     text-decoration: none;
+    margin-bottom: 3.75rem;
 }
 
 .upcoming-tournaments .card {

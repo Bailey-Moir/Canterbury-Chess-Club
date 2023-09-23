@@ -1,8 +1,8 @@
 <!-- Gavith -->
 <?php
   session_start();
-  require $_SERVER['DOCUMENT_ROOT']."/src/dbconnect.php";
-  
+  require $_SERVER['DOCUMENT_ROOT']."/src/secure/dbconnect.php";
+
   $username = $conn->real_escape_string($_POST['username-or-email']);
   $password = $conn->real_escape_string($_POST['password']);
 
@@ -23,10 +23,10 @@
     if (password_verify($password, $hash_password)) {
       $_SESSION['logged_in']['user_id'] = $user_aa['user_id'];
       $_SESSION['logged_in']['name'] = $username;
-      $_SESSION['logged_in']['security'] = $user_aa['security'];
+      $_SESSION['logged_in']['admin'] = $user_aa['security'];
 
       if (!$user_aa['security']) header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
-      else header("Location: /?page=adminpanel");
+      else header("Location: /admin");
 
     } else header("Location: /signin?error=fail");
   }

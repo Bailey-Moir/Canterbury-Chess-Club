@@ -1,7 +1,8 @@
 <!-- Gavith -->
 <?php
-if (isset($_SESSION['admin'])) header("Location: /?page=adminpanel");
-if (isset($_SESSION['logged_in'])) header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
+if (isset($_SESSION['logged_in'])) 
+    if ($_SESSION['logged_in']['admin'] == TRUE) header("Location: /admin");
+    else header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
 ?>
 
 <h3 class="card-header">
@@ -10,7 +11,7 @@ if (isset($_SESSION['logged_in'])) header("Location: /accounts/".urlencode($_SES
 
 <form class="card-body" style="padding-bottom: 10px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/src/pages/signin/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
-        <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username-or-email" >
+        <input type="text" class="form-control" id="floatingInput" name="username-or-email" >
         <label for="floatingInput">Username or Email</label>
     </div>
 

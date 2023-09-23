@@ -1,13 +1,4 @@
 /* Bailey */
-.games {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 3.75rem;
-}
-
-
 .games > .card {
     margin-bottom: 3.75rem;
     text-decoration: none;
@@ -24,7 +15,6 @@
 }
 
 .games p {
-    white-space: nowrap;
     text-overflow: ellipsis;
     word-wrap: break-word;
 }

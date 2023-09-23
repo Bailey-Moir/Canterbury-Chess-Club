@@ -4,7 +4,7 @@
 <head>
 	<?php 
     session_start();
-    require PATH."/src/dbconnect.php";
+    require PATH."/src/secure/dbconnect.php";
     require PATH."/src/header.php";
     $page->render_tags();
     ?>

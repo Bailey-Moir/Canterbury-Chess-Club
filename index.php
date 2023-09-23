@@ -78,22 +78,22 @@ $pages = [
     //     uri: "clubplayers",
     //     pg: "/src/pages/clubplayers/clubplayers"
     // ),
-    new Page(
-        uri: "forums",
-        pg: "/src/pages/forums/forums"
-    ),
-    new Page(
-        uri: "player",
-        pg: "/src/pages/player/player"
-    ),
-    new Page(
-        uri: "players",
-        pg: "/src/pages/players/players"
-    ),
-    new Page(
-        uri: "study",
-        pg: "/src/pages/study/study"
-    ),
+    // new Page(
+    //     uri: "forums",
+    //     pg: "/src/pages/forums/forums"
+    // ),
+    // new Page(
+    //     uri: "player",
+    //     pg: "/src/pages/player/player"
+    // ),
+    // new Page(
+    //     uri: "players",
+    //     pg: "/src/pages/players/players"
+    // ),
+    // new Page(
+    //     uri: "study",
+    //     pg: "/src/pages/study/study"
+    // ),
     new Page(
         uri: "account",
         pg: "/src/pages/account/account",
@@ -102,6 +102,10 @@ $pages = [
     new Page(
         uri: "about",
         pg: "/src/pages/about/about"
+    ),
+    new Page(
+        uri: "admin",
+        pg: "/src/pages/admin/admin"
     )
 ];
 

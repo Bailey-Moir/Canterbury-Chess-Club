@@ -423,16 +423,25 @@ function compile_move(str, white, board) {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
             const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
-           signed_rank_distance = rank(destinationClasses) - rank(originClasses);
+                   current_rank = rank(originClasses),
+                   signed_rank_distance = rank(destinationClasses) - current_rank;
             
-           // 0 < delta rank <= 2 
-            return  (white ? 
-                        (0 < signed_rank_distance && signed_rank_distance <= 2) 
-                        : 
-                        (-2 <= signed_rank_distance && signed_rank_distance <= 0)
-                    )
-                    &&
-                    file_distance == (move.taking != null ? 1 : 0);
+            // console.log(signed_rank_distance == (white ? 1 : -1));
+            // note that rank is accounted for higher.
+            return ((white && current_rank == 2) || (!white && current_rank == 7)) ?
+                            (
+                                file_distance == 0 && (white ?
+                                    (0 < signed_rank_distance && signed_rank_distance <= 2) 
+                                    : 
+                                    (-2 <= signed_rank_distance && signed_rank_distance <= 0)
+                                )
+                            )
+                            :
+                            (
+                                file_distance == (move.taking != null ? 1 : 0)
+                                &&
+                                signed_rank_distance == (white ? 1 : -1)
+                            );
         });
     }
     
