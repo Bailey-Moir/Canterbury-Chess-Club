@@ -15,7 +15,7 @@
             <p><a class="navbar-brand" href="/"><img src="/res/black_logo.svg" alt="Icon"/></a></p>
             <div class="col-6">
 
-                <div class="card" style="border-radius: 0px;"> 
+                <div class="card mt-2"> 
 
                     <?php require PATH.$page->pg.'.php'; ?>
                     

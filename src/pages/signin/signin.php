@@ -7,8 +7,7 @@ if (isset($_SESSION['logged_in'])) header("Location: /accounts/".urlencode($_SES
     Sign in
 </h3>
 
-<form style="border-radius: 0px; padding-top: 15px; width: 80%;" action="/src/pages/signin/verify.php" method="post">
-
+<form class="card-body" style="padding-bottom: 10px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/src/pages/signin/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username-or-email" >
         <label for="floatingInput">Username or Email</label>
@@ -19,7 +18,7 @@ if (isset($_SESSION['logged_in'])) header("Location: /accounts/".urlencode($_SES
         <label for="floatingPassword">Password</label>
     </div>
 
-    <div class="form-check text-start my-3" style="border-radius: 0px;">
+    <div class="form-check text-start mb-3" style="border-radius: 0px;">
         <!-- <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
             Remember me
@@ -41,8 +40,8 @@ if (isset($_SESSION['logged_in'])) header("Location: /accounts/".urlencode($_SES
     ?>
 
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            
+    <p class="p pt-2">
+        Don't have an account? <a href="/signup">Sign up</a> instead.
+    </p>
 </form>
-
-<p style="padding-top: 10px;">
-    Don't have an account? <a href="/signup">Sign up</a> instead.
-</p>
