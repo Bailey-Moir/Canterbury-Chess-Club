@@ -1,3 +1,4 @@
+<!-- Gavith -->
 <h2 style="padding-bottom: 20px;">Canterbury Chess Club</h2>
 
 <div class="container-fluid content">

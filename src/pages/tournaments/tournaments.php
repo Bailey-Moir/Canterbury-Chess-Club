@@ -1,3 +1,4 @@
+<!-- Gavith -->
 <h2>Canterbury Chess Club</h2>
 
 <div class="row justify-content-around" style="text-align: left !important;">
