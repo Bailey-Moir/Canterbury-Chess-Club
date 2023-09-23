@@ -4,12 +4,19 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 3.75rem;
 }
 
-.games > div {
-    margin-left: 3.75rem;
-    margin-right: 3.75rem;
+
+.games > .card {
     margin-bottom: 3.75rem;
+    text-decoration: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.games .card .card-header p {
+    text-align: center;
 }
 
 .games * {

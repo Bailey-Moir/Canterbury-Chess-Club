@@ -18,11 +18,14 @@ $stmt->execute();
 $board_results = $stmt->get_result()->fetch_assoc();
 ?>
 
-<div class="row justify-content-center" style="width: 100%;">
-    <div class="col-8">
-        <div class="card">
-            <h1><?php echo $board_results['black_name']." v. ".$board_results['white_name']; ?></h1>
-            <h5><a href="/tournaments/<?php echo urlencode($board_results['tournament_name']); ?>"><?php echo $board_results['tournament_name']; ?></a></h5>
+<div id="game-page" class="card">
+    <div class="card-header">
+        <!-- Note this is member name not username -->
+        <h1><a class="dark-link" href="/accounts/<?php echo urlencode($board_results['black_name']); ?>/games"><?php echo $board_results['black_name']?></a> v. <a class="dark-link" href="/accounts/<?php echo urlencode($board_results['white_name']); ?>/games"><?php echo$board_results['white_name']; ?></a></h1>
+        <h5 class="text-center"><a class="dark-link" href="/tournaments/<?php echo urlencode($board_results['tournament_name']); ?>"><?php echo $board_results['tournament_name']; ?></a></h5>
+    </div>
+    <div class="card-body">
+        <div class="game-board">
             <?php require PATH."/src/modules/board/board.php"; ?>
         </div>
     </div>

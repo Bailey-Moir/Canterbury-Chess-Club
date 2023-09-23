@@ -1,7 +1,7 @@
 <!-- Bailey -->
 <?php
     // This file resets/creates the database.
-
+    
     session_start();
     $_SESSION = [];
     session_destroy();
@@ -49,7 +49,7 @@
         password VARCHAR(60) NOT NULL,
         security TINYINT(1) UNSIGNED NOT NULL, # Admin
         verified TINYINT(1) UNSIGNED NOT NULL,
-        status VARCHAR(8) NOT NULL
+        status VARCHAR(8)
     );");
     $conn->query("CREATE TABLE members (
         member_id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

@@ -3,8 +3,7 @@
     Sign up
 </h3>
 
-<form style="border-radius: 0px; padding-top: 15px; width: 80%;" action="/src/pages/signup/verify.php" method="post">
-    
+<form class="card-body" style="padding-bottom: 30px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/src/pages/signup/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="text" class="form-control" id="floatingInput" placeholder="#" name="username">
         <label for="floatingInput">Username</label>
@@ -19,13 +18,12 @@
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
         <label for="floatingPassword">Password</label>
-        <span class="material-symbols-outlined">eye-open</span>
     </div>
     
     <?php
     if(isset($_GET['error'])) {
         ?>
-        <div class="alter alert-danger text-danger" role="alert" style="color: rgb(255, 0, 0); padding-bottom: 10px;    ">
+        <div class="alter alert-danger text-danger pb-3" role="alert" style="color: red;">
             Username, Email or Password is already in use, please use something else
         </div>
         <?php 

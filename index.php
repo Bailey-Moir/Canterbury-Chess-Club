@@ -96,7 +96,8 @@ $pages = [
     ),
     new Page(
         uri: "account",
-        pg: "/src/pages/account/account"
+        pg: "/src/pages/account/account",
+        custom_js: ["/src/modules/board/board-thumbnail.js"]
     ),
     new Page(
         uri: "about",

@@ -4,17 +4,16 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 3.75rem;
+}
+
+.upcoming-tournaments > a {
+    text-decoration: none;
 }
 
 .upcoming-tournaments .card {
-    border: none;
-}
-
-
-.upcoming-tournaments > div {
-    margin-left: 3.75rem;
-    margin-right: 3.75rem;
-    margin-bottom: 3.75rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .upcoming-tournaments * {
@@ -32,4 +31,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }

@@ -6,17 +6,35 @@
     align-items: center;
     padding-left: 15px;
     padding-right: 15px;
-    text-decoration-color: rgb(255, 255, 255);
-    background-color: rgb(1, 22, 30);
+    text-decoration-color: white;
+    background-color: var(--black);
     justify-content: space-between;
     position: absolute;
     bottom: 0px;
 }
 
-.footer-spacer {
+.footer, .footer-spacer {
     height: 10vh;
 }
 
-.a > text {
-    text-decoration-color: rgb(255, 255, 255);
+.footer a {
+    text-decoration: none;
+}
+.footer a button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer a img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    height: 24px;
+    width: auto;
+    margin-right: 0.3vw;
+}
+.footer a b {
+    position: relative;
+    bottom: 0.5px;
 }
