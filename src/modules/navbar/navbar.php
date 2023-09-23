@@ -7,6 +7,7 @@
         <a class="mnav-btn" aria-current="page" href="/tournaments"><b>Tournaments</b></a>
         <a class="mnav-btn" aria-current="page" href="/calendar"><b>Calendar</b></a>
         <a class="mnav-btn" aria-current="page" href="/coaching"><b>Coaching</b></a>
+        <a class="mnav-btn" aria-current="page" href="/about"><b>About</b></a>
 
 
         <div class="right">

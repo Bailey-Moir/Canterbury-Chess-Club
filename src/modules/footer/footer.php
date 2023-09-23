@@ -12,7 +12,7 @@
                     <a href="/about#contact"><button class="btn text-white" type="submit"><img src="/res/mail.svg"/><b>Contact</b></button></a>
                 </li>
                 <li class="nav-item">
-                    <a href="/about"><button class="btn text-white" type="submit"><img src="/res/history.svg"/><b>About</b></button></a>
+                    <a href="/about#club-history"><button class="btn text-white" type="submit"><img src="/res/history.svg"/><b>History</b></button></a>
                 </li>               
             </ul>
         </div>
