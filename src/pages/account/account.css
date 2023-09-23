@@ -1,6 +1,22 @@
+.account-nav {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-bottom: solid rgba(128, 128, 128, 0.5) 1px;
+}
 
+.account-nav a {
+    text-decoration: none;
+    color: gray;
+}
 
-
+.account-content {
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+}
 
 
 .profile-header {
