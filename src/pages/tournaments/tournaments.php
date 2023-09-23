@@ -1,3 +1,4 @@
+<!-- Gavith -->
 <h1>Tournaments</h1>
 
 <p class="p">
@@ -11,6 +12,7 @@
     <h3 class="text-center">Upcoming</h3>
 
     <div class="upcoming-tournaments">
+        <!-- Bailey -->
         <?php
         $results = $conn->query("SELECT name FROM tournaments ORDER BY date_start");
 

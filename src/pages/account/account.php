@@ -1,3 +1,4 @@
+<!-- Gavith -->
 <?php
     $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
     $decoded = urldecode($_GET['name']);

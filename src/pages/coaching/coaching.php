@@ -1,3 +1,4 @@
+<!-- Gavith -->
 <h1>Coaching</h1>
 
 Canterbury Chess Club provides coaching courses with experienced coaches. These courses are held at our clubrooms. We have a structured curriculum designed by <a href="https://ratings.fide.com/profile/4301030" style="none;">Craig Hall</a>, an experienced arbiter (referee/umpire) and trainer accredited by the World Chess Federation (FIDE) that we plan our lessons around. There will also be time for practice games at the end. We offer courses for children aged 8-15 on Mondays from 7pm and Fridays from 5:30 to 6:45pm and 7 to 8:15pm during school terms. Note that lessons are not held on the first or last day of term or public holidays (so courses are usually 8-9 lessons).

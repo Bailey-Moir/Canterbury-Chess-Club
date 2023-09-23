@@ -1,3 +1,4 @@
+<!-- Bailey, but debateable, see https://github.com/Bailey-Moir/Canterbury-Chess-Club/commits/main/src/pages/home/home.php -->
 <h1 class="pb-1">Canterbury Chess Club</h1>
 
 <div class="container-fluid content">
