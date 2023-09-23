@@ -366,7 +366,7 @@ function compile_move(str, white, board) {
         move.takingCell = move.dest;
     }
 
-    // console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
+    console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
     else if (move.pieceType == PieceType.rook) {
@@ -445,7 +445,7 @@ function compile_move(str, white, board) {
         });
     }
     
-    // console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
+    console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
     
     if (move.pieceType == PieceType.rook) {
@@ -534,7 +534,95 @@ function compile_move(str, white, board) {
     }
     // Note that knight can jump over things so it doesn't have walling.
     
-    // console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
+    console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
+    if (possibilities.length == 1) return checkpoint();
+
+    const kingClasses = board.find(`.K.${white ? "white" : "black"}`).parent().attr('class'),
+                   kr = rank(kingClasses),
+                   kf = file(kingClasses);
+    possibilities = possibilities.filter(i => {
+        const originClasses = board.find(possibilities[i]).parent().attr('class');
+        
+        const r = rank(originClasses),
+              f = file(originClasses),
+             dr = r - kr,
+             df = f.charCodeAt(0) - kf.charCodeAt(0);
+
+        let diagonal_check = (file,rank) => {
+            // remove from possibilities if it is a B or queen.
+            return !$(`.S${file}${rank} > .piece`).is(`.B.${white ? "black" : "white"}, .Q.${white ? "black" : "white"}`);
+        };
+
+        if (dr == 0) {
+            // horizontal
+
+            console.log("dr == 0:");
+            console.log(possibilities[i]);
+
+            // if they stay on the file, they're fine,
+            if (rank(destinationClasses) - kr == 0) return true;
+            
+            let check = (file) => {
+                // remove from possibilities if it is a rook or queen.
+                return !$(`.S${file}${r} > .piece`).is(`.R.${white ? "black" : "white"}, .Q.${white ? "black" : "white"}`);
+            };
+            
+            // (note 104 is char code of h)
+            // for each, if files aren't the same, and there is a piece, return 'check'.
+            if (df > 0) for (let i = kf.charCodeAt(0) + 1; i <= 104; i++) if (alphabet[i - 97] != f && isPieceAt(alphabet[i - 97], r)) return check(alphabet[i - 97]);
+            else        for (let i = kf.charCodeAt(0) - 1; i >= 97;  i--) if (alphabet[i - 97] != f && isPieceAt(alphabet[i - 97], r)) return check(alphabet[i - 97]);
+        } else if (df == 0) {
+            // vertical            
+
+            // if they stay on the rank, they're fine,
+            if (file(destinationClasses).charCodeAt(0) - kf.charCodeAt(0) == 0) return true;
+
+            let check = (rank) => {
+                // remove from possibilities if it is a rook or queen.
+                if (rank != r && isPieceAt(f, rank)) return !$(`.S${f}${rank} > .piece`).is(`.B.${white ? "black" : "white"}, .Q.${white ? "black" : "white"}`);
+            };
+
+            // for each, if ranks aren't the same, and there is a piece, return 'check'
+            if (dr > 0) for (let i = kr + 1; i <= 8; i++) if (i != r && isPieceAt(f, i)) return check(i);
+            else        for (let i = kr - 1; i >= 1; i--) if (i != r && isPieceAt(f, i)) return check(i);
+        } else if (df == dr) {
+            // gradient = 1
+
+            // if they stay on the same diagonal, they're fine,
+            if (file(destinationClasses).charCodeAt(0) - kf.charCodeAt(0) == rank(destinationClasses) - kr) return true;
+
+            // if pieces aren't the same, and there is a piece, return 'diagonal_check'.
+            if (df > 0) for (let i = kr + 1; i <= 8; i++) {
+                let file = alphabet(kf + i - kr);
+                if (file != f && i != r && isPieceAt(file, i)) return diagonal_check(file, i);
+            }
+            else for (let i = kr - 1; i >= 1; i--) {
+                let file = alphabet(kf + i - kr);
+                if (file != f && i != r && isPieceAt(file, i)) return diagonal_check(file, i);
+            }
+        } else if (df == -dr) {
+            // gradient = -1
+
+            console.log("m = -1:");
+            console.log(possibilities[i]);
+            
+            // if they stay on the same diagonal, they're fine,
+            if (file(destinationClasses).charCodeAt(0) - kf.charCodeAt(0) == -rank(destinationClasses) + kr) return true;
+            
+            // if pieces aren't the same, and there is a piece, return 'diagonal_check'.
+            if (df > 0) for (let i = kr + 1; i <= 8; i++) {
+                let file = alphabet(kf - (i - kr));
+                if (file != f && i != r && isPieceAt(file, i)) return diagonal_check(file, i);
+            }
+            else for (let i = kr - 1; i >= 1; i--) {
+                let file = alphabet(kf - (i - kr));
+                if (file != f && i != r && isPieceAt(file, i)) return diagonal_check(file, i);
+            }
+            
+        } else return true;
+    });
+
+    console.log(`Checkpoint 4 (Check) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 }
 
