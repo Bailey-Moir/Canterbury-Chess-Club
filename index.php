@@ -73,10 +73,10 @@ $pages = [
         pg: "/src/pages/forgotpassword/forgotpassword",
         lyt: "/src/layouts/empty.php"
     ),
-    new Page(
-        uri: "clubplayers",
-        pg: "/src/pages/clubplayers/clubplayers"
-    ),
+    // new Page(
+    //     uri: "clubplayers",
+    //     pg: "/src/pages/clubplayers/clubplayers"
+    // ),
     new Page(
         uri: "forums",
         pg: "/src/pages/forums/forums"

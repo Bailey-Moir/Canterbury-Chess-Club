@@ -1,8 +1,4 @@
 <?php
-    if(!isset($_SESSION['logged_in'])) {
-        header("Location: /signin");
-    }
-
     $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
     $decoded = urldecode($_GET['name']);
     $stmt->bind_param("s", $decoded);
@@ -10,10 +6,10 @@
     $user_results = $stmt->get_result()->fetch_assoc();
 ?>
 <div class="card">
-    <div class="card-header pb-3">
-        <h2 class="m-t-10 m-b-5"><?php echo $user_results['username'] ?></h2>
+    <div class="card-header pb-4">
+        <h2 class="pt-2"><?php echo $user_results['username'] ?></h2>
         <?php
-        if ($_SESSION['logged_in']['name'] == $user_results['username']) {
+        if ($_SESSION['logged_in'] && $_SESSION['logged_in']['name'] == $user_results['username']) {
             ?>
             <a href="/src/pages/account/signout.php"><button type="button" class="btn btn-primary">Sign Out</button></a>
             <?php

@@ -30,14 +30,14 @@ body {
 }
 /* Size is larger than 900px */
 @media not all and (max-width: 900px) {
-    #main-strip {
-        max-width: 70vw;
+    #main-strip, .responsive {
+        width: 70%;
     }
 }
 /* Size is smaller than 900px */
 @media all and (max-width: 900px) {
-    #main-strip {
-        max-width: 90vw;
+    #main-strip, .responsive {
+        width: 90%;
     }
 }
 
