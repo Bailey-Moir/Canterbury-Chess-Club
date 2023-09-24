@@ -31,6 +31,7 @@ $tournaments_results = $stmt->get_result()->fetch_assoc();
                 games.white_member_id AS white_member_id,
                 games.black_member_id AS black_member_id,
                 games.result AS result,
+                games.game_id AS id,
                 bm.name AS black_name,
                 wm.name AS white_name
             FROM games
@@ -44,7 +45,7 @@ $tournaments_results = $stmt->get_result()->fetch_assoc();
             ?>
             <tr>
                 <td><a href="#"><?php echo $row['white_name']; ?></a></td>
-                <td><?php echo $row['result'] ? "White": "Black"; ?></td>
+                <td class="text-center"><a href="/games/<?php echo $row['id']; ?>"><?php echo $row['result'] ? "1-0": "0-1"; ?></a></td>
                 <td><a href="#"><?php echo $row['black_name']; ?></a></td>
             </tr>
             <?php

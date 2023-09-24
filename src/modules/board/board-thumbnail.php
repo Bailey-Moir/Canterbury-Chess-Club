@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/src/modules/board/board.css">
 
 <?php
-$moves = preg_split("/(\r|\n| )+/", $row['moves']);
+$moves = preg_split('/\s+/', str_replace("\\r", "", $row['moves']));
 ?>
 
 <div class="board-container board-container-thumbnail" style="width: 15rem; height: 15rem;" id="board-container-<?php echo $id; ?>">
@@ -34,7 +34,7 @@ $moves = preg_split("/(\r|\n| )+/", $row['moves']);
     board = new Board(<?php echo $id; ?>);
 
     board.moves = [
-        <?php echo "\"".implode('", "', $moves)."\""; ?>
+        <?php echo '"'.preg_replace('/\s+/', '", "', str_replace("\\r", "", $row['moves'])).'"'; ?>
     ];
 
     board.setMove(2*<?php echo count($moves); ?>);

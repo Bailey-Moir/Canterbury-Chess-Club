@@ -1,7 +1,7 @@
 <!-- Bailey -->
 <link rel="stylesheet" href="/src/modules/board/board.css">
 <?php
-$moves = preg_split("/(\r|\n| )+/", $board_results['moves']);
+$moves = preg_split('/\s+/', str_replace("\\r", "", $board_results['moves']));
 ?>
 
 <div class="board-container" id="board-container-<?php echo $board_results['id']; ?>">
@@ -46,6 +46,9 @@ $moves = preg_split("/(\r|\n| )+/", $board_results['moves']);
     let board = new Board(<?php echo $board_results['id']; ?>);
 
     board.moves = [
-        <?php echo "\"".implode('", "', $moves)."\""; ?>
+        <?php echo '"'.preg_replace('/\s+/', '", "', str_replace("\\r", "", $board_results['moves'])).'"'; ?>
     ];
 </script>
+
+3
+ O

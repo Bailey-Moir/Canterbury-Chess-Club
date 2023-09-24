@@ -31,7 +31,7 @@
             <div class="card">
                 <a href="/games/<?php echo $id; ?>">
                     <div class="card-header">
-                        <p class="card-text"><?php echo $row['black_name']." v. ".$row['white_name']; ?></p>
+                        <p class="card-text"><?php echo $row['white_name']." v. ".$row['black_name']; ?></p>
                     </div>
                     <div class="card-body">
                         <?php
