@@ -44,7 +44,7 @@
     $conn->query("CREATE TABLE users (
         user_id INT(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         member_id INT(4) UNSIGNED,
-        email VARCHAR(48) NOT NULL,
+        email VARCHAR(48) NOT NULL UNIQUE,
         username VARCHAR(16) NOT NULL UNIQUE,
         password VARCHAR(60) NOT NULL,
         security TINYINT(1) UNSIGNED NOT NULL, # Admin
@@ -90,8 +90,6 @@
         (3, 1, 2, 0, \"e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O Bg4 h3 Bh5 Nbd2 Qe7 Re1 O-O-O Nf1 Bb6 Ng3 h6 b4 Rdg8 Qe2 Nd8 Bd2 c6 a4 Bg6 Qf1 Ne6 Be3 Kb8 Red1 Bh7 Kh1 g5 Bb3 Rg7 c4 Rhg8 d4 exd4 Nxd4 Nf4 f3 Qd7 Bf2 h5 Qe1 a6 Nf1 Qe8 Ng3 Qd7 Nf1 Qe8 Ne3 h4 b5 cxb5 axb5 axb5 cxb5 Nxe4 fxe4 Bxe4 Qf1 Bd8 Nc4 Be7 Ra8+ Kxa8 Ra1+ Kb8 Ra8+ Kxa8 Qa1+ Kb8 Qa7+ Kxa7 Nc6+ Ka8 Nb6\"),
         (1, 2, 1, 0, \"e4 e6 d4 d5 Nc3 Nf6 Bg5 Bb4 e5 h6 Bd2 Bxc3 bxc3 Ne4 Qg4 g6 Bd3 Nxd2 Kxd2 c5 Nf3 Nc6 Qf4 Qc7 h4 f5 g4 cxd4  cxd4 Ne7 gxf5 exf5 Bb5+ Kf8 Bd3 Be6 Ng1 Kf7 Nh3 Rac8  Rhg1 b6 h5 Qc3+ Ke2 Nc6 hxg6+ Kg7 Rad1 Nxd4+ Kf1 Rhe8  Rg3 Nc6 Qh4 Nxe5 Nf4 Ng4 Nxe6+ Rxe6 Bxf5 Qc4+ Kg1\")
     ");
-    // e4 e6 d4 d5 Nc3 Nf6 Bg5 Bb4 e5 h6 Bd2 Bxc3 bxc3 Ne4 Qg4 g6 Bd3 Nxd2 Kxd2 c5 Nf3 Nc6 Qf4 Qc7 h4 f5 g4 cxd4  cxd4 Ne7 gxf5 exf5 Bb5+ Kf8 Bd3 Be6 Ng1 Kf7 Nh3 Rac8  Rhg1 b6 h5 Qc3+ Ke2 Nc6 hxg6+ Kg7 Rad1 Nxd4+ Kf1 Rhe8  Rg3 Nc6 Qh4 Nxe5 Nf4 Ng4 Nxe6+ Rxe6 Bxf5 Qc4+ Kg1
-
     session_start();
 
     $_SESSION['logged_in']['user_id'] = 1;

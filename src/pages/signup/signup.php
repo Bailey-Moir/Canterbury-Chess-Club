@@ -10,25 +10,28 @@
     </div>
 
     <div class="form-floating border-secondary" style="border-radius: 0px;">
-        <input type="email" class="form-control" id="floatingInput2" placeholder="name@example.com" name="email">
+        <input type="email" class="form-control" id="floatingInput2" name="email">
         <label for="floatingInput2">Email address</label>
     </div>
     
 
     <div class="form-floating border-secondary" style="border-radius: 0px;">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
+        <input type="password" class="form-control" id="floatingPassword" name="password">
         <label for="floatingPassword">Password</label>
     </div>
     
     <?php
-    if(isset($_GET['error'])) {
+    if (isset($_GET['err'])) {
         ?>
-        <div class="alter alert-danger text-danger pb-3" role="alert" style="color: red;">
-            Username, Email or Password is already in use, please use something else
-        </div>
-        <?php 
-    } 
+        <p class="p w-100 text-danger text-center mb-3"><?php
+                 if ($_GET['err'] == "username") echo "Username may only contain alphanumeric characters, '-', '_', '.', and must be between 1 and 16 characters";
+            else if ($_GET['err'] == "taken")    echo "Username or email is already in use";
+            else if ($_GET['err'] == "email")    echo "Invalid email";
+            else if ($_GET['err'] == "password") echo "Password must contain a captial, lowercase, digit, and be at least 8 characters";
+        ?></p>
+        <?php
+    }
     ?>
-    
+
     <button class="btn btn-primary w-100 py-2" type="submit">Sign up</button>
 </form>
