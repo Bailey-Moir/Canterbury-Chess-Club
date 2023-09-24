@@ -162,7 +162,7 @@ function compile_move(str, white, board) {
         move.takingCell = move.dest;
     }
 
-    console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
+    // console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
     else if (move.pieceType == PieceType.rook) {
@@ -217,30 +217,34 @@ function compile_move(str, white, board) {
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
-            const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
-                   current_rank = rank(originClasses),
-                   signed_rank_distance = rank(destinationClasses) - current_rank;
+            const abs_df = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
+                       r = rank(originClasses),
+                      dr = rank(destinationClasses) - r;
             
-            // console.log(signed_rank_distance == (white ? 1 : -1));
             // note that rank is accounted for higher.
-            return ((white && current_rank == 2) || (!white && current_rank == 7)) ?
-                            (
-                                file_distance == 0 && (white ?
-                                    (0 < signed_rank_distance && signed_rank_distance <= 2) 
+            return ((white && r == 2) || (!white && r == 7)) ?
+                        (
+                            abs_df == 0 ? 
+                                (white ?
+                                    (0 < dr && dr <= 2) 
                                     : 
-                                    (-2 <= signed_rank_distance && signed_rank_distance <= 0)
-                                )
-                            )
-                            :
-                            (
-                                file_distance == (move.taking != null ? 1 : 0)
+                                    (-2 <= dr && dr <= 0)
+                                ) 
+                                :
+                                abs_df == (move.taking != null ? 1 : 0)
                                 &&
-                                signed_rank_distance == (white ? 1 : -1)
-                            );
+                                dr == (white ? 1 : -1)
+                        )
+                        :
+                        (
+                            abs_df == (move.taking != null ? 1 : 0)
+                            &&
+                            dr == (white ? 1 : -1)
+                        );
         });
     }
     
-    console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
+    // console.log(`Checkpoint 2 (Specific movement types) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
     
     if (move.pieceType == PieceType.rook) {
@@ -251,8 +255,6 @@ function compile_move(str, white, board) {
                 rankOrigin = rank(originClasses);
             const fileDest = file(destinationClasses).charCodeAt(0) - 97,
                 fileOrigin = file(originClasses).charCodeAt(0) - 97;
-
-            console.log(originClasses);
 
             if (rankDest == rankOrigin) {
                 // go through file
@@ -331,7 +333,7 @@ function compile_move(str, white, board) {
     }
     // Note that knight can jump over things so it doesn't have walling.
     
-    console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
+    // console.log(`Checkpoint 3 (Walled) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
     const kingClasses = board.find(`.K.${white ? "white" : "black"}`).parent().attr('class'),

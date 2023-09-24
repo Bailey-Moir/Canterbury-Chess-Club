@@ -9,11 +9,11 @@
     }
 
     // process moves
-    $moves = $conn->real_escape_string(  trim( preg_replace('/((\s|\n)+(\d)+.(\s|\n)+)|\n/', " ", " ".$_POST['moves']) ) );
+    $moves = $conn->real_escape_string(  trim( preg_replace('/((\s|\n)+(\d)+.(\s|\n)*)|\n/', " ", " ".$_POST['moves']) ) );
 
     $black_nzcf = $conn->real_escape_string($_POST['black_nzcf']);
     $white_nzcf = $conn->real_escape_string($_POST['white_nzcf']);
-    $result = $_POST['blackCheck'];
+    $result = isset($_POST['blackCheck']) ? $_POST['blackCheck'] : !$_POST['whiteCheck'];
     $tournament_id = $conn->real_escape_string($_POST['tournament_id']);
     
         

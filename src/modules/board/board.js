@@ -427,26 +427,30 @@ function compile_move(str, white, board) {
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
-            const file_distance = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
-                   current_rank = rank(originClasses),
-                   signed_rank_distance = rank(destinationClasses) - current_rank;
+            const abs_df = Math.abs(file(originClasses).charCodeAt(0) - file(destinationClasses).charCodeAt(0)),
+                       r = rank(originClasses),
+                      dr = rank(destinationClasses) - r;
             
-            // console.log(signed_rank_distance == (white ? 1 : -1));
             // note that rank is accounted for higher.
-            return ((white && current_rank == 2) || (!white && current_rank == 7)) ?
-                            (
-                                file_distance == 0 && (white ?
-                                    (0 < signed_rank_distance && signed_rank_distance <= 2) 
+            return ((white && r == 2) || (!white && r == 7)) ?
+                        (
+                            abs_df == 0 ? 
+                                (white ?
+                                    (0 < dr && dr <= 2) 
                                     : 
-                                    (-2 <= signed_rank_distance && signed_rank_distance <= 0)
-                                )
-                            )
-                            :
-                            (
-                                file_distance == (move.taking != null ? 1 : 0)
+                                    (-2 <= dr && dr <= 0)
+                                ) 
+                                :
+                                abs_df == (move.taking != null ? 1 : 0)
                                 &&
-                                signed_rank_distance == (white ? 1 : -1)
-                            );
+                                dr == (white ? 1 : -1)
+                        )
+                        :
+                        (
+                            abs_df == (move.taking != null ? 1 : 0)
+                            &&
+                            dr == (white ? 1 : -1)
+                        );
         });
     }
     
@@ -461,8 +465,6 @@ function compile_move(str, white, board) {
                 rankOrigin = rank(originClasses);
             const fileDest = file(destinationClasses).charCodeAt(0) - 97,
                 fileOrigin = file(originClasses).charCodeAt(0) - 97;
-
-            console.log(originClasses);
 
             if (rankDest == rankOrigin) {
                 // go through file
@@ -621,6 +623,7 @@ function compile_move(str, white, board) {
             }
             
         } else return true;
+        return true;
     });
 
     // console.log(`Checkpoint 4 (Check) : ${possibilities.length}`);

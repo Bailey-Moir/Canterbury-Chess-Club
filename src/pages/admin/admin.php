@@ -12,25 +12,25 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
             <form action="/src/admin/addgame.php" method="post">
                 <div class="d-flex flex-wrap w-100 justify-content-between">
                     <div class="form-floating border-secondary" style="width:45%; padding-bottom:0px;">
-                        <input type="text" class="form-control" id="floatingBlack" name="black_nzcf" >
-                        <label for="floatingBlack">Black player NZCF code</label>
-                    </div>
-                    <div class="form-floating border-secondary" style="width:45%; padding-bottom:0px;">
                         <input type="text" class="form-control" id="floatingWhite" name="white_nzcf" >
                         <label for="floatingWhite">White player NZCF code</label>
                     </div>
+                    <div class="form-floating border-secondary" style="width:45%; padding-bottom:0px;">
+                        <input type="text" class="form-control" id="floatingBlack" name="black_nzcf" >
+                        <label for="floatingBlack">Black player NZCF code</label>
+                    </div>
                     
+                    <div class="form-check pb-2" style="width:45%;">
+                        <label class="form-check-label" for="whiteCheck">
+                            White won
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" name="whiteCheck">
+                    </div>
                     <div class="form-check pb-2" style="width:45%;">
                         <label class="form-check-label" for="blackCheck">
                             Black won
                         </label>
                         <input class="form-check-input" type="checkbox" value="" name="blackCheck">
-                    </div>
-                    <div class="form-check pb-2" style="width:45%;">
-                        <label class="form-check-label" for="blackCheck">
-                            White won
-                        </label>
-                        <input class="form-check-input" type="checkbox" value="" name="whiteCheck">
                     </div>
                 </div>
 
