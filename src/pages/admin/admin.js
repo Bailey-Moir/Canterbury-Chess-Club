@@ -1,3 +1,4 @@
+// Bailey
 $(document).ready(() => {
     let white = $('input[name="whiteCheck"]');
     let black = $('input[name="blackCheck"]');
@@ -21,10 +22,9 @@ $(document).ready(() => {
         black.prop("checked", false);
     });
 
-        
-    // Data Picker Initialization
-    $('.datepicker').datepicker({
-        inline: true
+    // Reset to
+    $("#files").change(e => {
+        $(e.currentTarget).parents("form").submit();
     });
     
 });

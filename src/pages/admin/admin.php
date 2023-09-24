@@ -109,12 +109,25 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
                 <input class="btn btn-primary w-100" type="submit">
             </form>
 
-
             <br/>
-            
+
+            <a href="/src/admin/backup.php">Backup</a> <br/>
+            <?php
+            if (isset($_GET['err']) && $_GET['err'][0] == "b") {
+                ?>
+                <p class="p w-100 text-danger mb-3"><?php
+                    if ($_GET['err'] == "bfail") echo "Backup failed";
+                ?></p>
+                <?php
+            }
+            ?>
             <a href="/src/signout.php">Sign Out</a>
 
-            <h3 class="text-danger mt-5">Danger Zone</h3>
+            <h3 class="text-danger mt-3">Danger Zone</h3>
+            <form class="pb-3" action="/src/admin/reset_to.php" method="post" enctype="multipart/form-data">
+                <label class="text-danger" style="text-decoration: underline; cursor:pointer;" for="files">Reset to Backup</label>
+                <input id="files" style="visibility:hidden; height:5px; width:5px;" type="file" name="backup">
+            </form>
             <a class="text-danger" href="/src/admin/reset.php">Reset Databse</a>
         </div>
     </div>
