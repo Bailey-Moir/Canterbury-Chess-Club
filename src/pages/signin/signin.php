@@ -16,7 +16,7 @@ if (isset($_SESSION['logged_in']))
     </div>
 
     <div class="form-floating border-secondary" style="border-radius: 0px;">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
+        <input type="password" class="form-control" id="floatingPassword" name="password">
         <label for="floatingPassword">Password</label>
     </div>
 

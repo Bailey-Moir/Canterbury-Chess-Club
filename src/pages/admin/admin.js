@@ -20,4 +20,11 @@ $(document).ready(() => {
         white.prop("checked", false);
         black.prop("checked", false);
     });
+
+        
+    // Data Picker Initialization
+    $('.datepicker').datepicker({
+        inline: true
+    });
+    
 });

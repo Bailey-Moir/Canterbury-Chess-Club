@@ -9,14 +9,14 @@
     }
 
     // process moves
-    $moves = $conn->real_escape_string(  trim( preg_replace('/((\s|\n)+(\d)+.(\s|\n)*)|\n/', " ", " ".$_POST['moves']) ) );
+    $moves = $conn->real_escape_string( trim( preg_replace('/((\s|\n)+(\d)+.(\s|\n)*)|\n/', " ", " ".$_POST['moves']) ) );
 
     $white_nzcf = $conn->real_escape_string($_POST['white_nzcf']);
     $black_nzcf = $conn->real_escape_string($_POST['black_nzcf']);
 
     $tournament_id = $conn->real_escape_string($_POST['tournament_id']);
     if (!is_numeric($tournament_id)) {
-        header("Location: /admin?err=gameInvalidTournament");
+        header("Location: /admin?err=gInvalidTournament");
         die();
     }
     
@@ -24,7 +24,7 @@
     else if (isset($_POST['blackCheck']) && $_POST['blackCheck']) $result = 0;
     else if (isset($_POST['drawCheck']) && $_POST['drawCheck']) $result = 2;
     else {
-        header("Location: /admin?err=gameNoneChecked");
+        header("Location: /admin?err=gNoneChecked");
         die();
     }
 
@@ -33,7 +33,7 @@
     $stmt->execute();
     $qresult = $stmt->get_result(); 
     if ($qresult->num_rows == 0) {
-        header("Location: /admin?err=gameNoWhiteMember");
+        header("Location: /admin?err=gNoWhiteMember");
         die();
     }
     $white_member_results = $qresult->fetch_assoc();
@@ -43,7 +43,7 @@
     $stmt->execute();
     $qresult = $stmt->get_result();
     if ($qresult->num_rows == 0) {
-        header("Location: /admin?err=gameNoBlackMember");
+        header("Location: /admin?err=gNoBlackMember");
         die();
     }
     $black_member_results = $qresult->fetch_assoc();
@@ -55,7 +55,7 @@
     $stmt->bind_param("iiiis", $black_member_results['v'], $white_member_results['v'], $tournament_id, $result, $moves);
     $stmt->execute();
     if ($stmt->affected_rows == 0) {
-        header("Location: /admin?err=fail");
+        header("Location: /admin?err=gfail");
     }
 
     header("Location: /admin")

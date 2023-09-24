@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
                 </div>
 
                 <div class="form-floating border-secondary w-100">
-                    <textarea class="form-control" style="height: 6rem;" id="floatingMoves" name="moves"><?php isset($_POST['moves']) ? $_POST['moves'] : ''; ?></textarea>
+                    <textarea class="form-control" style="height: 6rem;" id="floatingMoves" name="moves"></textarea>
                     <label for="floatingMoves">Moves</label>
                 </div>
                 
@@ -52,14 +52,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
                 </div>
 
                 <?php
-                if (isset($_GET['err'])) {
+                if (isset($_GET['err']) && $_GET['err'][0] == "g") {
                     ?>
                     <p class="p w-100 text-danger text-center mb-3"><?php
-                             if ($_GET['err'] == "gameInvalidTournament") echo "Invalid Tournament ID";
-                        else if ($_GET['err'] == "gameNoneChecked")       echo "No game result selected";
-                        else if ($_GET['err'] == "gameNoWhiteMember")     echo "Invalid White NZCF Code";
-                        else if ($_GET['err'] == "gameNoBlackMember")     echo "Invalid Black NZCF Code";
-                        else if ($_GET['err'] == "gameNoBlackMember")     echo "Insert Failed";
+                             if ($_GET['err'] == "gInvalidTournament") echo "Invalid Tournament ID";
+                        else if ($_GET['err'] == "gNoneChecked")       echo "No game result selected";
+                        else if ($_GET['err'] == "gNoWhiteMember")     echo "Invalid White NZCF Code";
+                        else if ($_GET['err'] == "gNoBlackMember")     echo "Invalid Black NZCF Code";
+                        else if ($_GET['err'] == "gfail")              echo "Insert Failed";
                     ?></p>
                     <?php
                 }
@@ -70,6 +70,45 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
 
 
             <h3 class="mt-4">Add Tournament</h3>
+            <form action="/src/admin/addtournament.php" method="post">
+                <div class="d-flex w-100 justify-content-between">
+                    <div class="form-floating border-secondary" style="width: 45%;">
+                        <input class="form-control" type="date" name="date_start" id="floatingDateStart">
+                        <label for="floatingDateStart">Date Start</label>
+                    </div>
+                    <div class="form-floating border-secondary" style="width: 45%;">
+                        <input class="form-control" type="date" name="date_end" id="floatingDateEnd">
+                        <label for="floatingDateEnd">Date End</label>
+                    </div>
+                </div>
+                <div class="form-floating border-secondary w-100">
+                    <input type="text" class="form-control" id="floatingTournamentName" name="name" >
+                    <label for="floatingTournamentName">Tournament Name</label>
+                </div>
+                
+                <div class="form-floating border-secondary w-100">
+                    <input type="number" class="form-control" id="floatingRounds" name="rounds" >
+                    <label for="floatingRounds">Number of Rounds</label>
+                </div>
+
+                <?php
+                if (isset($_GET['err']) && $_GET['err'][0] == "t") {
+                    ?>
+                    <p class="p w-100 text-danger text-center mb-3"><?php
+                             if ($_GET['err'] == "temptyDateStart") echo "No start date provided";
+                        else if ($_GET['err'] == "temptyDateEnd")   echo "No end date provided";
+                        else if ($_GET['err'] == "temptyName")      echo "No tournament name given";
+                        else if ($_GET['err'] == "temptyRound")     echo "Number of rounds not set";
+                        else if ($_GET['err'] == "tinvalidRound")   echo "Invalid number of rounds (0-9)";
+                        else if ($_GET['err'] == "tfail")           echo "Insert Failed";
+                    ?></p>
+                    <?php
+                }
+                ?>
+
+                <input class="btn btn-primary w-100" type="submit">
+            </form>
+
 
             <br/>
             
