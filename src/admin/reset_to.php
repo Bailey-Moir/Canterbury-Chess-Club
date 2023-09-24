@@ -11,18 +11,12 @@
     $_SESSION = [];
     session_destroy();
     
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "canterbury_chess_club";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password);
+    require $_SERVER['DOCUMENT_ROOT']."/src/secure/dbconnect.php";
     
     $conn->query("DROP DATABASE IF EXISTS $dbname;");
     $conn->query("CREATE DATABASE $dbname;");
     $conn->query("USE $dbname;");
-    
+
     $conn->multi_query(file_get_contents($_FILES['backup']['tmp_name']));
 
     session_start();

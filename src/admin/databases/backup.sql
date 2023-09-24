@@ -67,7 +67,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,NULL,'Aaron','2023-09-24 10:07:12',1234567,1234567),(2,NULL,'Brock','2023-09-24 10:07:12',2234567,2234567),(3,NULL,'Caleb','2023-09-24 10:07:12',3234567,3234567),(4,NULL,'Dominic','2023-09-24 10:07:12',4234567,4234567);
+INSERT INTO `members` VALUES (1,NULL,'Aaron','2023-09-24 10:21:37',1234567,1234567),(2,NULL,'Brock','2023-09-24 10:21:37',2234567,2234567),(3,NULL,'Caleb','2023-09-24 10:21:37',3234567,3234567),(4,NULL,'Dominic','2023-09-24 10:21:37',4234567,4234567);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +112,7 @@ CREATE TABLE `tournaments` (
   `num_rounds` int(1) unsigned NOT NULL,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `tournaments` (
 
 LOCK TABLES `tournaments` WRITE;
 /*!40000 ALTER TABLE `tournaments` DISABLE KEYS */;
-INSERT INTO `tournaments` VALUES (1,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Arie Nijman Cup 2022'),(2,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Chas L Hart Cup 2022'),(3,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Eric Brown Shield 2022'),(4,'0000-00-00 00:00:00','0000-00-00 00:00:00',8,'Club Championships 2022 B Grad'),(5,'0000-00-00 00:00:00','0000-00-00 00:00:00',7,'Club Championships 2022 A Grad'),(6,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Arie Nijman Memorial 2022'),(7,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Colthart Cup 2022'),(8,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Summer Rapid 2022'),(9,'2023-09-01 12:00:00','2023-09-16 12:00:00',8,'Backed Up');
+INSERT INTO `tournaments` VALUES (1,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Arie Nijman Cup 2022'),(2,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Chas L Hart Cup 2022'),(3,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Eric Brown Shield 2022'),(4,'0000-00-00 00:00:00','0000-00-00 00:00:00',8,'Club Championships 2022 B Grad'),(5,'0000-00-00 00:00:00','0000-00-00 00:00:00',7,'Club Championships 2022 A Grad'),(6,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Arie Nijman Memorial 2022'),(7,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Colthart Cup 2022'),(8,'0000-00-00 00:00:00','0000-00-00 00:00:00',6,'Summer Rapid 2022');
 /*!40000 ALTER TABLE `tournaments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-24 23:15:13
+-- Dump completed on 2023-09-24 23:21:49

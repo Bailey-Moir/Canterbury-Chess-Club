@@ -14,7 +14,7 @@
     <div class="upcoming-tournaments justify-content-around d-flex flex-wrap">
         <!-- Bailey -->
         <?php
-        $results = $conn->query("SELECT name FROM tournaments ORDER BY date_start");
+        $results = $conn->query("SELECT name FROM tournaments ORDER BY date_start LIMIT 6");
 
         while ($row = $results->fetch_assoc()) {
             ?>

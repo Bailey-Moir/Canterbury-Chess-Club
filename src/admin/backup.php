@@ -7,10 +7,7 @@
         die();
     }
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "canterbury_chess_club";
+    require $_SERVER['DOCUMENT_ROOT']."/src/secure/server_creds.php";
 
     $filename = "databases/backup.sql";
 
