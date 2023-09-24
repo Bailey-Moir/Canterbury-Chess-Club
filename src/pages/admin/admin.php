@@ -10,7 +10,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
         <div class="responsive mx-auto my-4">
             <h3>Add Game</h3>
             <form action="/src/admin/addgame.php" method="post">
-                <div class="d-flex flex-wrap w-100 justify-content-between">
+                <div class="d-flex w-100 justify-content-between">
                     <div class="form-floating border-secondary" style="width:45%; padding-bottom:0px;">
                         <input type="text" class="form-control" id="floatingWhite" name="white_nzcf" >
                         <label for="floatingWhite">White player NZCF code</label>
@@ -19,23 +19,30 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
                         <input type="text" class="form-control" id="floatingBlack" name="black_nzcf" >
                         <label for="floatingBlack">Black player NZCF code</label>
                     </div>
-                    
-                    <div class="form-check pb-2" style="width:45%;">
+                </div>
+                <div class="d-flex w-100 justify-content-around">
+                    <div class="form-check pb-2">
                         <label class="form-check-label" for="whiteCheck">
                             White won
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" name="whiteCheck">
+                        <input class="form-check-input" type="checkbox" value="1" name="whiteCheck">
                     </div>
-                    <div class="form-check pb-2" style="width:45%;">
+                    <div class="form-check pb-2">
+                        <label class="form-check-label" for="drawCheck">
+                            Draw
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="1" name="drawCheck">
+                    </div>
+                    <div class="form-check pb-2">
                         <label class="form-check-label" for="blackCheck">
                             Black won
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" name="blackCheck">
+                        <input class="form-check-input" type="checkbox" value="1" name="blackCheck">
                     </div>
                 </div>
 
                 <div class="form-floating border-secondary w-100">
-                    <textarea class="form-control" style="height: 6rem;" id="floatingMoves" name="moves"></textarea>
+                    <textarea class="form-control" style="height: 6rem;" id="floatingMoves" name="moves"><?php isset($_POST['moves']) ? $_POST['moves'] : ''; ?></textarea>
                     <label for="floatingMoves">Moves</label>
                 </div>
                 
@@ -43,6 +50,20 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
                     <input type="number" class="form-control" id="floatingTourn" name="tournament_id" >
                     <label for="floatingTourn">Tournament ID</label>
                 </div>
+
+                <?php
+                if (isset($_GET['err'])) {
+                    ?>
+                    <p class="p w-100 text-danger text-center mb-3"><?php
+                             if ($_GET['err'] == "gameInvalidTournament") echo "Invalid Tournament ID";
+                        else if ($_GET['err'] == "gameNoneChecked")       echo "No game result selected";
+                        else if ($_GET['err'] == "gameNoWhiteMember")     echo "Invalid White NZCF Code";
+                        else if ($_GET['err'] == "gameNoBlackMember")     echo "Invalid Black NZCF Code";
+                        else if ($_GET['err'] == "gameNoBlackMember")     echo "Insert Failed";
+                    ?></p>
+                    <?php
+                }
+                ?>
 
                 <input class="btn btn-primary w-100" type="submit">
             </form>

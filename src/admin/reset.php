@@ -28,8 +28,8 @@
         black_member_id INT(3) UNSIGNED NOT NULL,
         white_member_id INT(3) UNSIGNED NOT NULL,
         tournament_id INT(2) UNSIGNED NOT NULL,
-        -- true is black winning, false is white winning
-        result TINYINT(1) UNSIGNED NOT NULL,
+        -- 1 is white winning, 0 is black winning, 2 is draw
+        result INT(1) UNSIGNED NOT NULL,
         moves varchar(500) NOT NULL
     );");
     $conn->query("CREATE TABLE ratings (

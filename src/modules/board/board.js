@@ -70,160 +70,9 @@ class Point {
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
-//TODO: add capability to have multiple boards without interfering.
-$(document).ready(() => {
-    // Toggling square selection for note taking
-    let squares = $(".square");
 
-    squares.contextmenu(e => {
-        let target = $(e.currentTarget);
-        if (target.hasClass("piece")) target = target.parent();
-
-        target.hasClass("selected") ? target.removeClass("selected") : target.addClass("selected");
-
-        return false;
-    });
-
-    // Keeping Mouse Position
-    let mousePosition = new Point(0,0);
-    $(document).mousemove(e => {
-        mousePosition.x = e.pageX;
-        mousePosition.y = e.pageY;
-    });
-
-    // Arrows
-    let hoveringCellPosition = new Point(0,0);
-    squares.mouseover(e => hoveringCellPosition = Point.getPoint(e.currentTarget) );
-
-    let rightMouseDown = false,
-        arrowLoopID;
-    $(".board").mousedown(e => { 
-        const board = $(e.currentTarget);
-        switch(e.which) {        
-            case 1:
-                // Clearing all notes
-                board.find(".square").removeClass("selected");
-                $(`.arrow-${board.attr("id").at(-1)}`).remove();
-                break;
-            case 3:
-                // Mark that the right mouse is being held down
-                rightMouseDown = true;
-
-                // Save point that arrow started
-                let arrowStart = hoveringCellPosition;
-
-                // Create the container for the arrow
-                let arrowContainer = $(document.createElement('div'))
-                    .addClass("arrow")
-                    .addClass(`arrow-${board.attr("id").at(-1)}`)
-                    .appendTo("body")
-                    .bind("contextmenu", FALSE)
-                    .bind("mousedown", e => e.which == 1 && $(e.currentTarget).remove())
-                    .css({
-                        top: arrowStart.y,
-                        left: arrowStart.x
-                    });
-                
-                // Set cell width
-                let cellWidth = squares[0].getBoundingClientRect().width;
-
-                // Create the main body of the arrow
-                let arrowBody = $(document.createElement('div'))
-                    .appendTo(arrowContainer)
-                    .bind("contextmenu", FALSE)
-                    .css({
-                        height: 4*cellWidth/15,
-                        top: -2*cellWidth/15
-                    });
-
-                // Create the arrow head
-                let arrowHead = $(document.createElement('img'))
-                    .appendTo(arrowContainer)
-                    .addClass("arrowHead")
-                    .bind("contextmenu", FALSE)
-                    .attr("src", "/res/arrowHead.svg")
-                    .css({
-                        height: cellWidth/2,
-                        width: 2*cellWidth/3,
-                        top: -cellWidth/2,
-                        visibility: "hidden" // remove?
-                    });
-
-                // Create the loop to update the arrow
-                arrowLoopID = setInterval(() => {
-                    if (!rightMouseDown) return;
-                    
-                    arrowBody.css({ width: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 });
-                    arrowHead.css({ 
-                        left: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 - 9,
-                        visibility: hoveringCellPosition._equals(arrowStart) ? "hidden" : "visible"
-                    });
-                    arrowContainer.css({ '-webkit-transform': `rotate(${arrowStart.angle(hoveringCellPosition)}deg)` });
-                }, 100);
-                break;
-        }
-    });
-
-    // Stop updating arrows
-    $(document).mouseup(e => { 
-        if (e.which != 3) return;
-        
-        // Mark that the right mouse is no longer being held down
-        rightMouseDown = false;
-        // Stop the loop that updates an arrow.
-        clearInterval(arrowLoopID);
-    });
-        
-    $(".next-move").mouseup(e => {
-        if (e.which != 1) return;
-        
-        boards[$(e.currentTarget).attr("id").at(-1)].nextMove();
-    });
-        
-    $(".last-move").mouseup(e => {
-        if (e.which != 1) return;
-        
-        boards[$(e.currentTarget).attr("id").at(-1)].lastMove();
-    });
-
-    $(".move").mouseup(e => {
-        if (e.which != 1) return;
-
-        const classes = $(e.currentTarget).attr("class");
-        boards[$(e.currentTarget).parent().parent().parent().attr("id").at(-1)].setMove(parseInt(classes.match(/move-\d+/g)[0].substring(5)));
-    });
-});
 
 // COMPILER
-
-class Move {
-    /**
-     * @type {pieceType}
-     */
-    pieceType = null;
-    piece = null;
-    dest = null;
-    origin = null;
-    taking = null;
-    takingCell = null; 
-    /**
-     * @type {Array}
-     */
-    operations = [];
-    /**
-     * @type {Array}
-     */
-    reverse_operations = [];
-}
-
-const PieceType = {
-    pawn: "P",
-    rook: "R", //
-    king: "K", //
-    knight: "N",
-    queen: "Q", //
-    bishop: "B", //
-}
 
 /**
  * @param {string} classes 
@@ -260,7 +109,6 @@ const isAt = (cell, file = "-1", rank = -1) => {
  * @param {number} rank 
  */
 const isPieceAt = (file, rank, board) => board.find(`.S${file}${rank} > .piece`).length != 0;
-
 /**
  * Returns data about a move on the given board given a chess noation move string.
  * @param {String} str The chess notation move
@@ -630,7 +478,7 @@ function compile_move(str, white, board) {
     if (possibilities.length == 1) return checkpoint();
 }
 
-// Implementation of compiler
+// IMPLENTATION OF COMPILER
 
 /**
  * @type {Array<Board>}
@@ -690,8 +538,8 @@ class Board {
         move.dest.removeClass("destination");
         move.origin.removeClass("origin");
 
-        this.compiledMoves[this.currentMove-1].dest.addClass("destination");
-        this.compiledMoves[this.currentMove-1].origin.addClass("origin");
+        if (this.currentMove > 0) this.compiledMoves[this.currentMove-1].dest.addClass("destination");
+        if (this.currentMove > 0) this.compiledMoves[this.currentMove-1].origin.addClass("origin");
         
         this.container.find(`.move-${this.currentMove-1}`).addClass("current-move");
         this.container.find(`.move-${this.currentMove}`).removeClass("current-move");
@@ -715,3 +563,165 @@ class Board {
         while (difference--) increase ? this.nextMove() : this.lastMove();
     }
 }
+
+class Move {
+    /**
+     * @type {pieceType}
+     */
+    pieceType = null;
+    piece = null;
+    dest = null;
+    origin = null;
+    taking = null;
+    takingCell = null; 
+    /**
+     * @type {Array}
+     */
+    operations = [];
+    /**
+     * @type {Array}
+     */
+    reverse_operations = [];
+}
+
+const PieceType = {
+    pawn: "P",
+    rook: "R", //
+    king: "K", //
+    knight: "N",
+    queen: "Q", //
+    bishop: "B", //
+}
+
+// GENERAL
+
+//TODO: add capability to have multiple boards without interfering.
+$(document).ready(() => {
+    // Toggling square selection for note taking
+    let squares = $(".square");
+
+    squares.contextmenu(e => {
+        let target = $(e.currentTarget);
+        if (target.hasClass("piece")) target = target.parent();
+
+        target.hasClass("selected") ? target.removeClass("selected") : target.addClass("selected");
+
+        return false;
+    });
+
+    // Keeping Mouse Position
+    let mousePosition = new Point(0,0);
+    $(document).mousemove(e => {
+        mousePosition.x = e.pageX;
+        mousePosition.y = e.pageY;
+    });
+
+    // Arrows
+    let hoveringCellPosition = new Point(0,0);
+    squares.mouseover(e => hoveringCellPosition = Point.getPoint(e.currentTarget) );
+
+    let rightMouseDown = false,
+        arrowLoopID;
+    $(".board").mousedown(e => { 
+        const board = $(e.currentTarget);
+        switch(e.which) {        
+            case 1:
+                // Clearing all notes
+                board.find(".square").removeClass("selected");
+                $(`.arrow-${board.attr("id").at(-1)}`).remove();
+                break;
+            case 3:
+                // Mark that the right mouse is being held down
+                rightMouseDown = true;
+
+                // Save point that arrow started
+                let arrowStart = hoveringCellPosition;
+
+                // Create the container for the arrow
+                let arrowContainer = $(document.createElement('div'))
+                    .addClass("arrow")
+                    .addClass(`arrow-${board.attr("id").at(-1)}`)
+                    .appendTo("body")
+                    .bind("contextmenu", FALSE)
+                    .bind("mousedown", e => e.which == 1 && $(e.currentTarget).remove())
+                    .css({
+                        top: arrowStart.y,
+                        left: arrowStart.x
+                    });
+                
+                // Set cell width
+                let cellWidth = squares[0].getBoundingClientRect().width;
+
+                // Create the main body of the arrow
+                let arrowBody = $(document.createElement('div'))
+                    .appendTo(arrowContainer)
+                    .bind("contextmenu", FALSE)
+                    .css({
+                        height: 4*cellWidth/15,
+                        top: -2*cellWidth/15
+                    });
+
+                // Create the arrow head
+                let arrowHead = $(document.createElement('img'))
+                    .appendTo(arrowContainer)
+                    .addClass("arrowHead")
+                    .bind("contextmenu", FALSE)
+                    .attr("src", "/res/arrowHead.svg")
+                    .css({
+                        height: cellWidth/2,
+                        width: 2*cellWidth/3,
+                        top: -cellWidth/2,
+                        visibility: "hidden" // remove?
+                    });
+
+                // Create the loop to update the arrow
+                arrowLoopID = setInterval(() => {
+                    if (!rightMouseDown) return;
+                    
+                    arrowBody.css({ width: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 });
+                    arrowHead.css({ 
+                        left: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 - 9,
+                        visibility: hoveringCellPosition._equals(arrowStart) ? "hidden" : "visible"
+                    });
+                    arrowContainer.css({ '-webkit-transform': `rotate(${arrowStart.angle(hoveringCellPosition)}deg)` });
+                }, 100);
+                break;
+        }
+    });
+
+    // Stop updating arrows
+    $(document).mouseup(e => { 
+        if (e.which != 3) return;
+        
+        // Mark that the right mouse is no longer being held down
+        rightMouseDown = false;
+        // Stop the loop that updates an arrow.
+        clearInterval(arrowLoopID);
+    });
+        
+    $(".next-move").mouseup(e => {
+        if (e.which != 1) return;
+        
+        boards[$(e.currentTarget).attr("id").at(-1)].nextMove();
+    });
+        
+    $(".last-move").mouseup(e => {
+        if (e.which != 1) return;
+        
+        boards[$(e.currentTarget).attr("id").at(-1)].lastMove();
+    });    
+
+    $(document).keydown(function(e) {
+        // right
+        if (e.keyCode == 39) for (const key in boards) boards[key].nextMove();
+        // left
+        if (e.keyCode == 37) for (const key in boards) boards[key].lastMove();
+    });
+
+    $(".move").mouseup(e => {
+        if (e.which != 1) return;
+
+        const classes = $(e.currentTarget).attr("class");
+        boards[$(e.currentTarget).parent().parent().parent().attr("id").at(-1)].setMove(parseInt(classes.match(/move-\d+/g)[0].substring(5)));
+    });
+});

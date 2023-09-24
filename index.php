@@ -14,8 +14,8 @@ class Page {
         $this->uri = $uri;
         $this->pg = $pg;
         $this->lyt = $lyt;
-        if (file_exists($pg.".css")) $this->add_css($pg.".css");
-        if (file_exists($pg.".js")) $this->add_js($pg.".js");
+        if (file_exists(PATH.$pg.".css")) $this->add_css($pg.".css");
+        if (file_exists(PATH.$pg.".js")) $this->add_js($pg.".js");
         if ($custom_css != NULL) foreach ($custom_css as $css) $this->add_css($css);
         if ($custom_js != NULL) foreach ($custom_js as $js) $this->add_js($js);
     }
@@ -109,15 +109,28 @@ $pages = [
     )
 ];
 
+$found = false;
 foreach($pages as $page) {
     if ($page->uri == $uri) {
-        if (file_exists(PATH.$page->pg.'.css')) $page->add_css($page->pg.'.css');
-        if (file_exists(PATH.$page->pg.'.js')) $page->add_js($page->pg.'.js');
+        $found = true;
         
         require PATH.$page->lyt;
         
         return;
     }
+}
+
+$page404 = new Page(
+    uri: "NA",
+    pg: "/src/pages/404/404"
+);
+
+if (!$found) {
+    $page = $page404;
+
+    require PATH.$page->lyt;
+    
+    return;   
 }
 
 ?>
