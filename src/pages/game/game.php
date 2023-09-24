@@ -21,8 +21,8 @@ $board_results = $stmt->get_result()->fetch_assoc();
 <div id="game-page" class="card">
     <div class="card-header">
         <!-- Note this is member name not username -->
-        <h1><a class="dark-link" href="/accounts/<?php echo urlencode($board_results['white_name']); ?>/games"><?php echo $board_results['white_name']?></a> v. <a class="dark-link" href="/accounts/<?php echo urlencode($board_results['black_name']); ?>/games"><?php echo$board_results['black_name']; ?></a></h1>
-        <h5 class="text-center"><a class="dark-link" href="/tournaments/<?php echo urlencode($board_results['tournament_name']); ?>"><?php echo $board_results['tournament_name']; ?></a></h5>
+        <h1><a class="dark-link" href="/chessclub/accounts/<?php echo urlencode($board_results['white_name']); ?>/games"><?php echo $board_results['white_name']?></a> v. <a class="dark-link" href="/chessclub/accounts/<?php echo urlencode($board_results['black_name']); ?>/games"><?php echo$board_results['black_name']; ?></a></h1>
+        <h5 class="text-center"><a class="dark-link" href="/chessclub/tournaments/<?php echo urlencode($board_results['tournament_name']); ?>"><?php echo $board_results['tournament_name']; ?></a></h5>
     </div>
     <div class="card-body">
         <div class="game-board">

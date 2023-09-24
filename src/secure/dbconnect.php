@@ -1,6 +1,6 @@
 <!-- Gavith -->
 <?php
-    require $_SERVER['DOCUMENT_ROOT']."/src/secure/server_creds.php";
+    require $_SERVER['DOCUMENT_ROOT']."/chessclub"."/src/secure/server_creds.php";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 

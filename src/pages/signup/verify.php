@@ -1,18 +1,18 @@
 <!-- Gavith -->
 <?php
     session_start();
-    require $_SERVER['DOCUMENT_ROOT']."/src/secure/dbconnect.php";
+    require $_SERVER['DOCUMENT_ROOT']."/chessclub"."/src/secure/dbconnect.php";
 
     if (!preg_match('/^[A-z\d._\-]{1,16}$/', $_POST['username'])) {
-        header("Location: /signup?err=username");
+        header("Location: /chessclub/signup?err=username");
         die();
     }
     if (!preg_match('/^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$/', $_POST['email'])) { // from https://regexr.com/3e48o
-        header("Location: /signup?err=email");
+        header("Location: /chessclub/signup?err=email");
         die();
     }    
     if (!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/', $_POST['password'])) { // from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-        header("Location: /signup?err=password");
+        header("Location: /chessclub/signup?err=password");
         die();
     }
 
@@ -26,7 +26,7 @@
     $results = $stmt->get_result();
 
     if ($results->num_rows) {
-        header("Location: /signup?err=taken");
+        header("Location: /chessclub/signup?err=taken");
         die();
     }
     
@@ -40,5 +40,5 @@
     $_SESSION['logged_in']['user_id'] = mysqli_insert_id($conn);
     $_SESSION['logged_in']['name'] = $username;
 
-    header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
+    header("Location: /chessclub/accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
 ?>

@@ -111,19 +111,19 @@
 }
 
 /* Placeholer colours and borders for identification */
-.board-container .piece.black.R { background-image: url("/res/pieces/blackR.svg"); }
-.board-container .piece.black.N { background-image: url("/res/pieces/blackN.svg"); }
-.board-container .piece.black.B { background-image: url("/res/pieces/blackB.svg"); }
-.board-container .piece.black.Q { background-image: url("/res/pieces/blackQ.svg"); }
-.board-container .piece.black.K { background-image: url("/res/pieces/blackK.svg"); }
-.board-container .piece.black.P { background-image: url("/res/pieces/blackP.svg"); }
+.board-container .piece.black.R { background-image: url("/chessclub/res/pieces/blackR.svg"); }
+.board-container .piece.black.N { background-image: url("/chessclub/res/pieces/blackN.svg"); }
+.board-container .piece.black.B { background-image: url("/chessclub/res/pieces/blackB.svg"); }
+.board-container .piece.black.Q { background-image: url("/chessclub/res/pieces/blackQ.svg"); }
+.board-container .piece.black.K { background-image: url("/chessclub/res/pieces/blackK.svg"); }
+.board-container .piece.black.P { background-image: url("/chessclub/res/pieces/blackP.svg"); }
 
-.board-container .piece.white.R { background-image: url("/res/pieces/whiteR.svg"); }
-.board-container .piece.white.N { background-image: url("/res/pieces/whiteN.svg"); }
-.board-container .piece.white.B { background-image: url("/res/pieces/whiteB.svg"); }
-.board-container .piece.white.Q { background-image: url("/res/pieces/whiteQ.svg"); }
-.board-container .piece.white.K { background-image: url("/res/pieces/whiteK.svg"); }
-.board-container .piece.white.P { background-image: url("/res/pieces/whiteP.svg"); }
+.board-container .piece.white.R { background-image: url("/chessclub/res/pieces/whiteR.svg"); }
+.board-container .piece.white.N { background-image: url("/chessclub/res/pieces/whiteN.svg"); }
+.board-container .piece.white.B { background-image: url("/chessclub/res/pieces/whiteB.svg"); }
+.board-container .piece.white.Q { background-image: url("/chessclub/res/pieces/whiteQ.svg"); }
+.board-container .piece.white.K { background-image: url("/chessclub/res/pieces/whiteK.svg"); }
+.board-container .piece.white.P { background-image: url("/chessclub/res/pieces/whiteP.svg"); }
 
 .board-container .selected {
     background-color: rgb(158, 84, 19) !important;

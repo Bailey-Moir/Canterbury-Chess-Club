@@ -4,14 +4,14 @@
     session_start();
 
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) {
-        header("Location: /");
+        header("Location: /chessclub/");
         die();
     }
 
     $_SESSION = [];
     session_destroy();
     
-    require $_SERVER['DOCUMENT_ROOT']."/src/secure/dbconnect.php";
+    require $_SERVER['DOCUMENT_ROOT']."/chessclub"."/src/secure/dbconnect.php";
     
     $conn->query("DROP DATABASE IF EXISTS $dbname;");
     $conn->query("CREATE DATABASE $dbname;");
@@ -25,5 +25,5 @@
     $_SESSION['logged_in']['name'] = "admin";
     $_SESSION['logged_in']['admin'] = TRUE;
 
-    header("Location: /admin");
+    header("Location: /chessclub/admin");
 ?>

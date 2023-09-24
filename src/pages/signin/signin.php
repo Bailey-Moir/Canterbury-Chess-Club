@@ -1,15 +1,15 @@
 <!-- Gavith -->
 <?php
 if (isset($_SESSION['logged_in'])) 
-    if ($_SESSION['logged_in']['admin'] == TRUE) header("Location: /admin");
-    else header("Location: /accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
+    if ($_SESSION['logged_in']['admin'] == TRUE) header("Location: /chessclub/admin");
+    else header("Location: /chessclub/accounts/".urlencode($_SESSION['logged_in']['name'])."/games");
 ?>
 
 <h3 class="card-header">
     Sign in
 </h3>
 
-<form class="card-body" style="padding-bottom: 10px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/src/pages/signin/verify.php" method="post">
+<form class="card-body" style="padding-bottom: 10px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/chessclub/chessclub/src/pages/signin/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="text" class="form-control" id="floatingInput" name="username-or-email" >
         <label for="floatingInput">Username or Email</label>
@@ -26,7 +26,7 @@ if (isset($_SESSION['logged_in']))
             Remember me
         </label> -->
 
-        <a href="/signin/forgotpassword" style="float: right;">
+        <a href="/chessclub/signin/forgotpassword" style="float: right;">
             Forgot password?
         </a>
     </div>
@@ -44,6 +44,6 @@ if (isset($_SESSION['logged_in']))
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
             
     <p class="p pt-2">
-        Don't have an account? <a href="/signup">Sign up</a> instead.
+        Don't have an account? <a href="/chessclub/signup">Sign up</a> instead.
     </p>
 </form>

@@ -1,5 +1,5 @@
 <!-- Bailey -->
-<link rel="stylesheet" href="/src/modules/board/board.css">
+<link rel="stylesheet" href="<?php echo UPATH; ?>/src/modules/board/board.css">
 
 <?php
 $moves = preg_split('/\s+/', str_replace("\\r", "", $row['moves']));

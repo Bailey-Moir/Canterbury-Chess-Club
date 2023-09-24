@@ -666,7 +666,7 @@ $(document).ready(() => {
                     .appendTo(arrowContainer)
                     .addClass("arrowHead")
                     .bind("contextmenu", FALSE)
-                    .attr("src", "/res/arrowHead.svg")
+                    .attr("src", "/chessclub/res/arrowHead.svg")
                     .css({
                         height: cellWidth/2,
                         width: 2*cellWidth/3,

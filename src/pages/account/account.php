@@ -12,7 +12,7 @@
         <?php
         if ($_SESSION['logged_in'] && $_SESSION['logged_in']['name'] == $user_results['username']) {
             ?>
-            <a href="/src/signout.php"><button type="button" class="btn btn-primary">Sign Out</button></a>
+            <a href="/chessclub/src/signout.php"><button type="button" class="btn btn-primary">Sign Out</button></a>
             <?php
         }
         ?>
@@ -23,7 +23,7 @@
             $pages = array("games", "tournaments");
             foreach ($pages as &$page) { 
                 ?>
-                <a href="/accounts/<?php echo $_GET['name']; ?>/<?php echo $page; ?>" class="nav-link_"><?php echo strtoupper($page); ?></a>
+                <a href="/chessclub/accounts/<?php echo $_GET['name']; ?>/<?php echo $page; ?>" class="nav-link_"><?php echo strtoupper($page); ?></a>
                 <?php 
             }
             ?>
@@ -49,7 +49,7 @@
                 //     $id = $row['id'];
                 //     ?\>
                 //     <div class="card">
-                //         <a href="/games/<?php echo $id; ?\>">
+                //         <a href="/chessclub/games/<?php echo $id; ?\>">
                 //             <div class="card-body bg-body-title">
                 //             <p class="card-text"><?php echo $row['black_name']." v. ".$row['white_name']; ?\></p>
                 //             </div>

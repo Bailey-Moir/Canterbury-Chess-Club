@@ -4,7 +4,7 @@
 </h3>
 
 <center class="card-body">
-    <form class="responsive" method="post" action="/src/pages/forgotpassword/sendforgot.php">
+    <form class="responsive" method="post" action="/chessclub/src/pages/forgotpassword/sendforgot.php">
         <p class="p w-100 mb-3">Please enter your email address below and we will send you information to change your password.</p>
 
         <div class="form-floating border-secondary" style="border-radius: 0px;">

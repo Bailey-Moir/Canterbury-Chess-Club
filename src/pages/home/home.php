@@ -29,7 +29,7 @@
             $id = $row['id'];
             ?>
             <div class="card">
-                <a href="/games/<?php echo $id; ?>">
+                <a href="/chessclub/games/<?php echo $id; ?>">
                     <div class="card-header">
                         <p class="card-text"><?php echo $row['white_name']." v. ".$row['black_name']; ?></p>
                     </div>

@@ -3,11 +3,11 @@
     session_start();
 
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) {
-        header("Location: /");
+        header("Location: /chessclub/");
         die();
     }
 
-    require $_SERVER['DOCUMENT_ROOT']."/src/secure/server_creds.php";
+    require $_SERVER['DOCUMENT_ROOT']."/chessclub"."/src/secure/server_creds.php";
 
     $filename = "databases/backup.sql";
 
@@ -15,7 +15,7 @@
     system("C:\\xampp\\mysql\\bin\\mysqldump --single-transaction --host=$servername --user=$username --password=$password $dbname > $filename", $returnStatus);
     
     if ($returnStatus !== 0) {
-        header("Location: /admin?err=$thing");
+        header("Location: /chessclub/admin?err=bfail");
         die();
     }
 
@@ -34,5 +34,5 @@
     //Read the size of the file
     readfile($filename);
 
-    header("Location: /admin");
+    header("Location: /chessclub/admin");
 ?>

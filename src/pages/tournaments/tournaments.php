@@ -18,13 +18,13 @@
 
         while ($row = $results->fetch_assoc()) {
             ?>
-            <a class="mx-3" href="/tournaments/<?php echo urlencode($row['name']); ?>">
+            <a class="mx-3" href="/chessclub/tournaments/<?php echo urlencode($row['name']); ?>">
                 <div class="card">
                     <div class="card-header">
                         <p class="card-text"><?php echo $row['name'] ?></p>
                     </div>
                     <div class="card-body">
-                        <img src="/res/tourney.JPG" class="card-img-top" alt="Chessboard"/>
+                        <img src="<?php echo UPATH; ?>/res/tourney.JPG" class="card-img-top" alt="Chessboard"/>
                     </div>
                 </div>
             </a>

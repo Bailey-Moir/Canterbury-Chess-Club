@@ -3,7 +3,7 @@
     Sign up
 </h3>
 
-<form class="card-body" style="padding-bottom: 30px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/src/pages/signup/verify.php" method="post">
+<form class="card-body" style="padding-bottom: 30px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/chessclub/src/pages/signup/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="text" class="form-control" id="floatingInput" name="username">
         <label for="floatingInput">Username</label>

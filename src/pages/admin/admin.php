@@ -1,6 +1,6 @@
 <!-- Bailey -->
 <?php 
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) header("Location: /");
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) header("Location: /chessclub/");
 ?>
 <div class="card">
     <div class="card-header">
@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
     <div class="card-body">
         <div class="responsive mx-auto my-4">
             <h3>Add Game</h3>
-            <form action="/src/admin/addgame.php" method="post">
+            <form action="/chessclub/src/admin/addgame.php" method="post">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="form-floating border-secondary" style="width:45%; padding-bottom:0px;">
                         <input type="text" class="form-control" id="floatingWhite" name="white_nzcf" >
@@ -70,7 +70,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
 
 
             <h3 class="mt-4">Add Tournament</h3>
-            <form action="/src/admin/addtournament.php" method="post">
+            <form action="/chessclub/src/admin/addtournament.php" method="post">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="form-floating border-secondary" style="width: 45%;">
                         <input class="form-control" type="date" name="date_start" id="floatingDateStart">
@@ -111,7 +111,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
 
             <br/>
 
-            <a href="/src/admin/backup.php">Backup</a> <br/>
+            <a href="/chessclub/src/admin/backup.php">Backup</a> <br/>
             <?php
             if (isset($_GET['err']) && $_GET['err'][0] == "b") {
                 ?>
@@ -121,14 +121,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) 
                 <?php
             }
             ?>
-            <a href="/src/signout.php">Sign Out</a>
+            <a href="/chessclub/src/signout.php">Sign Out</a>
 
             <h3 class="text-danger mt-3">Danger Zone</h3>
-            <form class="pb-3" action="/src/admin/reset_to.php" method="post" enctype="multipart/form-data">
+            <form class="pb-3" action="/chessclub/src/admin/reset_to.php" method="post" enctype="multipart/form-data">
                 <label class="text-danger" style="text-decoration: underline; cursor:pointer;" for="files">Reset to Backup</label>
                 <input id="files" style="visibility:hidden; height:5px; width:5px;" type="file" name="backup">
             </form>
-            <a class="text-danger" href="/src/admin/reset.php">Reset Databse</a>
+            <a class="text-danger" href="/chessclub/src/admin/reset.php">Reset Databse</a>
         </div>
     </div>
 </div>

@@ -45,7 +45,7 @@ $tournaments_results = $stmt->get_result()->fetch_assoc();
             ?>
             <tr>
                 <td><a href="#"><?php echo $row['white_name']; ?></a></td>
-                <td class="text-center"><a href="/games/<?php echo $row['id']; ?>"><?php echo $row['result'] == 1 ? "1-0": ($row['result'] == 0 ? "0-1" : "½-½"); ?></a></td>
+                <td class="text-center"><a href="/chessclub/games/<?php echo $row['id']; ?>"><?php echo $row['result'] == 1 ? "1-0": ($row['result'] == 0 ? "0-1" : "½-½"); ?></a></td>
                 <td><a href="#"><?php echo $row['black_name']; ?></a></td>
             </tr>
             <?php

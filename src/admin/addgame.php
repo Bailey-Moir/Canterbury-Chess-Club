@@ -1,10 +1,10 @@
 <!-- Bailey -->
 <?php
     session_start();
-    require $_SERVER['DOCUMENT_ROOT']."/src/secure/dbconnect.php";
+    require $_SERVER['DOCUMENT_ROOT']."/chessclub"."/src/secure/dbconnect.php";
 
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in']['admin'] == FALSE) {
-        header("Location: /");
+        header("Location: /chessclub/");
         die();
     }
 
@@ -16,7 +16,7 @@
 
     $tournament_id = $conn->real_escape_string($_POST['tournament_id']);
     if (!is_numeric($tournament_id)) {
-        header("Location: /admin?err=gInvalidTournament");
+        header("Location: /chessclub/admin?err=gInvalidTournament");
         die();
     }
     
@@ -24,7 +24,7 @@
     else if (isset($_POST['blackCheck']) && $_POST['blackCheck']) $result = 0;
     else if (isset($_POST['drawCheck']) && $_POST['drawCheck']) $result = 2;
     else {
-        header("Location: /admin?err=gNoneChecked");
+        header("Location: /chessclub/admin?err=gNoneChecked");
         die();
     }
 
@@ -33,7 +33,7 @@
     $stmt->execute();
     $qresult = $stmt->get_result(); 
     if ($qresult->num_rows == 0) {
-        header("Location: /admin?err=gNoWhiteMember");
+        header("Location: /chessclub/admin?err=gNoWhiteMember");
         die();
     }
     $white_member_results = $qresult->fetch_assoc();
@@ -43,7 +43,7 @@
     $stmt->execute();
     $qresult = $stmt->get_result();
     if ($qresult->num_rows == 0) {
-        header("Location: /admin?err=gNoBlackMember");
+        header("Location: /chessclub/admin?err=gNoBlackMember");
         die();
     }
     $black_member_results = $qresult->fetch_assoc();
@@ -55,10 +55,10 @@
     $stmt->bind_param("iiiis", $black_member_results['v'], $white_member_results['v'], $tournament_id, $result, $moves);
     $stmt->execute();
     if ($stmt->affected_rows == 0) {
-        header("Location: /admin?err=gfail");
+        header("Location: /chessclub/admin?err=gfail");
     }
 
-    header("Location: /admin")
+    header("Location: /chessclub/admin")
 
     
 ?>

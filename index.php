@@ -1,6 +1,7 @@
 <!-- Bailey -->
 <?php
-define("PATH", $_SERVER['DOCUMENT_ROOT']);
+define("UPATH", "/chessclub");
+define("PATH", $_SERVER['DOCUMENT_ROOT'].UPATH);
 
 $uri = $_GET['page'] ?? "";
 
@@ -10,7 +11,7 @@ class Page {
     public $lyt = '';
     public $tags = [];
 
-    function __construct($uri, $pg, $lyt="/src/layouts/basic.php", $custom_js=NULL, $custom_css=NULL) {
+    function __construct($uri, $pg, $custom_js=NULL, $custom_css=NULL, $lyt="/src/layouts/basic.php") {
         $this->uri = $uri;
         $this->pg = $pg;
         $this->lyt = $lyt;
@@ -21,10 +22,10 @@ class Page {
     }
 
     function add_css($url) {
-        $this->tags[] = '<link rel="stylesheet" href="'.$url.'">';
+        $this->tags[] = '<link rel="stylesheet" href="'.UPATH.$url.'">';
     }
     function add_js($url) {
-        $this->tags[] = '<script src="'.$url.'"></script>';
+        $this->tags[] = '<script src="'.UPATH.$url.'"></script>';
     }
 
     function render_tags() {
@@ -34,78 +35,84 @@ class Page {
 
 $pages = [
     new Page(
-        uri: "",
-        pg: "/src/pages/home/home",
-        custom_js: ["/src/modules/board/board-thumbnail.js"]
+        "", // uri 
+        "/src/pages/home/home", // pg
+        ["/src/modules/board/board-thumbnail.js"] // custom_js
     ),
     new Page(
-        uri: "game",
-        pg: "/src/pages/game/game",
-        custom_js: ["/src/modules/board/board.js"]
+        "game",
+        "/src/pages/game/game",
+        ["/src/modules/board/board.js"]
     ),
     new Page(
-        uri: "tournaments",
-        pg: "/src/pages/tournaments/tournaments"
+        "tournaments",
+        "/src/pages/tournaments/tournaments"
     ),
     new Page(
-        uri: "tournament",
-        pg: "/src/pages/tournament/tournament"
+        "tournament",
+        "/src/pages/tournament/tournament"
     ),
     new Page(
-        uri: "calendar",
-        pg: "/src/pages/calendar/calendar"
+        "calendar",
+        "/src/pages/calendar/calendar"
     ),
     new Page(
-        uri: "coaching",
-        pg: "/src/pages/coaching/coaching"
+        "coaching",
+        "/src/pages/coaching/coaching"
     ),
     new Page(
-        uri: "signin",
-        pg: "/src/pages/signin/signin",
-        lyt: "/src/layouts/empty.php"
+        "signin",
+        "/src/pages/signin/signin",
+        NULL,
+        NULL,
+        "/src/layouts/empty.php"
     ),
     new Page(
-        uri: "signup",
-        pg: "/src/pages/signup/signup",
-        lyt: "/src/layouts/empty.php"
+        "signup",
+        "/src/pages/signup/signup",
+        NULL,
+        NULL,
+        "/src/layouts/empty.php"
     ),
     new Page(
-        uri: "signin/forgotpassword",
-        pg: "/src/pages/forgotpassword/forgotpassword",
-        lyt: "/src/layouts/empty.php"
+        "signin/forgotpassword",
+        "/src/pages/forgotpassword/forgotpassword",
+        NULL,
+        NULL,
+        "/src/layouts/empty.php"
     ),
     // new Page(
-    //     uri: "clubplayers",
-    //     pg: "/src/pages/clubplayers/clubplayers"
+    //     "clubplayers",
+    //     "/src/pages/clubplayers/clubplayers"
     // ),
     // new Page(
-    //     uri: "forums",
-    //     pg: "/src/pages/forums/forums"
+    //     "forums",
+    //     "/src/pages/forums/forums"
     // ),
     // new Page(
-    //     uri: "player",
-    //     pg: "/src/pages/player/player"
+    //     "player",
+    //     "/src/pages/player/player"
     // ),
     // new Page(
-    //     uri: "players",
-    //     pg: "/src/pages/players/players"
+    //     "players",
+    //     "/src/pages/players/players"
     // ),
     // new Page(
-    //     uri: "study",
-    //     pg: "/src/pages/study/study"
+    //     "study",
+    //     "/src/pages/study/study"
     // ),
     new Page(
-        uri: "account",
-        pg: "/src/pages/account/account",
-        custom_js: ["/src/modules/board/board-thumbnail.js"]
+        "account",
+        "/src/pages/account/account",
+        ["/src/modules/board/board-thumbnail.js"]
     ),
     new Page(
-        uri: "about",
-        pg: "/src/pages/about/about"
+        "about",
+        "/src/pages/about/about"
     ),
     new Page(
-        uri: "admin",
-        pg: "/src/pages/admin/admin"
+        "admin",
+        "/src/pages/admin/admin"
     )
 ];
 
@@ -121,8 +128,8 @@ foreach($pages as $page) {
 }
 
 $page404 = new Page(
-    uri: "NA",
-    pg: "/src/pages/404/404"
+    "NA",
+    "/src/pages/404/404"
 );
 
 if (!$found) {
