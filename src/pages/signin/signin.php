@@ -9,7 +9,7 @@ if (isset($_SESSION['logged_in']))
     Sign in
 </h3>
 
-<form class="card-body" style="padding-bottom: 10px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/chessclub/chessclub/src/pages/signin/verify.php" method="post">
+<form class="card-body" style="padding-bottom: 10px !important; padding-top: 10px !important; padding-left: 60px !important; padding-right: 60px !important;" action="/chessclub/src/pages/signin/verify.php" method="post">
     <div class="form-floating border-secondary" style="border-radius: 0px;">
         <input type="text" class="form-control" id="floatingInput" name="username-or-email" >
         <label for="floatingInput">Username or Email</label>

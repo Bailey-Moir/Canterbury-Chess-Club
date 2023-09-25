@@ -12,7 +12,7 @@
     $filename = "databases/backup.sql";
 
     // Execute the command
-    system("C:\\xampp\\mysql\\bin\\mysqldump --single-transaction --host=$servername --user=$username --password=$password $dbname > $filename", $returnStatus);
+    system("mysqldump --single-transaction --host=$servername --user=$username --password=$password $dbname > $filename", $returnStatus);
     
     if ($returnStatus !== 0) {
         header("Location: /chessclub/admin?err=bfail");
