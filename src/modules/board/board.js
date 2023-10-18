@@ -5,13 +5,6 @@
 const FALSE = () => false;
 
 /**
- * Converts radians to degrees
- * @param {number} rad An angle in radians
- * @returns {number} The given angle converted to degrees
- */
-const radToDegree = rad => (rad > 0 ? rad : (2*Math.PI + rad)) * 360 / (2*Math.PI);
-
-/**
  * Represents a 2D point/coordinate.
  */
 class Point {
@@ -34,6 +27,8 @@ class Point {
         return new Point((rect.left + rect.right)/2 + window.scrollX, (rect.top + rect.bottom)/2 + window.scrollY);
     }
 
+    // OPERATORS
+
     /**
      * To be thought as the same as using '+' on this and the given point. 
      * @param {Point} p the point that you are adding.
@@ -51,15 +46,18 @@ class Point {
      */
     _equals(p) { return this.x == p.x && this.y == p.y; }
 
+
+    // FUNCTIONS
+
     /**
      * @returns {number} the distance to the point from the point from the origin using the pythagorean theorem.
      */
     magnitude() { return Math.sqrt(this.x**2 + this.y**2); }
     /**
      * @param {Point} p the point to calculate the relative angle to.
-     * @returns {number} angle in degrees from this point to the given point.
+     * @returns {number} angle in radians from this point to the given point.
      */
-    angle(p) { return radToDegree(Math.atan2(p.y - this.y, p.x - this.x)) }
+    angle(p) { return Math.atan2(p.y - this.y, p.x - this.x) }
 
     /**
      * @example `${x}, ${y}`
@@ -69,8 +67,6 @@ class Point {
 };
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-
-
 
 // COMPILER
 
@@ -120,7 +116,7 @@ function compile_move(str, white, board) {
 
     str = str.replace(/\.|!| |(\(=\))|\?|\+|\#/gmi,""); // Remove computationally meaningless characters
     
-    if (str.includes("O-O-O")) { // queenside castle
+    if (str.includes("O-O-O") || str.includes("0-0-0")) { // queenside castle
         move.pieceType = PieceType.king;
         move.dest = board.find(`.Sc${white ? 1 : 8}`);
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
@@ -133,7 +129,7 @@ function compile_move(str, white, board) {
         });
         return move;
     }
-    if (str.includes("O-O")) { // kingside castle
+    if (str.includes("O-O") || str.includes("0-0")) { // kingside castle
         move.pieceType = PieceType.king;
         move.dest = board.find(`.Sg${white ? 1 : 8}`);
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
@@ -147,9 +143,8 @@ function compile_move(str, white, board) {
         return move;        
     }
     
-    let promotingPiece = null;
     if (str.includes("=")) {
-        promotingPiece = str[str.length - 1];
+        let promotingPiece = str[str.length - 1];
         str = str.substring(0,str.length-2);
         move.operations.push(() => {
             let piece = move.dest.find(">:first-child");
@@ -223,7 +218,7 @@ function compile_move(str, white, board) {
     // console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
-    else if (move.pieceType == PieceType.rook) {
+    if (move.pieceType == PieceType.rook) {
         // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
@@ -235,7 +230,7 @@ function compile_move(str, white, board) {
         });
     }
     else if (move.pieceType == PieceType.bishop) {
-        // Check if they are on the same row and or same rank.
+        // Check if they are difference in rank is equal to the difference in file.
         possibilities = possibilities.filter(i => {
             let originClasses = board.find(possibilities[i]).parent().attr('class');
 
@@ -243,7 +238,6 @@ function compile_move(str, white, board) {
         });
     }
     else if (move.pieceType == PieceType.queen) {
-        // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
@@ -271,7 +265,6 @@ function compile_move(str, white, board) {
         });
     }
     else if (move.pieceType == PieceType.pawn) {
-        // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
 
@@ -347,9 +340,8 @@ function compile_move(str, white, board) {
 
             const difference = Math.abs(rankDest - rankOrigin);
 
-            for (let i = 1; i < difference; i++) {
+            for (let i = 1; i < difference; i++)
                 if (isPieceAt(alphabet[fileOrigin + (fileIncrease ? i : -i)], rankOrigin + (rankIncrease ? i : -i), board)) return false;
-            }
             
             return true;
         });
@@ -413,8 +405,8 @@ function compile_move(str, white, board) {
         if (dr == 0) {
             // horizontal
 
-            // if they stay on the file, they're fine,
-            if (rank(destinationClasses) - kr == 0) return true;
+            // if they stay on the rank, they're fine,
+            if (rank(destinationClasses) == kr) return true;
             
             let check = (file) => {
                 // remove from possibilities if it is a rook or queen.
@@ -428,8 +420,8 @@ function compile_move(str, white, board) {
         } else if (df == 0) {
             // vertical            
 
-            // if they stay on the rank, they're fine,
-            if (file(destinationClasses).charCodeAt(0) - kf.charCodeAt(0) == 0) return true;
+            // if they stay on the file, they're fine,
+            if (file(destinationClasses).charCodeAt(0) == kf.charCodeAt(0)) return true;
 
             let check = (rank) => {
                 // remove from possibilities if it is a rook or queen.
@@ -468,9 +460,8 @@ function compile_move(str, white, board) {
             else for (let i = kr - 1; i >= 1; i--) {
                 let file = alphabet(kf - (i - kr));
                 if (file != f && i != r && isPieceAt(file, i, board)) return diagonal_check(file, i);
-            }
-            
-        } else return true;
+            }            
+        }
         return true;
     });
 
@@ -489,60 +480,61 @@ class Board {
         this.id = id;
         boards[this.id] = this;
 
-        this.currentMove = 0;
-        this.compiledMoves = [];
+        currentMove = 0;
+        compiledMoves = [];
 
-        this.object = $(`#board-${this.id}`);
-        this.container = this.object.parent();
-    }    
+        object = $(`#board-${this.id}`);
+        container = object.parent();
+    }
 
     nextMove() {
-        if (this.currentMove == this.moves.length) return;
+        if (currentMove == moves.length) return;
 
-        this.container.find(`.move-${this.currentMove-1}`).removeClass("current-move");
-        this.container.find(`.move-${this.currentMove}`).addClass("current-move");
-
-        if (this.currentMove != 0) {
-            this.compiledMoves[this.currentMove-1].dest.removeClass("destination");
-            this.compiledMoves[this.currentMove-1].origin.removeClass("origin");
+        if (currentMove != 0) {
+            container.find(`.move-${currentMove-1}`).removeClass("current-move");
+            compiledMoves[currentMove-1].dest.removeClass("destination");
+            compiledMoves[currentMove-1].origin.removeClass("origin");
         }
 
         let move;
-        if (this.compiledMoves.length > this.currentMove) {
-            move = this.compiledMoves[this.currentMove++]; // WHERE IT INCREASES
-        } else {
-            move = compile_move(this.moves[this.currentMove], this.currentMove++ % 2 == 0, this.object);
-            this.compiledMoves.push(move);
-        }
+        if (compiledMoves.length > currentMove) 
+            move = compiledMoves[currentMove++];
+        else 
+            compiledMoves.push(
+                move = compile_move(moves[currentMove], currentMove++ % 2 == 0, object)
+            );
 
         move.dest.addClass("destination");
         move.origin.addClass("origin");
+        container.find(`.move-${currentMove}`).addClass("current-move");
     
         const children = move.dest.find(">:first-child");
         children.length != 0 && children.remove();
-    
         $(move.piece).appendTo(move.dest);
-        move.operations.forEach(fn => fn());
+
+            move.operations.forEach(fn => fn());
         
-        const moves_container = this.container.find(".moves");
+        const moves_container = container.find(".moves");
         moves_container.animate({
-            scrollTop: moves_container.height() * 0.1 * (Math.floor((this.currentMove-1)*0.5) - 1)
+            scrollTop: moves_container.height() * 0.1 * (Math.floor((currentMove-1)*0.5) - 1)
         },0);
     }
 
     lastMove() {
-        if (this.currentMove == 0) return;
+        if (currentMove == 0) return;
 
-        const move = this.compiledMoves[--this.currentMove];
+        const move = compiledMoves[--currentMove];
         
         move.dest.removeClass("destination");
         move.origin.removeClass("origin");
 
-        if (this.currentMove > 0) this.compiledMoves[this.currentMove-1].dest.addClass("destination");
-        if (this.currentMove > 0) this.compiledMoves[this.currentMove-1].origin.addClass("origin");
-        
-        this.container.find(`.move-${this.currentMove-1}`).addClass("current-move");
-        this.container.find(`.move-${this.currentMove}`).removeClass("current-move");
+        if (currentMove != 0) {
+            compiledMoves[currentMove-1].dest.addClass("destination");
+            compiledMoves[currentMove-1].origin.addClass("origin");
+        }
+
+        container.find(`.move-${currentMove-1}`).addClass("current-move");
+        container.find(`.move-${currentMove}`).removeClass("current-move");
         
         $(move.piece).appendTo(move.origin);
 
@@ -550,17 +542,17 @@ class Board {
 
         move.reverse_operations.forEach(fn => fn());
 
-        const moves_container = this.container.find(".moves");
+        const moves_container = container.find(".moves");
         moves_container.animate({
-            scrollTop: moves_container.height() * 0.1 * (Math.floor((this.currentMove-1)*0.5) - 1)
+            scrollTop: moves_container.height() * 0.1 * (Math.floor((currentMove-1)*0.5) - 1)
         },0);
     }
 
     setMove(n) {
-        let difference = Math.abs(n+1 - this.currentMove);
-        const increase = n+1 > this.currentMove;
+        let counting_difference = Math.abs(n+1 - currentMove);
+        const increase = n+1 > currentMove;
         
-        while (difference--) increase ? this.nextMove() : this.lastMove();
+        while (counting_difference--) increase ? this.nextMove() : this.lastMove();
     }
 }
 
@@ -597,31 +589,20 @@ const PieceType = {
 
 //TODO: add capability to have multiple boards without interfering.
 $(document).ready(() => {
-    // Toggling square selection for note taking
     let squares = $(".square");
 
+    // Toggling square selection for note taking
     squares.contextmenu(e => {
         let target = $(e.currentTarget);
-        if (target.hasClass("piece")) target = target.parent();
-
         target.hasClass("selected") ? target.removeClass("selected") : target.addClass("selected");
-
         return false;
     });
 
-    // Keeping Mouse Position
-    let mousePosition = new Point(0,0);
-    $(document).mousemove(e => {
-        mousePosition.x = e.pageX;
-        mousePosition.y = e.pageY;
-    });
-
     // Arrows
-    let hoveringCellPosition = new Point(0,0);
-    squares.mouseover(e => hoveringCellPosition = Point.getPoint(e.currentTarget) );
-
-    let rightMouseDown = false,
-        arrowLoopID;
+    let hovering = new Point(0,0);
+    squares.mouseover(e => hovering = Point.getPoint(e.currentTarget) );
+    
+    let arrowLoopID;
     $(".board").mousedown(e => { 
         const board = $(e.currentTarget);
         switch(e.which) {        
@@ -631,11 +612,8 @@ $(document).ready(() => {
                 $(`.arrow-${board.attr("id").at(-1)}`).remove();
                 break;
             case 3:
-                // Mark that the right mouse is being held down
-                rightMouseDown = true;
-
                 // Save point that arrow started
-                let arrowStart = hoveringCellPosition;
+                let arrowStart = hovering;
 
                 // Create the container for the arrow
                 let arrowContainer = $(document.createElement('div'))
@@ -671,56 +649,40 @@ $(document).ready(() => {
                         height: cellWidth/2,
                         width: 2*cellWidth/3,
                         top: -cellWidth/2,
-                        visibility: "hidden" // remove?
                     });
 
                 // Create the loop to update the arrow
                 arrowLoopID = setInterval(() => {
-                    if (!rightMouseDown) return;
-                    
-                    arrowBody.css({ width: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 });
+                    arrowBody.css({ width: hovering._minus(arrowStart).magnitude() - cellWidth/2 });
                     arrowHead.css({ 
-                        left: hoveringCellPosition._minus(arrowStart).magnitude() - cellWidth/2 - 9,
-                        visibility: hoveringCellPosition._equals(arrowStart) ? "hidden" : "visible"
+                        left: hovering._minus(arrowStart).magnitude() - cellWidth/2 - 9,
+                        visibility: hovering._equals(arrowStart) ? "hidden" : "visible"
                     });
-                    arrowContainer.css({ '-webkit-transform': `rotate(${arrowStart.angle(hoveringCellPosition)}deg)` });
+                    arrowContainer.css({ '-webkit-transform': `rotate(${arrowStart.angle(hovering)}rad)` });
                 }, 100);
                 break;
         }
     });
 
     // Stop updating arrows
-    $(document).mouseup(e => { 
-        if (e.which != 3) return;
-        
-        // Mark that the right mouse is no longer being held down
-        rightMouseDown = false;
-        // Stop the loop that updates an arrow.
-        clearInterval(arrowLoopID);
-    });
-        
-    $(".next-move").mouseup(e => {
-        if (e.which != 1) return;
-        
-        boards[$(e.currentTarget).attr("id").at(-1)].nextMove();
-    });
-        
-    $(".last-move").mouseup(e => {
-        if (e.which != 1) return;
-        
-        boards[$(e.currentTarget).attr("id").at(-1)].lastMove();
-    });    
+    $(document).mouseup(e => e.which == 3 && clearInterval(arrowLoopID) );
+    
+    // NAVIGATE MOVES
 
-    $(document).keydown(function(e) {
+    // Buttons
+    $(".next-move").mouseup(e => e.which == 1 && boards[$(e.currentTarget).attr("id").at(-1)].nextMove()); 
+    $(".last-move").mouseup(e => e.which == 1 && boards[$(e.currentTarget).attr("id").at(-1)].lastMove());
+    // Keys
+    $(document).keydown(e => {
         // right
         if (e.keyCode == 39) for (const key in boards) boards[key].nextMove();
         // left
         if (e.keyCode == 37) for (const key in boards) boards[key].lastMove();
     });
-
+    // Jumping to Move
     $(".move").mouseup(e => {
         if (e.which != 1) return;
-
+        
         const classes = $(e.currentTarget).attr("class");
         boards[$(e.currentTarget).parent().parent().parent().attr("id").at(-1)].setMove(parseInt(classes.match(/move-\d+/g)[0].substring(5)));
     });

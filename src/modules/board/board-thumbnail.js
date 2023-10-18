@@ -73,7 +73,7 @@ function compile_move(str, white, board) {
 
     str = str.replace(/\.|!| |(\(=\))|\?|\+|\#/gmi,""); // Remove computationally meaningless characters
     
-    if (str.includes("O-O-O")) { // queenside castle
+    if (str.includes("O-O-O") || str.includes("0-0-0")) { // queenside castle
         move.pieceType = PieceType.king;
         move.dest = board.find(`.Sc${white ? 1 : 8}`);
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
@@ -83,7 +83,7 @@ function compile_move(str, white, board) {
         });
         return move;
     }
-    if (str.includes("O-O")) { // kingside castle
+    if (str.includes("O-O") || str.includes("0-0")) { // kingside castle
         move.pieceType = PieceType.king;
         move.dest = board.find(`.Sg${white ? 1 : 8}`);
         move.piece = board.find(`.${PieceType.king}.${white ? "white" : "black"}`);
@@ -165,7 +165,7 @@ function compile_move(str, white, board) {
     // console.log(`Checkpoint 1 (Piece type, color, and origin) : ${possibilities.length}`);
     if (possibilities.length == 1) return checkpoint();
 
-    else if (move.pieceType == PieceType.rook) {
+    if (move.pieceType == PieceType.rook) {
         // Check if they are on the same row and or same rank.
         possibilities = possibilities.filter(i => {
             const originClasses = board.find(possibilities[i]).parent().attr('class');
@@ -412,7 +412,8 @@ function compile_move(str, white, board) {
                 if (file != f && i != r && isPieceAt(file, i, board)) return diagonal_check(file, i);
             }
             
-        } else return true;
+        }
+        return true;
     });
 
     // console.log(`Checkpoint 4 (Check) : ${possibilities.length}`);
